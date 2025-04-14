@@ -1,71 +1,37 @@
-from erros import invalid_token_error
-from enum import Enum
+delimitadores = [',', '.', ':', '(', ')', ' ', ';','\n', '\t', '\0']
 
-dict_tokens = {
-   1 : 'SUM_TOKEN',   
-   2 : 'SUBTRACTION_TOKEN',   
-   3 : 'TIMES_TOKEN',   
-   4 : 'DIVISION_TOKEN',    
-}
+operadores_aritmeticos = ['+', '-', '*', '/']
 
-class Token(Enum):
-    # Arithmetic Operators
-    SUM_TOKEN = '+'
-    SUBTRACTION_TOKEN = '-'
-    TIMES_TOKEN = '*'
-    DIVISION_TOKEN = '/'
-    MODULE_TOKEN = 'mod'
-    INTEGER_DIVISION_TOKEN = 'div'
+operadores_comparacao = ['=', '>', '<']
 
-    # Logic Operators
-    OR_TOKEN = 'or'
-    AND_TOKEN = 'and'
-    NOT_TOKEN = 'not'
+operadores_logicos = ['or', 'and', 'not']
 
-    # Comparison Operators
-    EQUAL_TOKEN = '=='
-    NOT_EQUAL_TOKEN = '<>'
-    GREATER_TOKEN = '>'
-    WEAKER_TOKEN = '<'
-    
-    GREATER_EQUAL_TOKEN = '>='
-    WEAKER_EQUAL_TOKEN = '<='
-    ATRIBUTTION_TOKEN = ':='
+palavras_reservadas = [
+    'program', 'var', 'integer', 'real', 'string',
+    'begin', 'end', 'for', 'to', 'break', 'mod', 'div'
+]
 
-    # Reserved Keywords
-    PROGRAM_TOKEN = 'program'
-    VAR_TOKEN = 'var'
-    INT_TOKEN  = 'integer'
-    REAL_TOKEN = 'real'
-    STR_TOKEN = 'string'
-    BEGIN_TOKEN = 'begin'
-    END_TOKEN = 'end'
-    
-    FOR_TOKEN = 'for'
-    TO_TOKEN = 'to'
-    BREAK_TOKEN = 'break'
+condicionais = ['if', 'else', 'then']
 
-    # Control Flow
-    IF_TOKEN = 'if'
-    ELSE_TOKEN = 'else'
-    THEN_TOKEN = 'then'
+io_tokens = ['write', 'writeln', 'read', 'readln']
 
-    # IO Keyworkds
-    WRITE_TOKEN = 'write'
-    WRITELN_TOKEN = 'writeln'
-    READ_TOKEN = 'read'
-    READLN_TOKEN = 'readln'
+def isDelimitador(token):
+    return token in delimitadores
 
-    # Delimiters
-    COLON_TOKEN = ','
-    DOT_TOKEN = '.'
-    DOUBLEDOT_TOKEN = ':'
-    OPEN_PARENTHESES_TOKEN = '('
-    CLOSE_PARENTHESES_TOKEN = ')'
+def isOperadorAritmetico(token):
+    return token in operadores_aritmeticos
 
-def str_token(token):
-    if isinstance(token, Token):
-        return token.value
-    else:
-        invalid_token_error()
-        return None 
+def isOperadorLogico(token):
+    return token in operadores_logicos
+
+def isOperadorComparacao(token):
+    return token in operadores_comparacao
+
+def isPalavraReservada(token):
+    return token in palavras_reservadas
+
+def isCondicional(token):
+    return token in condicionais
+
+def isIO(token):
+    return token in io_tokens
