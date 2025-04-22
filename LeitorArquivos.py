@@ -10,13 +10,13 @@ class LeitorArquivos():
         self.ListaNomesDeProgramas = []
         self.ListaProgramasPascal = []
         self.DicionarioProgramasPascal = {}
-        self.path = argv[1] + "\\"
+        self.path = argv[1] + "/"
 
         # Lista de Programas à sererm considerados como entrada
         files = walk(argv[1])
         self.ListaNomesDeProgramas = files.__next__()[2]    # Lendo as entradas
         num_arquivos = len(self.ListaNomesDeProgramas)
-        print(f"Lista criada com sucesso, possuindo{num_arquivos} programas!")
+        print(f"Lista criada com sucesso, possuindo {num_arquivos} programas!")
 
     # Lê todos os arquivos de programas em Pascal e os insere em uma lista
     def LerArquivos(self):
