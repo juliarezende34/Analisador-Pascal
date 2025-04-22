@@ -1,5 +1,10 @@
 from LeitorArquivos import LeitorArquivos
-from tokenizer import isDelimitador, isOperadorAritmetico
+from tokenizer import *
+from output import *
+
+with open('output.txt', 'w', encoding='utf-8') as f:
+    f.write(f"Código | Item{' ' *10} | Linha | Coluna\n")
+    f.close()
 
 Leitor = LeitorArquivos()
 
@@ -9,38 +14,52 @@ arquivo = Leitor.get_lines_program('EXS1.pas')
 palavra = ''
 operador_aninhado = ''
 delimitador = ''
+cod = ''
 
+cont_linha = 1
+cont_coluna = 1
 
 for linha in arquivo:
     for caracter in linha:
-        if (caracter in [':', '<', '>']) and (operador_aninhado == ''):
+        # Começo da construção dos caracteres aninhados - //, >=, <=, <>, :=, ==
+        if (caracter in [':', '<', '>', '=', '/']) and (operador_aninhado == ''):
             operador_aninhado = caracter
             continue
-        elif (operador_aninhado != '') and caracter in ['=', '>']:
+
+        # Se houver os caracteres em sequência, constrói o caracter aninhado
+        elif (operador_aninhado != '') and caracter in ['=', '>', '/']:
             operador_aninhado += caracter
             continue
+
+        # Se não for delimitador ou operador, continua a construir a palavra, letra por letra
         elif not (isDelimitador(caracter) or isOperadorAritmetico(caracter)):
             palavra = palavra + caracter
-        else:
-            if palavra.strip() != '':
-                print(palavra)
 
-# Aqui teremos que printar no output os delimitadores também
-                if operador_aninhado != '':
-                    print(f"delimitador aninhado-> '{operador_aninhado}'")
-                    operador_aninhado = ''
+        # Achou um delimitador e a palavra foi construída
+        else:
+            # Se '//', é um comentário, então pula pra próxima linha
+            if operador_aninhado == '//':
+                operador_aninhado = ''
+                palavra = ''
+                break
+
+            # Se a palavra não está vazia, fazer tratamentos
+            if palavra.strip() != '':
+                # Printar itens reservados
+                if (palavra in operadores_logicos) or (palavra in palavras_reservadas) or (palavra in io_tokens) or (palavra in condicionais):
+                    write_output(cod,palavra, cont_linha, cont_coluna)
+                # Printar variável
                 else:
-                    print(f"delimitador comum-> '{caracter}'")
+                    cod = 'variavel'
+                    write_output(cod,palavra, cont_linha, cont_coluna)
+                    cod = ''
+                if operador_aninhado != '':
+                    write_output(cod,operador_aninhado, cont_linha, cont_coluna)
+                else:
+                    write_output(cod,caracter, cont_linha, cont_coluna)
 
                 palavra = ''
-
-                # """
-                # # tratar
-                # if not isDelimitador:
-                    
-                #     # ai pode parar de ler pq o delimitador completo ta aqui, vamos:
-                #     # categorizar ele
-                #     # apagar a string
-                #     # pegar o caracterer atual (que nao faz parte do delimitador) pra nao perder ele]
-                #     # volta pro loop normalmente
-                # """
+                operador_aninhado = ''
+            write_output(cod,caracter, cont_linha, cont_coluna)
+        cont_coluna += 1
+    cont_linha += 1
