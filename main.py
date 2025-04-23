@@ -55,11 +55,11 @@ for linha in arquivo:
                     cod = ''
                 if operador_aninhado != '':
                     write_output(cod,operador_aninhado, cont_linha, cont_coluna)
-                else:
-                    write_output(cod,caracter, cont_linha, cont_coluna)
 
                 palavra = ''
                 operador_aninhado = ''
             write_output(cod,caracter, cont_linha, cont_coluna)
         cont_coluna += 1
     cont_linha += 1
+
+print("Resultado da tokenização disponível no arquivo `output.txt`")
