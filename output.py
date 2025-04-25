@@ -17,44 +17,65 @@ dicionario_tokens = {
     '=': 12,
     '>': 13,
     '<': 14,
-    '==': 15,
-    '>=':16,
-    '<=': 17,
-    '<>': 18,
+    ':=': 15,
+    '==': 16,
+    '>=':17,
+    '<=': 18,
+    '<>': 19,
 
-    'or': 19,
-    'and': 20,
-    'not': 21,
+    'or': 20,
+    'and': 21,
+    'not': 22,
 
-    'program': 22,
-    'var': 23,
-    'integer': 24,
-    'real': 25,
-    'string': 26,
-    'begin': 27,
-    'end': 28,
-    'for': 29,
-    'to': 30,
-    'break': 31,
-    'mod': 32,
-    'div': 33,
+    'program': 23,
+    'var': 24,
+    'integer': 25,
+    'real': 26,
+    'string': 27,
+    'begin': 28,
+    'end': 29,
+    'for': 30,
+    'to': 31,
+    'break': 32,
+    'mod': 33,
+    'div': 34,
 
-    'if': 34,
-    'else': 35,
-    'then': 36,
+    'if': 35,
+    'else': 36,
+    'then': 37,
 
-    'write': 37,
-    'writeln': 38,
-    'read': 39,
-    'readln': 40
+    'write': 38,
+    'writeln': 39,
+    'read': 40,
+    'readln': 41,
+
+    '\n': 42,
+    '\0': 43
 }
 
 
 def write_output(cod, item, linha, coluna):
     with open('output.txt', 'a', encoding='utf-8') as f:
+        if item == '\n' or item == '\0' or item == 'b\n' or item == 'b':
+            f.write(f"{dicionario_tokens[item]}{' '*(6 - len(str(dicionario_tokens[item])))} | exception case{' ' * (1 - len(item))} | {linha}{' '*(5 - len(str(linha)))} | {coluna}\n")
+            return
         if cod != 'variavel':
             if item not in [' ', '']:
                 f.write(f"{dicionario_tokens[item]}{' '*(6 - len(str(dicionario_tokens[item])))} | {item}{' ' * (14 - len(item))} | {linha}{' '*(5 - len(str(linha)))} | {coluna}\n")
         else:
             f.write(f"8{' '*5} | {item}{' ' * (14 - len(item))} | {linha}{' '*(5 - len(str(linha)))} | {coluna}\n")
         f.close()
+    # with open('output.txt', 'a', encoding='utf-8') as f:
+    #     if cod == 'string':
+    #         f.write(f"\t{dicionario_tokens[cod]} - {item} - {linha} - {coluna - len(item)}\t\n")
+    #     elif cod == 'variavel':
+    #         f.write(f"\t{dicionario_tokens['var']} - {item} - {linha} - {coluna - len(item)}\t\n")
+    #     else:
+    #         if item == '\n' or item == '\0':
+    #             f.write(f"\t{dicionario_tokens[item]} - {item.encode()} - {linha} - {coluna}\t\n")
+
+    #         f.write(f"\t{dicionario_tokens[item]} - {item} - {linha} - {coluna - len(item)}\t\n")
+            
+            
+    #     f.close()
+
