@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Código | Item           | Linha | Coluna
 23     | program        | 8     | 8
 8      | ConstantesHexadecimais | 31    | 31
@@ -411,3 +412,43 @@ Código | Item           | Linha | Coluna
 42     | exception case | 1718  | 1638
 29     | end            | 1722  | 1642
 2      | .              | 1722  | 1642
+=======
+Código | Item | Linha | Coluna
+23 | program | 1 | 1
+16 | == | 1 | 13
+24 | exs1 | 1 | 9
+7 | ; | 1 | 15
+10 | * | 2 | 1
+26 | real | 3 | 1
+24 | uses | 4 | 1
+24 | crt | 4 | 6
+7 | ; | 4 | 9
+19 | <> | 5 | 1
+24 | var | 6 | 1
+24 | n1 | 6 | 5
+1 | , | 6 | 7
+24 | n2 | 6 | 8
+1 | , | 6 | 10
+24 | n3 | 6 | 11
+1 | , | 6 | 13
+3 | : | 6 | 16
+24 | n4 | 6 | 14
+26 | real | 6 | 18
+7 | ; | 6 | 22
+28 | begin | 8 | 1
+7 | ; | 8 | 6
+24 | clrscr | 10 | 2
+7 | ; | 10 | 8
+39 | writeln | 11 | 2
+4 | ( | 11 | 10
+27 | caro usuario este programa 'calculara' 3 notas com seus respesquitivos pesos e a media da nota sera o conceito recebido. | 11 | 12
+5 | ) | 11 | 135
+7 | ; | 11 | 136
+38 | write | 12 | 2
+4 | ( | 12 | 8
+27 | para comecar aperte enter  | 12 | 10
+5 | ) | 12 | 37
+7 | ; | 12 | 38
+24 | readkey | 13 | 2
+7 | ; | 13 | 9
+>>>>>>> 23d87acc87341763823745d68df1d40bca0d8bbd

@@ -1,5 +1,7 @@
 delimitadores = [',', '.', ':', '(', ')', ' ', ';', '\n', '\t', '\0']
 
+delimitadoresSalvar = [',', '.', ':', '(', ')', ';', '\n', '\t', '\0', '*']
+
 operadores_aritmeticos = ['+', '-', '*', '/']
 
 operadores_comparacao = ['=', '>', '<']
