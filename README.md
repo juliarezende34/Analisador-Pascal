@@ -2,10 +2,11 @@
 
 ## Descrição do Projeto
 O projeto se propõe à construir um Interpretador da linguagem Pascal([Especificações](https://github.com/juliarezende34/Analisador-Pascal/blob/main/Especifica%C3%A7%C3%B5es/Analisador_L%C3%A9xico.pdf)). Acompanhe o status do projeto abaixo:
-[ ] - Análise Léxica
-[ ] - Análise Sintática
-[ ] - Análise Semântica
-[ ] - Interpretação e execução
+
+- [ ] Análise Léxica
+- [ ] Análise Sintática
+- [ ] Análise Semântica
+- [ ] Interpretação e execução
 
 ## Execução de Código
 
