@@ -1,4 +1,4 @@
-program exs1==; 
+program exs1==;
 *
 real //segue aqui o comentario
 uses crt;
