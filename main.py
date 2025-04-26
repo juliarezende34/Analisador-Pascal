@@ -33,27 +33,32 @@ for linha in arquivo:
     tamanho_linha = len(linha)
     
     while i < tamanho_linha:
+        
         caracter = linha[i]
         
         # Tratamento de comentários
-        if not aspas_dupla and not aspas_simples and not em_comentario:
-            if caracter == '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
-                break  # Pula o resto da linha
+        if not aspas_dupla and not aspas_simples:
+
+            if em_comentario:
+
+                if caracter == '}':
+                    em_comentario = False
+                i += 1
+                cont_coluna += 1
+                continue
+            
             elif caracter == '{':
                 em_comentario = True
                 i += 1
+                cont_coluna += 1
                 continue
-            elif caracter == '}' and em_comentario:
-                em_comentario = False
-                i += 1
-                continue
-            elif em_comentario:
-                i += 1
-                continue
-        
-        # Se estiver em comentário, ignora o caractere
+            elif caracter == '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
+                break  # Pula o resto da linha
+
+        # Se estiver em comentário, ignora o caractere   
         if em_comentario:
             i += 1
+            cont_coluna += 1
             continue
             
         # Tratamento de strings
