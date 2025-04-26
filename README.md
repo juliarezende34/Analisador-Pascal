@@ -41,7 +41,7 @@ def calcular_imposto(valor: float, taxa: float) -> float:
 
 _[Lucas Lima](https://www.linkedin.com/in/lucas-lima-358599223/)_
 
-_[Julia Rezende]("https://www.linkedin.com/in/julia-rezende-r28/)_
+_[Julia Rezende](https://www.linkedin.com/in/julia-rezende-r28/)_
 
 _[Mariana Rodrigues](https://www.linkedin.com/in/mariana-rodrigues-lmelo/)_
 
