@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/5cb5a0ba-80c2-4d6b-98bb-ab5e9116d134)# Analisador-Pascal
+# Analisador-Pascal
 
 ## Descrição do Projeto
 O projeto se propõe à construir um Interpretador da linguagem Pascal([Especificações](https://github.com/juliarezende34/Analisador-Pascal/blob/main/Especifica%C3%A7%C3%B5es/Analisador_L%C3%A9xico.pdf)). Acompanhe o status do projeto abaixo:
@@ -37,18 +37,36 @@ def calcular_imposto(valor: float, taxa: float) -> float:
 
 ## Desenvolvido por:
 
+<br>
+<br>
+Lucas Lima
+<br>
 <a href="https://www.linkedin.com/in/lucas-lima-358599223/">
 <img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
 
+
+<br>
+<br>
+Julia Rezende
+<br>
 <a href="https://www.linkedin.com/in/julia-rezende-r28/">
 <img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
 
+<br>
+<br>
+Mariana Rodrigues
+<br>
 <a href="https://www.linkedin.com/in/mariana-rodrigues-lmelo/">
 <img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
 
+
+<br>
+<br>
+João Gustavo
+<br>
 <a href="https://www.linkedin.com/in/joao-gustavo-silva/">
 <img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
 </a>
