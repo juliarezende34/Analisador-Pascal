@@ -1,31 +1,18 @@
 from LeitorArquivos import LeitorArquivos
 from tokenizer import *
 from output import *
-<<<<<<< HEAD
-from ferramentas import digito_hexadecimal
-
-=======
 from erros import *
->>>>>>> 23d87acc87341763823745d68df1d40bca0d8bbd
 
 with open('output.txt', 'w', encoding='utf-8') as f:
     f.write(f"Código | Item | Linha | Coluna\n")
     f.close()
 
 Leitor = LeitorArquivos()
-
 Leitor.LerArquivos()
-
-<<<<<<< HEAD
-arquivos = Leitor.ListaProgramasPascal
-=======
-
 arquivo = Leitor.get_lines_program('EXS1.pas')
 
 # Variáveis de estado
->>>>>>> 23d87acc87341763823745d68df1d40bca0d8bbd
 palavra = ''
-palavra_hexadec = ''
 operador_aninhado = ''
 cod = ''
 aspas_dupla = False
@@ -33,45 +20,6 @@ aspas_simples = False
 string_buffer = ''
 cont_linha = 1
 cont_coluna = 1
-<<<<<<< HEAD
-hexadecimal_flag = False
-last_caracter = ''
-
-# Arquivos com erro ao realizar leitura:
-#EXS15.pas -> índice 16 de arquivos
-
-for linha in arquivos[25]:
-    #[:527]:                                                               # Lendo a linha
-    for caracter in linha:                                                          # Lendo o caracter                          
-        # Começo da construção dos caracteres aninhados - //, >=, <=, <>, :=, ==
-        if (caracter in [':', '<', '>', '=', '/']) and (operador_aninhado == ''):  
-            operador_aninhado = caracter
-            continue
-
-        # Se houver os caracteres em sequência, constrói o caracter aninhado
-        elif (operador_aninhado != '') and caracter in ['=', '>', '/']:             
-            operador_aninhado += caracter
-            continue
-
-        # Se não for delimitador ou operador, continua a construir a palavra, letra por letra
-        elif not (isDelimitador(caracter) or isOperadorAritmetico(caracter)):
-            palavra = palavra + caracter
-
-        # Achou um delimitador e a palavra foi construída
-        else:
-            # Se '//', é um comentário, então pula pra próxima linha
-            if operador_aninhado == '//':
-                operador_aninhado = ''
-                palavra = ''
-                break
-
-            # Se a palavra não está vazia, fazer tratamentos
-            if palavra.strip() != '':
-                # Printar itens reservados
-                if (palavra in operadores_logicos) or (palavra in palavras_reservadas) or (palavra in io_tokens) or (palavra in condicionais):
-                    write_output(cod, palavra, cont_linha, cont_coluna)
-                # Printar variável
-=======
 em_comentario = False
 tam_operador_aninhado = 0
 escape_coluna = 0
@@ -148,7 +96,6 @@ for linha in arquivo:
                     i += 2
                     cont_coluna += 2
                     continue
->>>>>>> 23d87acc87341763823745d68df1d40bca0d8bbd
                 else:
                     string_buffer += '\\'
             else:
@@ -173,9 +120,6 @@ for linha in arquivo:
                 else:
                     tam_operador_aninhado=0
                 operador_aninhado = ''
-<<<<<<< HEAD
-            write_output(cod, caracter, cont_linha, cont_coluna)
-=======
                 i += 1
                 cont_coluna += 1
                 continue
@@ -208,7 +152,6 @@ for linha in arquivo:
         # Acumula caracteres para formar palavras
         palavra += caracter
         i += 1
->>>>>>> 23d87acc87341763823745d68df1d40bca0d8bbd
         cont_coluna += 1
     
     # Processa qualquer palavra restante no final da linha (isso porque antes está ignorando os espaços em branco)
@@ -224,7 +167,6 @@ for linha in arquivo:
         operador_aninhado = ''
     
     cont_linha += 1
-    ultimo_caracter = caracter
 
 # Verificação final
 if aspas_dupla or aspas_simples:
