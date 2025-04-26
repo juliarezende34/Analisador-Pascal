@@ -33,43 +33,22 @@ def calcular_imposto(valor: float, taxa: float) -> float:
  ```
 # Referêncial
 <!-- PEPs -->[PEPs] https://peps.python.org/#introduction
+<br>
 <!-- Flake8 -->[FK8] - https://flake8.pycqa.org/en/latest/
+
 
 ## Desenvolvido por:
 
-<br>
-<br>
-Lucas Lima
-<br>
-<a href="https://www.linkedin.com/in/lucas-lima-358599223/">
-<img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
+_[Lucas Lima](https://www.linkedin.com/in/lucas-lima-358599223/)_
+
+_[Julia Rezende]("https://www.linkedin.com/in/julia-rezende-r28/)_
+
+_[Mariana Rodrigues](https://www.linkedin.com/in/mariana-rodrigues-lmelo/)_
+
+_[João Gustavo](https://www.linkedin.com/in/joao-gustavo-silva/)_
 
 
-<br>
-<br>
-Julia Rezende
-<br>
-<a href="https://www.linkedin.com/in/julia-rezende-r28/">
-<img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
 
-<br>
-<br>
-Mariana Rodrigues
-<br>
-<a href="https://www.linkedin.com/in/mariana-rodrigues-lmelo/">
-<img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
-
-
-<br>
-<br>
-João Gustavo
-<br>
-<a href="https://www.linkedin.com/in/joao-gustavo-silva/">
-<img align="center" width="20%" height="20%" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
-</a>
 
 
 
