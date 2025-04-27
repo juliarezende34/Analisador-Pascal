@@ -24,21 +24,20 @@ def is_hex(palavra):
     else:
         return False
 
-
-
 def is_float(palavra):
     """
     Verifica se a palavra lida é um float escrito em Pascal
     :return: True se for float, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = [0,1,2,3,4,5,6,7,8,9]
-    
+    inteiros = ['0','1','2','3','4','5','6','7','8','9']
     for i,v in enumerate(palavra):
-        if palavra[i-1] in inteiros and palavra[i] == '.' and palavra[i+1] in inteiros:
+        if v in inteiros and palavra[i+1] == '.' and palavra[i+2] in inteiros:
             return True
-        else:
+        elif v not in inteiros or v not in list('e','-','+'):
             return False
+
+    return False
 
 def is_octal(palavra):
     
@@ -47,7 +46,7 @@ def is_octal(palavra):
     :return: True se for octal, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = [0,1,2,3,4,5,6,7]
+    inteiros = ['0','1','2','3','4','5','6','7']
     if palavra[0] == '0':
         for i in palavra:
             if i not in inteiros:

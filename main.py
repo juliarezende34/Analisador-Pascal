@@ -10,8 +10,6 @@ from output import lendo_float
 
 from output import write_output, escrever_variavel_ou_numero
 
-
-
 with open('output.txt', 'w', encoding='utf-8') as f:
     f.write("Código | Item | Linha | Coluna\n")
     f.close()
@@ -159,7 +157,6 @@ for linha in arquivo:
                 # Processa a palavra acumulada
                 if (palavra in palavras_reservadas) or (palavra in operadores_logicos) or (palavra in io_tokens) or (palavra in condicionais):
                     write_output(palavra, palavra, cont_linha, cont_coluna - len(palavra))
-                    print(palavra)
                 else:
                     index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
                     escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
