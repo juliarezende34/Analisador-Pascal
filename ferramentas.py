@@ -6,11 +6,15 @@ def lendo_float(char_antecessor, char_atual, char_sucessor):
     :param char_sucessor: Próximo caracter à ser lido.
     :return: True se for um ponto flutuante, False caso contrário.
     """
-    vizinhos_numericos = char_antecessor.isnumeric() and char_sucessor.isnumeric()
+    antecessor_numerico = char_antecessor.isnumeric()
+    sucessor_numerico = char_sucessor.isnumeric()
+
+    vizinhos_numericos = antecessor_numerico and sucessor_numerico
     if char_atual == '.' and vizinhos_numericos:
         return True
     else:
         return False
+
 
 def is_hex(palavra):
     """
@@ -18,7 +22,7 @@ def is_hex(palavra):
     :return: True se for hexadecimal, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    if len(palavra)<3:
+    if len(palavra) < 3:
         return False
     else:
         if palavra[0] == '0' and palavra[1] == 'x':
@@ -27,37 +31,39 @@ def is_hex(palavra):
         else:
             return False
 
+
 def is_float(palavra):
     """
     Verifica se a palavra lida é um float escrito em Pascal
     :return: True se for float, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = ['0','1','2','3','4','5','6','7','8','9']
-    for i,v in enumerate(palavra):
+    inteiros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    for i, v in enumerate(palavra):
         if v in inteiros and palavra[i+1] == '.' and palavra[i+2] in inteiros:
             return True
-        elif v not in inteiros or v not in ['e','-','+']:
+        elif v not in inteiros or v not in ['e', '-', '+']:
             return False
 
     return False
 
+
 def is_octal(palavra):
-    
     """
     Verifica se a palavra é um octal escrito em Pascal
     :return: True se for octal, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = ['0','1','2','3','4','5','6','7']
+    inteiros = ['0', '1', '2', '3', '4', '5', '6', '7']
     if palavra[0] == '0':
         for i in palavra:
             if i not in inteiros:
                 return False
         return True
-    
+
     else:
         return False
+
 
 def is_int(palavra):
     """
@@ -65,7 +71,7 @@ def is_int(palavra):
     :return: True se for inteiro, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = ['1','2','3','4','5','6','7','8','9']
+    inteiros = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
     if palavra[0] == '0':
         return False
@@ -74,5 +80,3 @@ def is_int(palavra):
             if i not in inteiros:
                 return False
         return True
-
-
