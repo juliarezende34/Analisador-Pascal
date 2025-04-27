@@ -1,5 +1,11 @@
 from tokenizer import *
 
+from ferramentas import (
+    lendo_float, is_hex,
+    is_float, is_int,
+    is_octal
+)
+
 dicionario_tokens = {
     ',': 1,
     '.': 2,
@@ -30,33 +36,36 @@ dicionario_tokens = {
     'program': 23,
     'var': 24,
     'integer': 25,
-    'real': 26,
-    'string': 27,
-    'begin': 28,
-    'end': 29,
-    'for': 30,
-    'to': 31,
-    'break': 32,
-    'mod': 33,
-    'div': 34,
+    'float': 26,
+    'hexa': 27,
+    'octal': 28,
+    'real': 29,
+    'string': 30,
+    'begin': 31,
+    'end': 32,
+    'for': 33,
+    'to': 34,
+    'break': 35,
+    'mod': 36,
+    'div': 37,
 
-    'if': 35,
-    'else': 36,
-    'then': 37,
+    'if': 38,
+    'else': 39,
+    'then': 40,
 
-    'write': 38,
-    'writeln': 39,
-    'read': 40,
-    'readln': 41,
+    'write': 41,
+    'writeln': 42,
+    'read': 43,
+    'readln': 44,
 
-    '\n': 42,
-    '\0': 43
+    '\n': 45,
+    '\0': 46
 }
 
 
 def write_output(cod, item, linha, coluna):
     with open('output.txt', 'a', encoding='utf-8') as f:
-        if cod == 'string':  
+        if cod == 'string' or cod == 'hexa' or cod == 'octal' or cod == 'float' or cod == 'int':  
             f.write(f"{dicionario_tokens[cod]} | {item} | {linha} | {coluna}\n")
         elif cod == 'variavel':
             f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
@@ -64,3 +73,15 @@ def write_output(cod, item, linha, coluna):
             f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
         f.close()
 
+def escrever_variavel_ou_numero(palavra, cont_linha, index_de_saida_no_arquivo):
+    if is_hex(palavra):
+        write_output('hexa', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_int(palavra):
+        write_output('integer', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_octal(palavra):
+        write_output('octal', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_float(palavra):
+        write_output('float', palavra, cont_linha, index_de_saida_no_arquivo)
+    else:
+        write_output('variavel', palavra, cont_linha, index_de_saida_no_arquivo)
+    

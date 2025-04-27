@@ -1,11 +1,19 @@
 from LeitorArquivos import LeitorArquivos
-from tokenizer import *
-from output import *
-from erros import *
-from ferramentas import lendo_float
+
+from tokenizer import (
+    isDelimitador, palavras_reservadas,
+    operadores_logicos, io_tokens,
+    condicionais
+)
+
+from output import lendo_float
+
+from output import write_output, escrever_variavel_ou_numero
+
+
 
 with open('output.txt', 'w', encoding='utf-8') as f:
-    f.write(f"Código | Item | Linha | Coluna\n")
+    f.write("Código | Item | Linha | Coluna\n")
     f.close()
 
 Leitor = LeitorArquivos()
@@ -29,54 +37,54 @@ for linha in arquivo:
     cont_coluna = 1  # Reset a cada nova linha
     i = 0  # Índice para percorrer a linha
     tamanho_linha = len(linha)
-    
+
     while i < tamanho_linha:
-        
-        caracter_atual= linha[i]
-        
-        if i>0:
-            ultimo_caracter_lido = linha[i-1]
-        else: 
-            ultimo_caracter_lido = ''        
+
+        char_atual = linha[i]
+
+        if i > 0:
+            ultimo_char = linha[i-1]
+        else:
+            ultimo_char = ''
 
         if i + 1 < tamanho_linha:
-            proximo_caracter = linha[i+1]
+            proximo_char = linha[i+1]
         else:
-                proximo_caracter = ''
+            proximo_char = ''
 
-        verificador_float = lendo_float(ultimo_caracter_lido, caracter_atual, proximo_caracter)
+        verificador_float = lendo_float(ultimo_char, char_atual, proximo_char)
 
         # Tratamento de comentários
         if not aspas_dupla and not aspas_simples:
 
             if em_comentario:
 
-                if caracter_atual== '}':
+                if char_atual== '}':
                     em_comentario = False
                 i += 1
                 cont_coluna += 1
                 continue
             
-            elif caracter_atual== '{':
+            elif char_atual == '{':
                 em_comentario = True
                 i += 1
                 cont_coluna += 1
                 continue
-            elif caracter_atual== '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
+            elif char_atual == '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
                 break  # Pula o resto da linha
 
-        # Se estiver em comentário, ignora ocaracter_atuale   
+        # Se estiver em comentário, ignora ochar_atuale
         if em_comentario:
             i += 1
             cont_coluna += 1
             continue
             
         # Tratamento de strings
-        if caracter_atual== '"' and not aspas_simples:
+        if char_atual == '"' and not aspas_simples:
             if aspas_dupla:
                 # Fechamento de string
                 write_output('string', string_buffer, cont_linha, cont_coluna - len(string_buffer) - escape_coluna)
-                escape_coluna=0
+                escape_coluna = 0
                 string_buffer = ''
                 aspas_dupla = False
             else:
@@ -86,11 +94,11 @@ for linha in arquivo:
             cont_coluna += 1
             continue
             
-        elif caracter_atual== "'" and not aspas_dupla:
+        elif char_atual == "'" and not aspas_dupla:
             if aspas_simples:
                 # Fechamento de string
                 write_output('string', string_buffer, cont_linha, cont_coluna - len(string_buffer) - escape_coluna)
-                escape_coluna=0
+                escape_coluna = 0
                 string_buffer = ''
                 aspas_simples = False
             else:
@@ -102,7 +110,7 @@ for linha in arquivo:
             
         # Se estiver dentro de string (tratamento escape '\')
         if aspas_dupla or aspas_simples:
-            if caracter_atual== '\\':  # Caractere de escape
+            if char_atual == '\\':  # chare de escape
                 escape_coluna += 1
                 if i + 1 < tamanho_linha:
                     string_buffer += linha[i+1]
@@ -112,21 +120,21 @@ for linha in arquivo:
                 else:
                     string_buffer += '\\'
             else:
-                string_buffer +=caracter_atual
+                string_buffer += char_atual
             i += 1
             cont_coluna += 1
             continue
             
         # Tratamento de operadores aninhados
-        if caracter_atual in [':', '<', '>', '=', '/', '*'] and operador_aninhado == '':
-            operador_aninhado = caracter_atual
+        if char_atual in [':', '<', '>', '=', '/', '*'] and operador_aninhado == '':
+            operador_aninhado = char_atual
             i += 1
             cont_coluna += 1
             continue
             
         if operador_aninhado:
-            if caracter_atual in ['=', '>']:
-                operador_aninhado += caracter_atual
+            if char_atual in ['=', '>']:
+                operador_aninhado += char_atual
                 write_output('operador', operador_aninhado, cont_linha, cont_coluna - len(operador_aninhado) + 1)
                 if palavra: 
                     tam_operador_aninhado = len(operador_aninhado)
@@ -146,24 +154,26 @@ for linha in arquivo:
                 continue
        
         # Tratamento de delimitadores
-        if isDelimitador(caracter_atual) and verificador_float is False:
+        if isDelimitador(char_atual) and verificador_float is False:
             if palavra:
                 # Processa a palavra acumulada
                 if (palavra in palavras_reservadas) or (palavra in operadores_logicos) or (palavra in io_tokens) or (palavra in condicionais):
                     write_output(palavra, palavra, cont_linha, cont_coluna - len(palavra))
+                    print(palavra)
                 else:
-                    write_output('variavel', palavra, cont_linha, cont_coluna - len(palavra)- tam_operador_aninhado)
-                    tam_operador_aninhado=0
+                    index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
+                    escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
+                    tam_operador_aninhado = 0
                 palavra = ''
             
-            if caracter_atual not in [' ', '\t', '\n']:  # Ignora espaços em branco
-                write_output('delimitador',caracter_atual, cont_linha, cont_coluna)
+            if char_atual not in [' ', '\t', '\n']:  # Ignora espaços em branco
+                write_output('delimitador', char_atual, cont_linha, cont_coluna)
             i += 1
             cont_coluna += 1
             continue
             
-        # Acumula caracteres para formar palavras
-        palavra +=caracter_atual
+        # Acumula chares para formar palavras
+        palavra += char_atual
         i += 1
         cont_coluna += 1
     
@@ -172,7 +182,8 @@ for linha in arquivo:
         if palavra in palavras_reservadas or palavra in operadores_logicos or palavra in io_tokens or palavra in condicionais:
             write_output(palavra, palavra, cont_linha, cont_coluna - len(palavra))
         else:
-            write_output('variavel', palavra, cont_linha, cont_coluna - len(palavra))
+            index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
+            escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
         palavra = ''
     
     if operador_aninhado:
@@ -184,6 +195,5 @@ for linha in arquivo:
 # Verificação final
 if aspas_dupla or aspas_simples:
     print("Erro léxico: string não fechada")
-    invalid_token_error()
 
 print("Resultado da tokenização disponível no arquivo `output.txt`")
