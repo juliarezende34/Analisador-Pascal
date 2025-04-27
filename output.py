@@ -1,7 +1,5 @@
-from tokenizer import *
-
 from ferramentas import (
-    lendo_float, is_hex,
+    is_hex,
     is_float, is_int,
     is_octal
 )
@@ -65,23 +63,23 @@ dicionario_tokens = {
 
 def write_output(cod, item, linha, coluna):
     with open('output.txt', 'a', encoding='utf-8') as f:
-            if cod == 'string' or cod == 'hexa' or cod == 'octal' or cod == 'float' or cod == 'integer': 
-                f.write(f"{dicionario_tokens[cod]} | {item} | {linha} | {coluna}\n")
-            elif cod == 'variavel':
-                f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
-            else:
-                f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
-            f.close()
+        if cod == 'string' or cod == 'hexa' or cod == 'octal' or cod == 'float' or cod == 'integer':
+            f.write(f"{dicionario_tokens[cod]} | {item} | {linha} | {coluna}\n")
+        elif cod == 'variavel':
+            f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
+        else:
+            f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
+        f.close()
+
 
 def escrever_variavel_ou_numero(palavra, cont_linha, index_de_saida_no_arquivo):
-        if is_hex(palavra):
-            write_output('hexa', palavra, cont_linha, index_de_saida_no_arquivo)
-        elif is_int(palavra):
-            write_output('integer', palavra, cont_linha, index_de_saida_no_arquivo)
-        elif is_octal(palavra):
-            write_output('octal', palavra, cont_linha, index_de_saida_no_arquivo)
-        elif is_float(palavra):
-            write_output('float', palavra, cont_linha, index_de_saida_no_arquivo)
-        else:
-            write_output('variavel', palavra, cont_linha, index_de_saida_no_arquivo)
-        
+    if is_hex(palavra):
+        write_output('hexa', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_int(palavra):
+        write_output('integer', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_octal(palavra):
+        write_output('octal', palavra, cont_linha, index_de_saida_no_arquivo)
+    elif is_float(palavra):
+        write_output('float', palavra, cont_linha, index_de_saida_no_arquivo)
+    else:
+        write_output('variavel', palavra, cont_linha, index_de_saida_no_arquivo)

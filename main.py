@@ -17,7 +17,7 @@ with open('output.txt', 'w', encoding='utf-8') as f:
 Leitor = LeitorArquivos()
 Leitor.LerArquivos()
 
-arquivo = Leitor.get_lines_program('EXS26.pas')
+arquivo = Leitor.get_lines_program('EXS25.pas')
 
 # Variáveis de estado
 palavra = ''
@@ -58,17 +58,18 @@ for linha in arquivo:
 
             if em_comentario:
 
-                if char_atual== '}':
+                if char_atual == '}':
                     em_comentario = False
                 i += 1
                 cont_coluna += 1
                 continue
-            
+
             elif char_atual == '{':
                 em_comentario = True
                 i += 1
                 cont_coluna += 1
                 continue
+
             elif char_atual == '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
                 break  # Pula o resto da linha
 
@@ -77,7 +78,7 @@ for linha in arquivo:
             i += 1
             cont_coluna += 1
             continue
-            
+
         # Tratamento de strings
         if char_atual == '"' and not aspas_simples:
             if aspas_dupla:
@@ -92,11 +93,15 @@ for linha in arquivo:
             i += 1
             cont_coluna += 1
             continue
-            
+
         elif char_atual == "'" and not aspas_dupla:
             if aspas_simples:
                 # Fechamento de string
-                write_output('string', string_buffer, cont_linha, cont_coluna - len(string_buffer) - escape_coluna)
+                write_output(
+                    'string',
+                    string_buffer, cont_linha,
+                    cont_coluna - len(string_buffer) - escape_coluna
+                )
                 escape_coluna = 0
                 string_buffer = ''
                 aspas_simples = False
@@ -106,7 +111,7 @@ for linha in arquivo:
             i += 1
             cont_coluna += 1
             continue
-            
+
         # Se estiver dentro de string (tratamento escape '\')
         if aspas_dupla or aspas_simples:
             if char_atual == '\\':  # chare de escape
@@ -123,19 +128,23 @@ for linha in arquivo:
             i += 1
             cont_coluna += 1
             continue
-            
+
         # Tratamento de operadores aninhados
         if char_atual in [':', '<', '>', '=', '/', '*'] and operador_aninhado == '':
             operador_aninhado = char_atual
             i += 1
             cont_coluna += 1
             continue
-            
+
         if operador_aninhado:
             if char_atual in ['=', '>']:
                 operador_aninhado += char_atual
-                write_output('operador', operador_aninhado, cont_linha, cont_coluna - len(operador_aninhado) + 1)
-                if palavra: 
+                write_output(
+                    'operador',
+                    operador_aninhado, cont_linha,
+                    cont_coluna - len(operador_aninhado) + 1
+                )
+                if palavra:
                     tam_operador_aninhado = len(operador_aninhado)
                 else:
                     tam_operador_aninhado = 0
@@ -144,20 +153,27 @@ for linha in arquivo:
                 cont_coluna += 1
                 continue
             else:
-                write_output('operador', operador_aninhado, cont_linha, cont_coluna - len(operador_aninhado))
-                if palavra: 
+                write_output(
+                    'operador',
+                    operador_aninhado, cont_linha,
+                    cont_coluna - len(operador_aninhado)
+                )
+                if palavra:
                     tam_operador_aninhado = len(operador_aninhado)
                 else:
                     tam_operador_aninhado = 0
                 operador_aninhado = ''
                 continue
-       
+
         # Tratamento de delimitadores
         if isDelimitador(char_atual) and verificador_float is False:
             if palavra:
                 # Processa a palavra acumulada
                 if (palavra in palavras_reservadas) or (palavra in operadores_logicos) or (palavra in io_tokens) or (palavra in condicionais):
-                    write_output(palavra, palavra, cont_linha, cont_coluna - len(palavra))
+                    write_output(
+                        palavra, palavra,
+                        cont_linha, cont_coluna - len(palavra)
+                    )
                 else:
                     index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
                     escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
@@ -165,7 +181,11 @@ for linha in arquivo:
                 palavra = ''
             
             if char_atual not in [' ', '\t', '\n']:  # Ignora espaços em branco
-                write_output('delimitador', char_atual, cont_linha, cont_coluna)
+                write_output(
+                    'delimitador',
+                    char_atual, cont_linha,
+                    cont_coluna
+                )
             i += 1
             cont_coluna += 1
             continue
@@ -183,11 +203,11 @@ for linha in arquivo:
             index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
             escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
         palavra = ''
-    
+
     if operador_aninhado:
         write_output('operador', operador_aninhado, cont_linha, cont_coluna-1)
         operador_aninhado = ''
-    
+
     cont_linha += 1
 
 # Verificação final

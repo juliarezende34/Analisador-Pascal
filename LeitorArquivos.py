@@ -22,7 +22,10 @@ class LeitorArquivos():
     def LerArquivos(self):
         for arquivo in self.ListaNomesDeProgramas:
             try:
-                self.ListaProgramasPascal.append(open(f"{self.path+arquivo}", 'r', encoding='utf-8'))
+                self.ListaProgramasPascal.append(
+                    open(f"{self.path+arquivo}", 'r', encoding='utf-8')
+                )
+
             except FileNotFoundError or IOError as e:
                 print(f"Problemas na leitura de arquivos \n\n {e} \n\n")
                 exit(1)
@@ -55,4 +58,3 @@ class LeitorArquivos():
         """
 
         return self.DicionarioProgramasPascal[f"{name}"].read().split('\n')
-        
