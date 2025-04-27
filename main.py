@@ -16,7 +16,8 @@ with open('output.txt', 'w', encoding='utf-8') as f:
 
 Leitor = LeitorArquivos()
 Leitor.LerArquivos()
-arquivo = Leitor.get_lines_program('EXS27.pas')
+
+arquivo = Leitor.get_lines_program('EXS26.pas')
 
 # Variáveis de estado
 palavra = ''

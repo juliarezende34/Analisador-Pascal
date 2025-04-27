@@ -18,11 +18,14 @@ def is_hex(palavra):
     :return: True se for hexadecimal, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    if palavra[0] == '0' and palavra[1] == 'x':
-        return True
-
-    else:
+    if len(palavra)<3:
         return False
+    else:
+        if palavra[0] == '0' and palavra[1] == 'x':
+            return True
+
+        else:
+            return False
 
 def is_float(palavra):
     """
@@ -34,7 +37,7 @@ def is_float(palavra):
     for i,v in enumerate(palavra):
         if v in inteiros and palavra[i+1] == '.' and palavra[i+2] in inteiros:
             return True
-        elif v not in inteiros or v not in list('e','-','+'):
+        elif v not in inteiros or v not in ['e','-','+']:
             return False
 
     return False
@@ -62,7 +65,7 @@ def is_int(palavra):
     :return: True se for inteiro, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
-    inteiros = [1,2,3,4,5,6,7,8,9]
+    inteiros = ['1','2','3','4','5','6','7','8','9']
 
     if palavra[0] == '0':
         return False

@@ -53,4 +53,6 @@ class LeitorArquivos():
         :param name: nome do programa desejado
         :return: linhas do programa em Pascal
         """
+
         return self.DicionarioProgramasPascal[f"{name}"].read().split('\n')
+        
