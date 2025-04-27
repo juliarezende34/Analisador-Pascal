@@ -1,22 +1,24 @@
 program valores_mistos;
-{ Programa com 8 valores float e 2 valores hexadecimais (formato 0x) }
+{ Programa com 4 valores float, 3 valores octais e 3 inteiros }
 
 uses crt;
 
 const
   // Valores float
-  PI_VAL          := 3.14159265;
-  EULER_VAL       := 2.71828182;
-  GRAVITY         := 9.80665;
-  LIGHT_SPEED     := 2.99792458e8;
-  GOLDEN_RATIO    := 1.61803398;
-  AVOGADRO        := 6.02214076e23;
-  PLANCK          := 6.62607015e-34;
-  ELECTRON_CHARGE := 1.602176634e-19;
+  PI_VAL          = 3.14159265;
+  EULER_VAL       = 2.71828182;
+  GRAVITY         = 9.80665;
+  GOLDEN_RATIO    = 1.61803398;
 
-  // Valores hexadecimais (formato 0x)
-  MASK_FLAGS      := 0xFF00;
-  ERROR_CODE      := 0x1A3F;
+  // Valores octais (prefixo 0)
+  FILE_PERMISSION = 0755;    // Permissões de arquivo Unix
+  MASK_OPTIONS    = 0644;    // Máscara de opções
+  USER_GROUP      = 0770;    // Grupo de usuários
+
+  // Valores inteiros
+  MAX_USERS       = 100;
+  TIMEOUT         = 30;
+  BUFFER_SIZE     = 1024;
 
 var
   i: integer;
@@ -32,23 +34,27 @@ begin
   writeln('1. PI............: ', PI_VAL:0:8);
   writeln('2. Número de Euler: ', EULER_VAL:0:8);
   writeln('3. Gravidade......: ', GRAVITY:0:5);
-  writeln('4. Velocidade Luz.: ', LIGHT_SPEED:0:0);
-  writeln('5. Razão Áurea....: ', GOLDEN_RATIO:0:8);
-  writeln('6. Número Avogadro: ', AVOGADRO:0:0);
-  writeln('7. Constante Planck: ', PLANCK:0:10);
-  writeln('8. Carga Elétron..: ', ELECTRON_CHARGE:0:10);
+  writeln('4. Razão Áurea....: ', GOLDEN_RATIO:0:8);
   
   writeln;
-  writeln('Valores Hexadecimais:');
+  writeln('Valores Octais:');
+  writeln('---------------');
+  writeln('5. Permissões de Arquivo: ', FILE_PERMISSION);
+  writeln('6. Máscara de Opções....: ', MASK_OPTIONS);
+  writeln('7. Grupo de Usuários....: ', USER_GROUP);
+  
+  writeln;
+  writeln('Valores Inteiros:');
+  writeln('-----------------');
+  writeln('8. Máximo de Usuários..: ', MAX_USERS);
+  writeln('9. Tempo de Espera......: ', TIMEOUT);
+  writeln('10. Tamanho do Buffer...: ', BUFFER_SIZE);
+  
+  writeln;
+  writeln('Operações com Octais:');
   writeln('---------------------');
-  writeln('9. Máscara de Flags: ', MASK_FLAGS);
-  writeln('10. Código de Erro..: ', ERROR_CODE);
-  
-  writeln;
-  writeln('Operações com Hexadecimais:');
-  writeln('--------------------------');
-  writeln('MASK_FLAGS AND 0x00FF = ', MASK_FLAGS and $00FF);
-  writeln('ERROR_CODE OR 0x0100 = ', ERROR_CODE or $0100);
+  writeln('FILE_PERMISSION AND 0750 = ', FILE_PERMISSION and 0750);
+  writeln('USER_GROUP OR 0007 = ', USER_GROUP or 0007);
   
   writeln;
   writeln('Pressione ENTER para sair...');
