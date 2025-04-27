@@ -14,13 +14,13 @@ begin;
  write ('para comecar tecle enter.');
  readkey;
 
- //Ent∆o se le o salario que o usuario ira digitar.
+ //Ento se le o salario que o usuario ira digitar.
 
  clrscr;
  writeln ('primeiramente digite o seu salario.');
  readln (sal);
 
- //depois se le a opá∆o que definir† quanto de salario o usuario ir† receber.
+ //depois se le a opo que definir quanto de salario o usuario ir receber.
 
  clrscr;
  writeln ('para calcular seu novo salario , ');
@@ -34,8 +34,8 @@ begin;
 
  clrscr;
 
- //E com uma simples estrutura de case engloba as opá‰es e da o tratamento para cada uma delas.
- //Entao de acordo com a opá∆o que o usuario digitar se apresenta direto o novo salario dele ja com o aumento.
+ //E com uma simples estrutura de case engloba as opes e da o tratamento para cada uma delas.
+ //Entao de acordo com a opo que o usuario digitar se apresenta direto o novo salario dele ja com o aumento.
 
  case n1 of
 

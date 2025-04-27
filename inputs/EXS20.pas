@@ -15,8 +15,8 @@ begin;
  write ('para prosseguir tecle enter.');
  readkey;
 
- //o usuario digitar  2 valores num‚ricos inteiros, que serÆo os codigos usados nas estruturas case.
- //e ele digitar  tambem o peso do produto.
+ //o usuario digitar 2 valores numricos inteiros, que sero os codigos usados nas estruturas case.
+ //e ele digitar tambem o peso do produto.
 
  clrscr;
  writeln ('primeiramente digite o codigo do produto comprado numero inteiro entre 1 e 10.');
@@ -35,10 +35,10 @@ begin;
 
  novo_peso:= peso*1000;
 
- {aqui se come‡a as estruturas de cases um contendo o outro.
- o primeiro case tem como condi‡Æo o codigo do produto sendo de 1..4, o segundo de 5..7, e o terceiro de 8..10.
- dentro dessas 3 condi‡äes se coloca outras 3 que ‚ o codigo de cada pais, onde o imposto ‚ diferente.
- e dentro da estrutura de cada pais ja se mostra ao usuario os valores do peso em gramas, o pre‡o total do produto, o valor do imposto, e o pre‡o do produto com imposto.
+ {aqui se comea as estruturas de cases um contendo o outro.
+ o primeiro case tem como condio o codigo do produto sendo de 1..4, o segundo de 5..7, e o terceiro de 8..10.
+ dentro dessas 3 condies se coloca outras 3 que  o codigo de cada pais, onde o imposto  diferente.
+ e dentro da estrutura de cada pais ja se mostra ao usuario os valores do peso em gramas, o preo total do produto, o valor do imposto, e o preo do produto com imposto.
  e dessa mesma maneira se faz para as outras estruturas de case.}
 
  case cod_p of

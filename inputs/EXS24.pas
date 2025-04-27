@@ -30,7 +30,7 @@ begin;
  writeln ('Lembre-se de usar somente letras maiusculas.');
  readln (refri);
 
- {depois se là os valores das variaveis que ser∆o utilisados nas estruturas case e if.
+ {depois se l os valores das variaveis que sero utilisados nas estruturas case e if.
   Na primeira estrutura case se coloca um outro case dentro dele, e dentro de cada case faz-se uma pequena cadeia if
    para definir o valor adicional.}
 
@@ -97,11 +97,11 @@ begin;
             imp:= preco*0.08;
             end;
 
- //ent∆o se calcula o preco de custo do produto.
+ //ento se calcula o preco de custo do produto.
 
  preco_custo:= preco + imp;
 
- {Para definir o valor do desconto se depende de duas variaveis e impondo a condiá∆o sobre elas se calcula o valor
+ {Para definir o valor do desconto se depende de duas variaveis e impondo a condio sobre elas se calcula o valor
    do desconto.}
 
  if (tipo = 'A') and (refri = 'S')  then
@@ -114,12 +114,12 @@ begin;
         desconto:= preco_custo*0.03;
         end;
 
- //ent∆o se calcula o novo preáo para que se possa definir a classificaá∆o do produto.
+ //ento se calcula o novo preo para que se possa definir a classificao do produto.
 
  novo_preco:= preco_custo - desconto + val_add;
 
- {a classificaá∆o do produto Ç definida a partir do valor do novo preáo.
-  A cada condiá∆o imposta vai ser uma classificaá∆o.}
+ {a classificao do produto  definida a partir do valor do novo preo.
+  A cada condio imposta vai ser uma classificao.}
 
  if (novo_preco <= 50) then
     begin
@@ -137,7 +137,7 @@ begin;
                     end;
 
 
- //ent∆o a unica coisa restante Ç limpar a tela para mostrar ao usuario os resultados.
+ //ento a unica coisa restante  limpar a tela para mostrar ao usuario os resultados.
 
  clrscr;
 

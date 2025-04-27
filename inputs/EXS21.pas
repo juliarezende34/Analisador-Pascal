@@ -16,7 +16,7 @@ begin;
  write ('para inciar tecle enter.');
  readkey;
 
- //vocà ler† do usuario dois codigos que ser∆o utilizados na estrutura case e um valor que Ç o peso da carga em toneladas.
+ //voc ler do usuario dois codigos que sero utilizados na estrutura case e um valor que  o peso da carga em toneladas.
 
  clrscr;
  writeln ('primeiramente digite o codigo do estado de origem, de 1 a 5.');
@@ -32,13 +32,13 @@ begin;
 
  novo_peso:= peso*1000;
 
- //se transforma o peso em toneladas em quilos e se comeáa as estruturas case.
+ //se transforma o peso em toneladas em quilos e se comea as estruturas case.
 
  clrscr;
 
- {a estrutura primaria Ç a que tem como condiá∆o o codigo de estado que definira o imposto.
- a estrutura secundaria que entra dentro de todas as primarias Ç a que tem como condiá∆o o codigo do produto que definir† o seu preáo.
- ent∆o se faz os calculos para cada estrutura considerando o valor de imposto, e o preáo de cada quilo de produto.
+ {a estrutura primaria  a que tem como condio o codigo de estado que definira o imposto.
+ a estrutura secundaria que entra dentro de todas as primarias  a que tem como condio o codigo do produto que definir o seu preo.
+ ento se faz os calculos para cada estrutura considerando o valor de imposto, e o preo de cada quilo de produto.
  e se apresenta ao usuario esses resultados.}
 
  case cod_e of

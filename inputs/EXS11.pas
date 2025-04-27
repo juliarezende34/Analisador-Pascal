@@ -15,7 +15,7 @@ begin;
  write ('para comecar tecle enter');
  readkey;
 
- //entÆo se come‡a a adquirir os valores das variaveis.
+ //ento se comea a adquirir os valores das variaveis.
 
  clrscr;
  writeln ('primeiramente digite a hora que o jogo comecou, numeros de 00-23.');
@@ -34,7 +34,7 @@ begin;
  readln (min_f);
 
  //agora se abre a cadeia de ifs. Para casos mais simples como a hora final e minuto final maior que os iniciais.
- //simplesmente ‚ nescessario diminuir da hora final a hora inicial e o mesmo com os minutos.
+ //simplesmente  nescessario diminuir da hora final a hora inicial e o mesmo com os minutos.
 
  clrscr;
 
@@ -43,8 +43,8 @@ begin;
     writeln ('o jogo durou ',hora_f - hora_i, ' horas e ', min_f - min_i, 'minutos .');
     end
 
-    //agora quando os minutos finais tem um valor menor que os minutos iniciais j  ‚ nescessario diminuir uma hora do total de horas
-    //e subtrair os minutos finais com 60 que ‚ o valor da hora diminuida com o valor dos minutos iniciais.
+    //agora quando os minutos finais tem um valor menor que os minutos iniciais j  nescessario diminuir uma hora do total de horas
+    //e subtrair os minutos finais com 60 que  o valor da hora diminuida com o valor dos minutos iniciais.
 
     else
         if (hora_f > hora_i) and (min_f < min_i) then
@@ -52,8 +52,8 @@ begin;
            writeln ('o jogo durou ',(hora_f - hora_i)-1 ,' horas ', (min_f+60)-min_i, ' minutos .'); readkey;
            end
 
-           //agora para o caso da hora inicial ser maior que a final o tratamento ‚ diferente.
-           //porem para o caso dos minutos iniciais forem maior que os finais o tratamento ‚ o mesmo
+           //agora para o caso da hora inicial ser maior que a final o tratamento  diferente.
+           //porem para o caso dos minutos iniciais forem maior que os finais o tratamento  o mesmo
            //no caso da hora inicial ser maior que a final, se soma a hora final com 24 e depois se substrai pela hora inical
 
 
@@ -72,7 +72,7 @@ begin;
                hora_d := hora_f - hora_i;
                end;
 
-               //entao a unica coisa restante ‚ mostrar para o usuario o valor de dura‡Æo do jogo.
+               //entao a unica coisa restante  mostrar para o usuario o valor de durao do jogo.
 
                writeln ('o jogo durou ',hora_d,' horas ',min_d, ' minutos.');
                 end;

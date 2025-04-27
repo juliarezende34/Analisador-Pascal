@@ -24,8 +24,8 @@ begin;
 
  clrscr;
 
- //ja que o màs deve ser escrito em forma extensa entao para cada numero de 1 a 12 se escreve em uma condiá∆o
- //e a unica coisa restante Ç mostrar para o usuario os resultados.
+ //ja que o ms deve ser escrito em forma extensa entao para cada numero de 1 a 12 se escreve em uma condio
+ //e a unica coisa restante  mostrar para o usuario os resultados.
 
  case mes of
 
@@ -44,7 +44,7 @@ begin;
 
  end;
 
- //depois de terminar a estrutura de case se salta uma linha para certificar que o usuario n∆o fique confuso
+ //depois de terminar a estrutura de case se salta uma linha para certificar que o usuario no fique confuso
  //e se mostra as horas para ele junto com a data composta.
 
  writeln (' ');

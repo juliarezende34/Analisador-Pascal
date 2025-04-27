@@ -19,19 +19,19 @@ begin;
  writeln ('primeiramente digite o angulo.');
  readln (angulo);
 
- //ent∆o se le o angulo que o usuario digita.
+ //ento se le o angulo que o usuario digita.
 
  clrscr;
 
- {Para se descobrir quanto ser† o angulo, se usa mod do angulo por 360 e
- dessa maneira se acha o resto da divis∆o do angulo por 360.}
- {E para se descobrir o numero de voltas se faz a operaá∆o de div do angulo por
+ {Para se descobrir quanto ser o angulo, se usa mod do angulo por 360 e
+ dessa maneira se acha o resto da diviso do angulo por 360.}
+ {E para se descobrir o numero de voltas se faz a operao de div do angulo por
   360.}
 
  novo_ang:= angulo mod 360;
  voltas:=   angulo div 360;
 
- {Se cria uma condiá∆o para quando o angulo for menor que 0 para se calcular
+ {Se cria uma condio para quando o angulo for menor que 0 para se calcular
   em qual quadrante o angulo esta.}
 
  if (novo_ang < 0) then
@@ -39,7 +39,7 @@ begin;
     novo_ang:= novo_ang + 360;
     end;
 
- {Se cria uma condiá∆o para que se o usuario digitar uma opá∆o que o angulo em quest∆o
+ {Se cria uma condio para que se o usuario digitar uma opo que o angulo em questo
   esteja em cima dos eixos, se apresenta uma mensagem falando e se encerra o programa.}
 
  if (novo_ang=0) or (novo_ang=90) or (novo_ang=180) or (novo_ang=270) or (novo_ang=360) then
@@ -49,9 +49,9 @@ begin;
           readkey;       exit;
     end;
 
- {Para se descobrir em qual quadrante o angulo est† basta pegar o resultado do
-  mod do angulo e o colocar em uma cadeia de ifs, onde j† se apresenta ao usuario
-  em qual quadrante est† o angulo.}
+ {Para se descobrir em qual quadrante o angulo est basta pegar o resultado do
+  mod do angulo e o colocar em uma cadeia de ifs, onde j se apresenta ao usuario
+  em qual quadrante est o angulo.}
 
  if (novo_ang > 0) and (novo_ang < 90) then
     begin
@@ -74,7 +74,7 @@ begin;
                             end;
 
 
- {para descobrir o sentido do angulo basta criar uma condiá∆o para que se o angulo inicial
+ {para descobrir o sentido do angulo basta criar uma condio para que se o angulo inicial
  for menor que 0 entao sera sentido anti horario caso contrario sera sentido horario.}
 
  if (angulo < 0) then

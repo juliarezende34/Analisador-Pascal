@@ -32,12 +32,12 @@ begin;
  writeln ('agora digite sua funcao O=operario, G=gerente. Lembre-se de colocar letra maiuscula.');
  readln (cat);
 
- {entÆo se le as variaveis do salario minimo, da quantidade de horas, do periodo em que o usuario trabalha e de sua
-  fun‡Æo, para que se possa realizar os calculos.}
+ {ento se le as variaveis do salario minimo, da quantidade de horas, do periodo em que o usuario trabalha e de sua
+  funo, para que se possa realizar os calculos.}
 
  clrscr;
 
- //a primeira cadeia de ifs ‚ para definir o valor de cada hora trabalhada.
+ //a primeira cadeia de ifs  para definir o valor de cada hora trabalhada.
 
  if (peri='M') then
     begin
@@ -56,7 +56,7 @@ begin;
 
  sal_bruto:= val_hora*horas;
 
- //entÆo se abre uma estrutura de case com uma cadeia de ifs interna para se calcular o valor do imposto.
+ //ento se abre uma estrutura de case com uma cadeia de ifs interna para se calcular o valor do imposto.
 
  case cat of
 
@@ -83,7 +83,7 @@ begin;
         end;
  end;
 
- //entÆo se abre outra cadeia de ifs para se definir de quanto ser  a gratifica‡Æo do usuario.
+ //ento se abre outra cadeia de ifs para se definir de quanto ser a gratificao do usuario.
 
  if (peri='N') and (horas > 80) then
      begin
@@ -94,7 +94,7 @@ begin;
            grat:= 30;
            end;
 
- //entÆo outra cadeia de ifs ‚ aberta para definir de quanto ser  o auxilio alimenta‡Æo do usuario.
+ //ento outra cadeia de ifs  aberta para definir de quanto ser o auxilio alimentao do usuario.
 
  if (cat = 'O') or (val_hora <= 25) then
     begin
@@ -109,7 +109,7 @@ begin;
 
  sal_liq:= sal_bruto - imp + grat + auxilio;
 
- //entÆo ja na ultima cadeia de ifs se apresenta ao usuario todos os resultados juntamente com sua classifica‡Æo.
+ //ento ja na ultima cadeia de ifs se apresenta ao usuario todos os resultados juntamente com sua classificao.
 
  if (sal_liq > 600) then
     begin

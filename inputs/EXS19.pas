@@ -13,7 +13,7 @@ begin;
  write ('para continuar tecle enter.');
  readkey;
 
- //ent∆o se le a altura e peso do usuario para mostra-lhe a sua classificaá∆o
+ //ento se le a altura e peso do usuario para mostra-lhe a sua classificao
 
  clrscr;
  writeln ('por favor digite sua altura.');
@@ -23,8 +23,8 @@ begin;
  writeln ('agora digite seu peso.');
  readln (n2);
 
- //ent∆o se faz 3 cadeias de ifs 1 para cada condiá∆o de altura e dentro das cadeias de alturas se coloca as condiá‰es
- //de pesos para achar a classificaá∆o do usuario
+ //ento se faz 3 cadeias de ifs 1 para cada condio de altura e dentro das cadeias de alturas se coloca as condies
+ //de pesos para achar a classificao do usuario
 
  if (n1 < 1.20) then
     begin
@@ -81,7 +81,7 @@ begin;
 
     end;
 
-  //depois so resta mostrar ao usuario sua classificaá∆o.
+  //depois so resta mostrar ao usuario sua classificao.
 
  writeln (' ');
  write ('para encerrar o programa precione qualquer tecla.');

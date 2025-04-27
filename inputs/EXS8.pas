@@ -6,8 +6,8 @@ var n1,n2,n3,n4: real;
 
 begin;
 
- //primeiramente se da o resumo do que o programa far† para o usuario.
- //e depois j† se manda ele digitar as variaveis que ser∆o utilizadas.
+ //primeiramente se da o resumo do que o programa far para o usuario.
+ //e depois j se manda ele digitar as variaveis que sero utilizadas.
 
  clrscr;
  writeln ('caro usuario este programa recebera dois numeros e te dara opcoes sobre o que   fazer com eles.');
@@ -22,15 +22,15 @@ begin;
  writeln ('por favor digite o segundo numero');
  readln (n2);
 
- //se da as opá‰es para o usuario escolher o que deseja ser feito a principio.
+ //se da as opes para o usuario escolher o que deseja ser feito a principio.
 
  clrscr;
  writeln ('tecle 1 para somar os dois numeros.');
  writeln ('tecle 2 para calcular a raiz quadrada de um numero.');
  readln (n3);
 
- //agora comeáa uma pequena cadeia de ifs para determinar o que fazer caso o usuario digite 2.
- //se là o valor que ele quer e apresenta-se o resultado a ele.
+ //agora comea uma pequena cadeia de ifs para determinar o que fazer caso o usuario digite 2.
+ //se l o valor que ele quer e apresenta-se o resultado a ele.
 
  clrscr;
  if n3=2 then begin
@@ -38,9 +38,9 @@ begin;
               writeln ('precione 2 para a raiz quadrada do segundo numero.');   readln (n4);
               end;
 
- //aqui Ç a outra parte da cadeia de if caso ele digite 1 para a variavel n4 se calcula a raiz quadrada de n1.
+ //aqui  a outra parte da cadeia de if caso ele digite 1 para a variavel n4 se calcula a raiz quadrada de n1.
  //poderia ser utilizado somente um else, porem se fosse feito desse jeito qualquer valor que o usuario digitasse cairia no else.
- //por isso se abre outra condiá∆o para caso do usuario digitar um valor que n∆o seja 2 o programa se encerra e assim ele tem que recomeáar.
+ //por isso se abre outra condio para caso do usuario digitar um valor que no seja 2 o programa se encerra e assim ele tem que recomear.
 
  if n4=1 then begin
               writeln ('a raiz quadrada do primeiro numero e ', sqrt(n1):4:2, ' .');
@@ -52,7 +52,7 @@ begin;
 
 
 
- //aqui est† a condiá∆o para o n3 ser 1.
+ //aqui est a condio para o n3 ser 1.
  //so basta apresentar pro usuario a soma dos dois numeros.
 
  if  n3=1 then begin

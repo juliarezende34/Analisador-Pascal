@@ -21,9 +21,9 @@ begin;
 
  clrscr;
 
- // o modo de descobrir se um n£mero ‚ par ou impar ‚ o dividindo por 2.
- // se o resultado for 0 entao o numero ‚ par,caso contrario o numero ‚ impar.
- // a linha acima ‚ o que ‚ nescessario colocar na condi‡Æo para descobrir, depois disto so resta mostrar os resultados ao usuario.
+ // o modo de descobrir se um nmero  par ou impar  o dividindo por 2.
+ // se o resultado for 0 entao o numero  par,caso contrario o numero  impar.
+ // a linha acima  o que  nescessario colocar na condio para descobrir, depois disto so resta mostrar os resultados ao usuario.
 
  if (n1)mod(2)=0  then  begin
                       writeln(n1,' e par.');
