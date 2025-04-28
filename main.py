@@ -3,10 +3,10 @@ from LeitorArquivos import LeitorArquivos
 from tokenizer import (
     isDelimitador, palavras_reservadas,
     operadores_logicos, io_tokens,
-    condicionais
+    condicionais, operadores_aritmeticos
 )
 
-from output import lendo_float
+from ferramentas import lendo_float
 
 from output import write_output, escrever_variavel_ou_numero
 
@@ -17,7 +17,7 @@ with open('output.txt', 'w', encoding='utf-8') as f:
 Leitor = LeitorArquivos()
 Leitor.LerArquivos()
 
-arquivo = Leitor.get_lines_program('EXS25.pas')
+arquivo = Leitor.get_lines_program('EXS2.pas')
 
 # Variáveis de estado
 palavra = ''
@@ -40,7 +40,7 @@ for linha in arquivo:
     while i < tamanho_linha:
 
         char_atual = linha[i]
-
+        
         if i > 0:
             ultimo_char = linha[i-1]
         else:
@@ -73,7 +73,7 @@ for linha in arquivo:
             elif char_atual == '/' and i + 1 < tamanho_linha and linha[i+1] == '/':
                 break  # Pula o resto da linha
 
-        # Se estiver em comentário, ignora ochar_atuale
+        # Se estiver em comentário, ignora o char_atual
         if em_comentario:
             i += 1
             cont_coluna += 1
@@ -130,12 +130,12 @@ for linha in arquivo:
             continue
 
         # Tratamento de operadores aninhados
-        if char_atual in [':', '<', '>', '=', '/', '*'] and operador_aninhado == '':
+        if (char_atual in [':', '<', '>', '='] or char_atual in operadores_aritmeticos) and operador_aninhado == '':
             operador_aninhado = char_atual
             i += 1
             cont_coluna += 1
             continue
-
+        
         if operador_aninhado:
             if char_atual in ['=', '>']:
                 operador_aninhado += char_atual
@@ -148,10 +148,8 @@ for linha in arquivo:
                     tam_operador_aninhado = len(operador_aninhado)
                 else:
                     tam_operador_aninhado = 0
-                operador_aninhado = ''
                 i += 1
                 cont_coluna += 1
-                continue
             else:
                 write_output(
                     'operador',
@@ -162,14 +160,12 @@ for linha in arquivo:
                     tam_operador_aninhado = len(operador_aninhado)
                 else:
                     tam_operador_aninhado = 0
-                operador_aninhado = ''
-                continue
-
+        
         # Tratamento de delimitadores
-        if isDelimitador(char_atual) and verificador_float is False:
+        if (isDelimitador(char_atual) or operador_aninhado) and verificador_float is False:
             if palavra:
                 # Processa a palavra acumulada
-                if (palavra in palavras_reservadas) or (palavra in operadores_logicos) or (palavra in io_tokens) or (palavra in condicionais):
+                if (palavra in palavras_reservadas) or (palavra in operadores_logicos) or (palavra in io_tokens) or (palavra in condicionais) or (palavra in operadores_aritmeticos):
                     write_output(
                         palavra, palavra,
                         cont_linha, cont_coluna - len(palavra)
@@ -180,14 +176,17 @@ for linha in arquivo:
                     tam_operador_aninhado = 0
                 palavra = ''
             
-            if char_atual not in [' ', '\t', '\n']:  # Ignora espaços em branco
+            if char_atual not in [' ', '\t', '\n'] and isDelimitador(char_atual):  # Ignora espaços em branco
                 write_output(
                     'delimitador',
                     char_atual, cont_linha,
                     cont_coluna
                 )
-            i += 1
-            cont_coluna += 1
+            if not operador_aninhado:
+                i += 1
+                cont_coluna += 1
+            
+            operador_aninhado = ''
             continue
             
         # Acumula chares para formar palavras
@@ -213,5 +212,8 @@ for linha in arquivo:
 # Verificação final
 if aspas_dupla or aspas_simples:
     print("Erro léxico: string não fechada")
+
+if em_comentario:
+    print("Erro léxico: comentário não finalizado")
 
 print("Resultado da tokenização disponível no arquivo `output.txt`")
