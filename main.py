@@ -1,2 +1,2 @@
 from lexico import *
-lexico()
+lista = lexico()

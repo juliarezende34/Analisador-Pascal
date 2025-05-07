@@ -4,6 +4,8 @@ from ferramentas import (
     is_octal
 )
 
+lista_tuplas = []
+
 # Lista de caracteres inválidos
 caracteres_invalidos = {'#', '$', '|', '&', '¨', '!', '@', '%', '°', 'º', 'ª', '§', '?', '¹', '²', '³', '£', '¢', '¬', '_'}
 
@@ -64,19 +66,21 @@ dicionario_tokens = {
     'variavel':47
 }
 
-
 def write_output(cod, item, linha, coluna):
     with open('output.txt', 'a', encoding='utf-8') as f:
         if cod == 'string' or cod == 'hexa' or cod == 'octal' or cod == 'float' or cod == 'integer':
             f.write(f"{dicionario_tokens[cod]} | {item} | {linha} | {coluna}\n")
+            lista_tuplas.append((dicionario_tokens[cod], item, linha, coluna))
         elif cod == 'variavel':
             if item == 'var':
                 f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
+                lista_tuplas.append((dicionario_tokens['var'], item, linha, coluna))
             else:
                 f.write(f"{dicionario_tokens['variavel']} | {item} | {linha} | {coluna}\n")
-
+                lista_tuplas.append((dicionario_tokens['variavel'], item, linha, coluna))
         else:
             f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
+            lista_tuplas.append((dicionario_tokens[item], item, linha, coluna))
         f.close()
 
 
