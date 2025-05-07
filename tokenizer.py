@@ -15,7 +15,7 @@ palavras_reservadas = [
 
 condicionais = ['if', 'else', 'then']
 
-io_tokens = ['write', 'writeln', 'read', 'readln']
+io_tokens = {'write', 'writeln', 'read', 'readln'}
 
 
 def isDelimitador(token):

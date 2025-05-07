@@ -8,7 +8,7 @@ from tokenizer import (
 
 from ferramentas import lendo_float
 
-from output import write_output, escrever_variavel_ou_numero
+from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos
 
 with open('output.txt', 'w', encoding='utf-8') as f:
     f.write("Código | Item | Linha | Coluna\n")
@@ -17,7 +17,7 @@ with open('output.txt', 'w', encoding='utf-8') as f:
 Leitor = LeitorArquivos()
 Leitor.LerArquivos()
 
-arquivo = Leitor.get_lines_program('EXS2.pas')
+arquivo = Leitor.get_lines_program('EXS1.pas')
 
 # Variáveis de estado
 palavra = ''
@@ -193,6 +193,11 @@ for linha in arquivo:
         palavra += char_atual
         i += 1
         cont_coluna += 1
+
+    # Verificação de caracteres inválidos
+    if palavra in caracteres_invalidos:
+        print("Erro léxico: caractere inválido: ", palavra)
+        exit(1)
     
     # Processa qualquer palavra restante no final da linha (isso porque antes está ignorando os espaços em branco)
     if palavra:

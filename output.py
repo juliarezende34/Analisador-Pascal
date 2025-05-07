@@ -4,6 +4,9 @@ from ferramentas import (
     is_octal
 )
 
+# Lista de caracteres inválidos
+caracteres_invalidos = ['#', '$', '|', '&', '¨', '!', '@', '%', '°', 'º', 'ª', '§']
+
 dicionario_tokens = {
     ',': 1,
     '.': 2,
