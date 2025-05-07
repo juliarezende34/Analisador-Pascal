@@ -5,7 +5,7 @@ from ferramentas import (
 )
 
 # Lista de caracteres inválidos
-caracteres_invalidos = ['#', '$', '|', '&', '¨', '!', '@', '%', '°', 'º', 'ª', '§']
+caracteres_invalidos = {'#', '$', '|', '&', '¨', '!', '@', '%', '°', 'º', 'ª', '§', '?', '¹', '²', '³', '£', '¢', '¬', '_'}
 
 dicionario_tokens = {
     ',': 1,
@@ -60,7 +60,8 @@ dicionario_tokens = {
     'readln': 44,
 
     '\n': 45,
-    '\0': 46
+    '\0': 46,
+    'variavel':47
 }
 
 
@@ -69,7 +70,11 @@ def write_output(cod, item, linha, coluna):
         if cod == 'string' or cod == 'hexa' or cod == 'octal' or cod == 'float' or cod == 'integer':
             f.write(f"{dicionario_tokens[cod]} | {item} | {linha} | {coluna}\n")
         elif cod == 'variavel':
-            f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
+            if item == 'var':
+                f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
+            else:
+                f.write(f"{dicionario_tokens['variavel']} | {item} | {linha} | {coluna}\n")
+
         else:
             f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
         f.close()
