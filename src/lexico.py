@@ -41,7 +41,7 @@ def lexico():
         while i < tamanho_linha:
 
             char_atual = linha[i]
-            
+
             if i > 0:
                 ultimo_char = linha[i-1]
             else:
@@ -51,7 +51,7 @@ def lexico():
                 proximo_char = linha[i+1]
             else:
                 proximo_char = ''
-            
+
             if char_atual in caracteres_invalidos:
                 print(f'Caracter inválido: {char_atual} | Linha {cont_linha} | Coluna {cont_coluna}')
                 exit(1)
@@ -140,7 +140,7 @@ def lexico():
                 i += 1
                 cont_coluna += 1
                 continue
-            
+
             if operador_aninhado:
                 if char_atual in ['=', '>']:
                     operador_aninhado += char_atual
@@ -165,7 +165,7 @@ def lexico():
                         tam_operador_aninhado = len(operador_aninhado)
                     else:
                         tam_operador_aninhado = 0
-            
+
             # Tratamento de delimitadores
             if (isDelimitador(char_atual) or operador_aninhado) and verificador_float is False:
                 if palavra:
@@ -180,7 +180,7 @@ def lexico():
                         escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
                         tam_operador_aninhado = 0
                     palavra = ''
-                
+
                 if char_atual not in [' ', '\t', '\n'] and isDelimitador(char_atual):  # Ignora espaços em branco
                     write_output(
                         'delimitador',
@@ -190,10 +190,10 @@ def lexico():
                 if not operador_aninhado:
                     i += 1
                     cont_coluna += 1
-                
+
                 operador_aninhado = ''
                 continue
-                
+
             # Acumula chares para formar palavras
             palavra += char_atual
             i += 1
@@ -203,7 +203,7 @@ def lexico():
         if palavra in caracteres_invalidos:
             print("Erro léxico: caractere inválido: ", palavra)
             exit(1)
-        
+
         # Processa qualquer palavra restante no final da linha (isso porque antes está ignorando os espaços em branco)
         if palavra:
             if palavra in palavras_reservadas or palavra in operadores_logicos or palavra in io_tokens or palavra in condicionais:
