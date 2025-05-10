@@ -19,7 +19,7 @@ py .\main.py .\inputs
 
 Atenção para escolher o arquivo de entrada em Pascal que queira ser lido, vá até a linha _*20*_ do arquivo `main.py` e altere para o nome do arquivo que deseja rodar.
 
-![Demonstração de onde o arquivo que irá rodar é escolhido](image.png)
+![Demonstração de onde o arquivo que irá rodar é escolhido](images/image.png)
 
 
 ## Documentação de Código
