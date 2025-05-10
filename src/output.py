@@ -81,17 +81,17 @@ def write_output(cod, item, linha, coluna):
         else:
             f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
             lista_tuplas.append((dicionario_tokens[item], item, linha, coluna))
-        f.close()
+        f.close() 
 
 
-def escrever_variavel_ou_numero(palavra, cont_linha, index_de_saida_no_arquivo):
+def escrever_variavel_ou_numero(palavra, cont_linha,  cont_coluna, index_de_saida_no_arquivo):
     if is_hex(palavra):
         write_output('hexa', palavra, cont_linha, index_de_saida_no_arquivo)
     elif is_int(palavra):
         write_output('integer', palavra, cont_linha, index_de_saida_no_arquivo)
     elif is_octal(palavra):
         write_output('octal', palavra, cont_linha, index_de_saida_no_arquivo)
-    elif is_float(palavra):
+    elif is_float(palavra, cont_linha, cont_coluna):
         write_output('float', palavra, cont_linha, index_de_saida_no_arquivo)
     else:
         write_output('variavel', palavra, cont_linha, index_de_saida_no_arquivo)

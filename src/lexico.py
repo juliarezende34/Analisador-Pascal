@@ -177,7 +177,7 @@ def lexico():
                         )
                     else:
                         index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
-                        escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
+                        escrever_variavel_ou_numero(palavra, cont_linha, cont_coluna, index_coluna_no_arquivo)
                         tam_operador_aninhado = 0
                     palavra = ''
 
@@ -210,7 +210,7 @@ def lexico():
                 write_output(palavra, palavra, cont_linha, cont_coluna - len(palavra))
             else:
                 index_coluna_no_arquivo = cont_coluna - len(palavra) - tam_operador_aninhado
-                escrever_variavel_ou_numero(palavra, cont_linha, index_coluna_no_arquivo)
+                escrever_variavel_ou_numero(palavra, cont_linha, cont_coluna, index_coluna_no_arquivo)
             palavra = ''
 
         if operador_aninhado:

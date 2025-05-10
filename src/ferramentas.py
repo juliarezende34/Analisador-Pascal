@@ -32,7 +32,7 @@ def is_hex(palavra):
             return False
 
 
-def is_float(palavra):
+def is_float(palavra, cont_linha, cont_coluna):
     """
     Verifica se a palavra lida é um float escrito em Pascal
     :return: True se for float, False caso contrário.
@@ -47,7 +47,7 @@ def is_float(palavra):
         else:
             if v not in inteiros:
                 if ponto == True and palavra[i] == '.':
-                    print("Erro léxico: caractere inválido: ", palavra)
+                    print(f'Caracter inválido: {palavra} | Linha {cont_linha} | Coluna {cont_coluna}')
                     exit(1)
                 else:
                     return False
