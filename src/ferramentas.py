@@ -16,21 +16,29 @@ def lendo_float(char_antecessor, char_atual, char_sucessor):
         return False
 
 
-def is_hex(palavra):
+def is_hex(palavra, cont_linha, cont_coluna):
     """
     Verifica se o número é hexadecimal.
     :return: True se for hexadecimal, False caso contrário.
     :param palavra: Palavra a ser verificada.
     """
+    letras_hexadecimais = ['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']
+    inteiros = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
     if len(palavra) < 3:
         return False
     else:
         if palavra[0] == '0' and palavra[1] == 'x':
+            for i in palavra[2:]:
+                if i not in inteiros and i not in letras_hexadecimais:
+                    print(f'Erro Léxico - Caracter inválido para hexadecimal: {palavra} | Linha {cont_linha} | Coluna {cont_coluna}')
+                    exit(1)
+                else:
+                    continue
             return True
 
         else:
             return False
-
 
 def is_float(palavra, cont_linha, cont_coluna):
     """
@@ -47,7 +55,7 @@ def is_float(palavra, cont_linha, cont_coluna):
         else:
             if v not in inteiros:
                 if ponto == True and palavra[i] == '.':
-                    print(f'Caracter inválido: {palavra} | Linha {cont_linha} | Coluna {cont_coluna}')
+                    print(f'Erro Léxico - Caracter inválido para float: {palavra} | Linha {cont_linha} | Coluna {cont_coluna}')
                     exit(1)
                 else:
                     return False
