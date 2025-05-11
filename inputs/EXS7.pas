@@ -17,7 +17,7 @@ begin;
  write ('para iniciar tecle enter.');
  readkey;
 
- // aqui ‚ feita a intera‡Æo com o usuario onde ele digitar  os numeros a serem lidos
+ // aqui  feita a interao com o usuario onde ele digitar os numeros a serem lidos
 
  clrscr;
  writeln ('primeiro digite o primeiro numero ');
@@ -39,11 +39,11 @@ begin;
  writeln ('digite 3 para que o numero maior seja apresentado no meio dos outros dois');
  readln (i);
 
- //agora come‡a a primeira cadeia de ifs onde o usuario digita 1 para obter seus numeros em ordem crescente
- //cada cadeia ‚ constituida com 1 condi‡Æo prim ria, que ‚ o recebimento do que o usuario deseja fazer com os
+ //agora comea a primeira cadeia de ifs onde o usuario digita 1 para obter seus numeros em ordem crescente
+ //cada cadeia  constituida com 1 condio primria, que  o recebimento do que o usuario deseja fazer com os
  //seus numeros digitados.
- //entao quando o programa acha a cadeia que o usuario deseja, ele abre a primeira condi‡Æo da cadeia que pede a condi‡Æo de um numero ser maior que o outro
- //e dentro dela foi colocado outra condi‡Æo para determinar a ordem exata dos numeros a serem apresentados.
+ //entao quando o programa acha a cadeia que o usuario deseja, ele abre a primeira condio da cadeia que pede a condio de um numero ser maior que o outro
+ //e dentro dela foi colocado outra condio para determinar a ordem exata dos numeros a serem apresentados.
 
 
 
@@ -131,8 +131,8 @@ begin;
                       end;
          end;
 
- //somente para a op‡Æo 3 do usuario que as coisas mudam um pouco aqui vocˆ so precisa saber qual o numero maior entao
- //basta fazer 3 condi‡äes, na qual o programa achar a condi‡Æo verdadeira, so resta dar o tratamento para o usuario.
+ //somente para a opo 3 do usuario que as coisas mudam um pouco aqui voc so precisa saber qual o numero maior entao
+ //basta fazer 3 condies, na qual o programa achar a condio verdadeira, so resta dar o tratamento para o usuario.
 
  if i=3
    then  begin

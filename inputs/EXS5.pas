@@ -9,7 +9,7 @@ begin;
  clrscr;
  writeln ('caro usuario este programa recebera tres numeros a sua escolha em ordem crescente e um quarto numero aleatorio');
  writeln ('e os colocara em ordem crescente.');
- write  ('para come‡ar por favor tecle enter');
+ write  ('para comear por favor tecle enter');
  readkey;
 
  clrscr;

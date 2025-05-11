@@ -24,8 +24,8 @@ begin;
  readln (n3);
 
  //primeiro se le os 3 numeros que o usuario deseja.
- //entÆo o que deve ser feito ‚ calcular todas as combina‡äes possiveis entre n1,n2,n3 serem diferentes e,
- //escreve-las, e depois disso s¢ e preciso mostrar os resultados.
+ //ento o que deve ser feito  calcular todas as combinaes possiveis entre n1,n2,n3 serem diferentes e,
+ //escreve-las, e depois disso s e preciso mostrar os resultados.
 
  if (n1>n2) and (n1>n3) and (n2>n3)
    then  begin writeln('a ordem crescente desses numeros e ',n1:4:2,', ',n2:4:2,', ',n3:4:2 ,'.');

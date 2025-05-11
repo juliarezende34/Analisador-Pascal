@@ -13,13 +13,13 @@ begin;
  write ('para prosseguir tecle enter.');
  readkey;
 
- // entao se le o salario dele para se fazer os calculos de bonificaá∆o e auxilio escola.
+ // entao se le o salario dele para se fazer os calculos de bonificao e auxilio escola.
 
  clrscr;
  writeln ('por favor digite o seu salario.');
  readln (sal);
 
- // o calculo da bonificaá∆o Ç feita em uma cadeia de ifs onde a condiá∆o atendida sera somada ao salario inicial
+ // o calculo da bonificao  feita em uma cadeia de ifs onde a condio atendida sera somada ao salario inicial
  // juntamente com o auxilio escola.
 
  if (sal > 1200) then
@@ -38,7 +38,7 @@ begin;
                  end;
 
 
-  //como o auxilio escola so tem duas condiá‰es se a primeira n∆o for atendida automaticamente sera calculada a segunda
+  //como o auxilio escola so tem duas condies se a primeira no for atendida automaticamente sera calculada a segunda
 
  if (sal > 600) then
     begin
@@ -50,7 +50,7 @@ begin;
         aux:= 150;
         end;
 
- //ent∆o a unica coisa restante Ç calcular o novo salario e o apresentar ao usuario.
+ //ento a unica coisa restante  calcular o novo salario e o apresentar ao usuario.
 
  novo_sal:= sal+bon+aux;
 

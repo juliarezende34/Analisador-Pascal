@@ -17,9 +17,9 @@ begin;
  write ('para continuar tecle enter.');
  readkey;
 
- // entÆo lhe mostra o menu com as op‡äes disponiveis e se le a op‡Æo que o usuario digitar para se usar na estrutura case.
- // como ‚ pedido para tratar de op‡äes que nÆo fosse as trˆs abaixo se faz um if e nele se coloca a seguinte condi‡Æo.
- // se a op‡Æo que o usuario for maior que 3 ou menor que 1 entÆo mostre a ele a mensagem op‡Æo invalida.
+ // ento lhe mostra o menu com as opes disponiveis e se le a opo que o usuario digitar para se usar na estrutura case.
+ // como  pedido para tratar de opes que no fosse as trs abaixo se faz um if e nele se coloca a seguinte condio.
+ // se a opo que o usuario for maior que 3 ou menor que 1 ento mostre a ele a mensagem opo invalida.
 
  clrscr;
  writeln ('escolha a opcao desejada.');
@@ -28,10 +28,10 @@ begin;
  writeln ('tecle 3 para classificacao.');
  readln (n1);
 
- //  vantajoso colocar esta condi‡Æo aqui pois caso contrario vocˆ teria que ler o salario do usuario em todas as op‡äes do case
- // E tambem caso o usuario digite uma op‡Æo invalida j  se encerra o programa, pois ele nÆo faria nada com uma op‡Æo dessas mesmo.
- // Para se encerrar o programa se usa o comando exit que manda o ponteiro de execu‡Æo para a ultima linha do codigo.
- // E a vantagem ‚ que se esse if nÆo for atendido o programa simplesmente ir  rodar normalmente.
+ //  vantajoso colocar esta condio aqui pois caso contrario voc teria que ler o salario do usuario em todas as opes do case
+ // E tambem caso o usuario digite uma opo invalida j se encerra o programa, pois ele no faria nada com uma opo dessas mesmo.
+ // Para se encerrar o programa se usa o comando exit que manda o ponteiro de execuo para a ultima linha do codigo.
+ // E a vantagem  que se esse if no for atendido o programa simplesmente ir rodar normalmente.
 
  clrscr;
  if (n1>3) or (n1<1) then
@@ -40,7 +40,7 @@ begin;
                       writeln ('aperte qualquer tecla para encerrar o programa.');  readkey;   exit;
                       end;
 
- //ja que todas as op‡äes do menu envolvem salario entÆo ‚ vantajoso ler o sal rio antes de se come‡ar as estruturas.
+ //ja que todas as opes do menu envolvem salario ento  vantajoso ler o salrio antes de se comear as estruturas.
 
  clrscr;
  writeln ('agora informe o seu salario.');
@@ -48,11 +48,11 @@ begin;
 
  clrscr;
 
- //aqui se come‡a a estrutura de case. e em cada op‡Æo do usuario se abre uma cadeia de ifs para realizar os comandos nescessarios.
+ //aqui se comea a estrutura de case. e em cada opo do usuario se abre uma cadeia de ifs para realizar os comandos nescessarios.
 
  case n1 of
 
- //na primeira cadeia se impoe as condi‡äes de salario para calcular o valor do imposto.
+ //na primeira cadeia se impoe as condies de salario para calcular o valor do imposto.
 
  1:   if (sal > 850) then
          begin
@@ -70,7 +70,7 @@ begin;
                          end;
 
 
- //na segunda cadeia se impoe as condi‡äes de salario para calcular quanto ser  o novo salario.
+ //na segunda cadeia se impoe as condies de salario para calcular quanto ser o novo salario.
 
  2:  if  (sal > 1500) then
          begin
@@ -92,7 +92,7 @@ begin;
                            writeln ('o novo salario e de, ', sal+100:4:2 ,' .');
                            end;
 
- // Na terceira como se tem somente duas op‡äes se coloca a condi‡Æo de salario que se caso nÆo for atendida,
+ // Na terceira como se tem somente duas opes se coloca a condio de salario que se caso no for atendida,
  // So lhe resta executar o outro comando.
 
  3:  if (sal > 700) then

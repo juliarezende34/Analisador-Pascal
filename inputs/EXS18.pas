@@ -15,7 +15,7 @@ begin;
  write ('para prosseguir precione enter.');
  readkey;
 
- //entao se le as 3 medidas do usuario para descobrir qual tipo de triangulo Ç.
+ //entao se le as 3 medidas do usuario para descobrir qual tipo de triangulo .
 
  clrscr;
  writeln ('por favor digite a primeira medida .');
@@ -29,10 +29,10 @@ begin;
  writeln ('agora digite a terceira medida .');
  readln (z);
 
- // entao se comeáa a cadeia de ifs. Note que para a cadeia central ser executada uma condiá∆o tem que ser cumprida
- // pois se essa condiá∆o primaria nao for cumprida a figura em quest∆o n∆o Ç um triangulo.
- // porem quando ela ja foi cumprida basta colocar condiá‰es para cada tipo de triangulo baseado em seu formato.
- // dessa forma vocà mostra ao usuario se a figura em quest∆o Ç algum dos tipos de triÉngulo, ou n∆o Ç um triangulo.
+ // entao se comea a cadeia de ifs. Note que para a cadeia central ser executada uma condio tem que ser cumprida
+ // pois se essa condio primaria nao for cumprida a figura em questo no  um triangulo.
+ // porem quando ela ja foi cumprida basta colocar condies para cada tipo de triangulo baseado em seu formato.
+ // dessa forma voc mostra ao usuario se a figura em questo  algum dos tipos de tringulo, ou no  um triangulo.
 
  clrscr;
 

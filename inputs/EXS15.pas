@@ -15,7 +15,7 @@ begin;
  write ('para prosseguir tecle enter.');
  readkey;
 
- //entÆo se le os valores de salario minimo, da quantidade de horas trabalhadas e horas extras, e a quantidade de dependentes.
+ //ento se le os valores de salario minimo, da quantidade de horas trabalhadas e horas extras, e a quantidade de dependentes.
 
  clrscr;
  writeln ('por favor digite o valor do salario minimo.');
@@ -39,14 +39,14 @@ begin;
  val_ht:= sal/5;
  val_he:= val_ht*1.5;
 
- // o salario bruto ‚ calculado pela quantidade de horas trabalhadas * o seu valor, pela quantidade de horas extras * o seu valor
+ // o salario bruto  calculado pela quantidade de horas trabalhadas * o seu valor, pela quantidade de horas extras * o seu valor
  // e pela quantidade de dependentes * 32.
 
  sal_bru:=   (val_ht * hora_t)+(dep * 32)+(val_he * hora_e);
 
 
- //para descobrir o imposto ‚ nescessario uma cadeia de ifs
- //se o salario for maior que 500 entao o imposto sera de 20%, se estiver entre 500 e 200 sera de 10%, caso menor que 200 nÆo ha imposto.
+ //para descobrir o imposto  nescessario uma cadeia de ifs
+ //se o salario for maior que 500 entao o imposto sera de 20%, se estiver entre 500 e 200 sera de 10%, caso menor que 200 no ha imposto.
 
  if (sal_bru > 500) then
     begin
@@ -64,13 +64,13 @@ begin;
                     end;
 
 
- //o salario liquido ‚ calculado pela subtra‡Æo do imposto sobre o salario bruto.
+ //o salario liquido  calculado pela subtrao do imposto sobre o salario bruto.
 
  sal_liq:=  sal_bru - imp;
 
- //aqui ja se calcula a bonifica‡Æo e apresenta ao usuario o salario recebido dele.
- //caso o salario seja maior que 350 a bonifica‡Æo ‚ de 50 e basta ser somada ao salario liquido.
- //caso seja menor ou igual a 350 a bonifica‡Æo ‚ de 100 e da mesma maneira so ‚ nescessario somar ao salario liquido.
+ //aqui ja se calcula a bonificao e apresenta ao usuario o salario recebido dele.
+ //caso o salario seja maior que 350 a bonificao  de 50 e basta ser somada ao salario liquido.
+ //caso seja menor ou igual a 350 a bonificao  de 100 e da mesma maneira so  nescessario somar ao salario liquido.
 
  if (sal_liq > 350) then
     begin

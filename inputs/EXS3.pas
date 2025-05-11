@@ -19,9 +19,9 @@ begin;
  writeln ('agora digite o segundo numero e tecle enter ');
  readln (n2);
 
- //primeiro se le os dois numeros que o usuario digitou, entÆo voce faz as 3 condi‡äes possiveis, que nesse caso sÆo.
- //o n1 maior que o n2, o contrario desta situa‡Æo, e ambos os numeros iguais.
- //entÆo so resta digitar os comandos para cada caso.
+ //primeiro se le os dois numeros que o usuario digitou, ento voce faz as 3 condies possiveis, que nesse caso so.
+ //o n1 maior que o n2, o contrario desta situao, e ambos os numeros iguais.
+ //ento so resta digitar os comandos para cada caso.
 
  clrscr;
  if n1 > n2

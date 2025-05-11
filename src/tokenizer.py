@@ -1,21 +1,21 @@
-delimitadores = [',', '.', ':', '(', ')', ' ', ';', '\n', '\t', '\0']
+delimitadores ={',', '.', ':', '(', ')', ' ', ';', '\n', '\t', '\0'}
 
-delimitadoresSalvar = [',', '.', ':', '(', ')', ';', '\n', '\t', '\0', '*']
+delimitadoresSalvar ={',', '.', ':', '(', ')', ';', '\n', '\t', '\0', '*'}
 
-operadores_aritmeticos = ['+', '-', '*', '/']
+operadores_aritmeticos ={'+', '-', '*', '/'}
 
-operadores_comparacao = ['=', '>', '<']
+operadores_comparacao ={'=', '>', '<'}
 
-operadores_logicos = ['or', 'and', 'not']
+operadores_logicos ={'or', 'and', 'not'}
 
-palavras_reservadas = [
+palavras_reservadas ={
     'program', 'var', 'integer', 'real', 'string',
     'begin', 'end', 'for', 'to', 'break', 'mod', 'div'
-]
+}
 
-condicionais = ['if', 'else', 'then']
+condicionais ={'if', 'else', 'then'}
 
-io_tokens = ['write', 'writeln', 'read', 'readln']
+io_tokens = {'write', 'writeln', 'read', 'readln'}
 
 
 def isDelimitador(token):

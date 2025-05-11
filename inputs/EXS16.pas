@@ -10,11 +10,11 @@ begin;
  //depois de se declarar as variaveis, se apresenta um resumo do programa ao usuario.
 
  clrscr;
- writeln ('caro usuario este programa lhe mostrara o novo preco do produto de acordo com a venda mensal e seu pre‡o.');
+ writeln ('caro usuario este programa lhe mostrara o novo preco do produto de acordo com a venda mensal e seu preo.');
  write ('para prosseguir tecle enter.');
  readkey;
 
- //se le os valores do pre‡o do produto e da venda mensal do mesmo.
+ //se le os valores do preo do produto e da venda mensal do mesmo.
 
  clrscr;
  writeln ('por favor digite o preco do produto.');
@@ -26,8 +26,8 @@ begin;
 
  clrscr;
 
- //e depois se come‡a a cadeia de ifs para determinar o novo pre‡o do produto
- //com as condi‡äes impostas j  se apresenta ao usuario o novo valor do produto fazendo simples calculos de mutiplica‡Æo.
+ //e depois se comea a cadeia de ifs para determinar o novo preo do produto
+ //com as condies impostas j se apresenta ao usuario o novo valor do produto fazendo simples calculos de mutiplicao.
 
  if (n2 >= 1200) or  (n1 >= 80) then
     begin
