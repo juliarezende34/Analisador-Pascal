@@ -58,4 +58,3 @@ class LeitorArquivos():
         """
 
         return self.DicionarioProgramasPascal[f"{name}"].read().split('\n')
-    
