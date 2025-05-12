@@ -94,4 +94,5 @@ def is_int(palavra):
         for i in palavra:
             if i not in inteiros:
                 return False
+              
         return True
