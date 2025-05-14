@@ -5,7 +5,7 @@ uses crt;
 
 const
   // Valores float
-  PIVAL           := 32333.14159265;
+  PIVAL           := 8.54.6;
  
 
 var

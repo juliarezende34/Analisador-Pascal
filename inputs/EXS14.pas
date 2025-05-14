@@ -2,7 +2,7 @@ program exs14;
 
 uses crt;
 
-var sal,bon,aux,novo_sal: real;
+var sal,bon,aux,novoSal: real;
 
 begin;
 
@@ -52,10 +52,10 @@ begin;
 
  //ento a unica coisa restante  calcular o novo salario e o apresentar ao usuario.
 
- novo_sal:= sal+bon+aux;
+ novoSal:= sal+bon+aux;
 
  clrscr;
- writeln ('caro usuario seu novo salario e ', novo_sal:4:2 , ' .');
+ writeln ('caro usuario seu novo salario e ', novoSal:4:2 , ' .');
  writeln (' ');
  write ('para encerrar o programa precione qualquer tecla.');
  readkey;

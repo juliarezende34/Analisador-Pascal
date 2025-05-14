@@ -2,7 +2,7 @@ program exs22;
 
 uses crt;
 
-var sal, sal_liq, imp: real;
+var sal, salLiq, imp: real;
     tempo, grat: integer;
     clas: char;
 
@@ -93,21 +93,21 @@ begin;
   //se calcula o valor do salrio liquido da seguinte forma:
   //salario - imposto - a gratificao que foram obtidos acima.
 
-  sal_liq:= sal-imp+grat;
+  salLiq:= sal-imp+grat;
 
   //ento se comea uma cadeia de ifs para determinar a classificao do usuario de acordo com seu salrio liquido.
 
-  if (sal_liq >= 600) then
+  if (salLiq >= 600) then
      begin
      clas:= 'C';
      end
 
-     else if (sal_liq > 350) and (sal_liq < 600) then
+     else if (salLiq > 350) and (salLiq < 600) then
              begin
              clas:= 'B';
              end
 
-             else if (sal_liq <= 350) then
+             else if (salLiq <= 350) then
                      begin
                      clas:= 'A';
                      end;
@@ -116,7 +116,7 @@ begin;
 
  writeln ('caro usuario o imposto pago por voce e de ', imp:4:2, ' .');
  writeln ('a gratificacao e de ', grat, ' .');
- writeln ('o salario liquido e de ', sal_liq:4:2, ' .');
+ writeln ('o salario liquido e de ', salLiq:4:2, ' .');
  writeln ('e sua classificacao e ', clas , ' .');
 
  writeln (' ');
