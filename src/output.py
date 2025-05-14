@@ -76,8 +76,12 @@ def write_output(cod, item, linha, coluna):
                 f.write(f"{dicionario_tokens['var']} | {item} | {linha} | {coluna}\n")
                 lista_tuplas.append((dicionario_tokens['var'], item, linha, coluna))
             else:
-                f.write(f"{dicionario_tokens['variavel']} | {item} | {linha} | {coluna}\n")
-                lista_tuplas.append((dicionario_tokens['variavel'], item, linha, coluna))
+                if not item[0].isdigit() and all(c.isalnum() for c in item[1:]):
+                    f.write(f"{dicionario_tokens['variavel']} | {item} | {linha} | {coluna}\n")
+                    lista_tuplas.append((dicionario_tokens['variavel'], item, linha, coluna))
+                else:
+                    print(f"Erro léxico: variável '{item}' inválida. Linha: {linha}, Coluna: {coluna}.")
+                    exit(1)
         else:
             f.write(f"{dicionario_tokens[item]} | {item} | {linha} | {coluna}\n")
             lista_tuplas.append((dicionario_tokens[item], item, linha, coluna))
