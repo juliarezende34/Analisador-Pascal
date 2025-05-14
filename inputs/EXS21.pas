@@ -2,8 +2,8 @@ program exs21;
 
 uses crt;
 
-var cod_e,cod_c: integer;
-var peso,novo_peso: real;
+var codE,codC: integer;
+var peso,novoPeso: real;
 
 begin;
 
@@ -20,17 +20,17 @@ begin;
 
  clrscr;
  writeln ('primeiramente digite o codigo do estado de origem, de 1 a 5.');
- readln (cod_e);
+ readln (codE);
 
  clrscr;
  writeln ('agora digite o codigo da carga, de 10 a 40.');
- readln (cod_c);
+ readln (codC);
 
  clrscr;
  writeln ('agora digite o peso da carga em toneladas.');
  readln (peso);
 
- novo_peso:= peso*1000;
+ novoPeso:= peso*1000;
 
  //se transforma o peso em toneladas em quilos e se comea as estruturas case.
 
@@ -41,121 +41,121 @@ begin;
  ento se faz os calculos para cada estrutura considerando o valor de imposto, e o preo de cada quilo de produto.
  e se apresenta ao usuario esses resultados.}
 
- case cod_e of
+ case codE of
 
-   1: case cod_c of
+   1: case codC of
       10..20: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 100):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 100) *0.35):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 100) *1.35):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 100):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 100) *0.35):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 100) *1.35):4:2, ' .');
               end;
 
       21..30: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 250):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 250) *0.35):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 250) *1.35):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 250):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 250) *0.35):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 250) *1.35):4:2, ' .');
               end;
 
       31..40: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 340):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 340) *0.35):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 340) *1.35):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 340):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 340) *0.35):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 340) *1.35):4:2, ' .');
               end;
       end;
 
-   2: case cod_c of
+   2: case codC of
       10..20: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 100):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 100) *0.25):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 100) *1.25):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 100):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 100) *0.25):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 100) *1.25):4:2, ' .');
               end;
 
       21..30: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 250):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 250) *0.25):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 250) *1.25):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 250):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 250) *0.25):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 250) *1.25):4:2, ' .');
               end;
 
       31..40: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 340):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 340) *0.25):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 340) *1.25):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 340):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 340) *0.25):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 340) *1.25):4:2, ' .');
               end;
       end;
 
 
-   3: case cod_c of
+   3: case codC of
       10..20: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 100):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 100) *0.15):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 100) *1.15):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 100):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 100) *0.15):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 100) *1.15):4:2, ' .');
               end;
 
       21..30: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 250):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 250) *0.15):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 250) *1.15):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 250):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 250) *0.15):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 250) *1.15):4:2, ' .');
               end;
 
       31..40: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 340):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 340) *0.15):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 340) *1.15):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 340):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 340) *0.15):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 340) *1.15):4:2, ' .');
               end;
       end;
 
-   4: case cod_c of
+   4: case codC of
       10..20: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 100):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 100) *0.05):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 100) *1.05):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 100):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 100) *0.05):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 100) *1.05):4:2, ' .');
               end;
 
       21..30: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 250):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 250) *0.05):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 250) *1.05):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 250):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 250) *0.05):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 250) *1.05):4:2, ' .');
               end;
 
       31..40: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 340):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 340) *0.05):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 340) *1.05):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 340):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 340) *0.05):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 340) *1.05):4:2, ' .');
               end;
       end;
 
-   5: case cod_c of
+   5: case codC of
       10..20: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 100):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 100) *0.0):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 100) *1.00):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 100):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 100) *0.0):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 100) *1.00):4:2, ' .');
               end;
 
       21..30: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 250):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 250) *0.00):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 250) *1.00):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 250):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 250) *0.00):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 250) *1.00):4:2, ' .');
               end;
 
       31..40: begin
-              writeln ('o peso da carga em quilos e ', novo_peso:4:2, ' .');
-              writeln ('o preco da carga e ', (novo_peso * 340):4:2, ' .');
-              writeln ('o preco do imposto e ', ((novo_peso * 340) *0.00):4:2, ' .');
-              writeln ('o valor da carga com imposto e ', ((novo_peso * 340) *1.00):4:2, ' .');
+              writeln ('o peso da carga em quilos e ', novoPeso:4:2, ' .');
+              writeln ('o preco da carga e ', (novoPeso * 340):4:2, ' .');
+              writeln ('o preco do imposto e ', ((novoPeso * 340) *0.00):4:2, ' .');
+              writeln ('o valor da carga com imposto e ', ((novoPeso * 340) *1.00):4:2, ' .');
               end;
       end;
 

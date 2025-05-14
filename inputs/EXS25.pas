@@ -2,7 +2,7 @@ program exs25;
 
 uses crt;
 
-var angulo, voltas, novo_ang, : integer;
+var angulo, voltas, novoAng, : integer;
 
 begin;
 
@@ -28,21 +28,21 @@ begin;
  {E para se descobrir o numero de voltas se faz a operao de div do angulo por
   360.}
 
- novo_ang:= angulo mod 360;
+ novoAng:= angulo mod 360;
  voltas:=   angulo div 360;
 
  {Se cria uma condio para quando o angulo for menor que 0 para se calcular
   em qual quadrante o angulo esta.}
 
- if (novo_ang < 0) then
+ if (novoAng < 0) then
     begin
-    novo_ang:= novo_ang + 360;
+    novoAng:= novoAng + 360;
     end;
 
  {Se cria uma condio para que se o usuario digitar uma opo que o angulo em questo
   esteja em cima dos eixos, se apresenta uma mensagem falando e se encerra o programa.}
 
- if (novo_ang=0) or (novo_ang=90) or (novo_ang=180) or (novo_ang=270) or (novo_ang=360) then
+ if (novoAng=0) or (novoAng=90) or (novoAng=180) or (novoAng=270) or (novoAng=360) then
     begin
     writeln ('Este angulo esta em cima de algum dos eixos.');
     write ('para encerrar o programa precione qualquer tecla.');
@@ -53,22 +53,22 @@ begin;
   mod do angulo e o colocar em uma cadeia de ifs, onde j se apresenta ao usuario
   em qual quadrante est o angulo.}
 
- if (novo_ang > 0) and (novo_ang < 90) then
+ if (novoAng > 0) and (novoAng < 90) then
     begin
     writeln ('Este angulo esta no primeiro quadrante.');
     end
 
-    else if (novo_ang > 90) and (novo_ang < 180) then
+    else if (novoAng > 90) and (novoAng < 180) then
             begin
             writeln ('Este angulo esta no segundo quadrante.');
             end
 
-            else if (novo_ang > 180) and (novo_ang < 270) then
+            else if (novoAng > 180) and (novoAng < 270) then
                     begin
                     writeln ('Este angulo esta no terceiro quadrante.');
                     end
 
-                    else if (novo_ang > 270) and (novo_ang < 360) then
+                    else if (novoAng > 270) and (novoAng < 360) then
                             begin
                             writeln ('Este angulo esta no quarto quadrante.');
                             end;

@@ -2,8 +2,8 @@ program exs9;
 
 uses crt,dos;
 
-var ano, mes, dia, dia_semana: word;
-    hora, minuto, segundo, cen_seg : word;
+var ano, mes, dia, diaSemana: word;
+    hora, minuto, segundo, cenSeg : word;
 
 begin;
 
@@ -19,8 +19,8 @@ begin;
  //e o comando get time para adquirir o horario, entao a unica coisa restante e ler esses valores,
  //com uma variavel do tipo word e depois seguir as instrucoes abaixo.
 
- getdate (ano, mes, dia, dia_semana);
- gettime (hora, minuto, segundo, cen_seg);
+ getdate (ano, mes, dia, diaSemana);
+ gettime (hora, minuto, segundo, cenSeg);
 
  clrscr;
 
