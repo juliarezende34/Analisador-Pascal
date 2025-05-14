@@ -9,7 +9,7 @@ from tokenizer import (
 
 from ferramentas import lendo_float
 
-from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos
+from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos, lista_tuplas
 
 
 def lexico():
@@ -195,3 +195,4 @@ def lexico():
         exit(1)
 
     print("Resultado da tokenização disponível no arquivo `output.txt`")
+    return lista_tuplas

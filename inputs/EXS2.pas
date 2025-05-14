@@ -1,7 +1,5 @@
 program exs2;
 
-uses crt;
-
 var n1,n2,n3,media,exame: real;
 
 begin;
