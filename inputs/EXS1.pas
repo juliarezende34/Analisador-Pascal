@@ -1,7 +1,7 @@
 program°? //{asdasdasdasd exs1 =====1.12 0x123 01239;
 
 real //segue aqui o comentario
-uses crt;
+
 <>
 var n1,n2,n3,n4: real;
 

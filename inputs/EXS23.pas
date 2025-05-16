@@ -1,6 +1,6 @@
 program exs23;
 
-uses crt;
+
 
 var horas, grat : integer;
     peri,cat: char;

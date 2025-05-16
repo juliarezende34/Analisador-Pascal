@@ -1,6 +1,6 @@
 program exs24;
 
-uses crt;
+
 
 var preco, valAdd, imp, precoCusto, desconto, novoPreco : real;
     tipo, refri: char;

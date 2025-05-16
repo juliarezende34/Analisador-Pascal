@@ -1,6 +1,6 @@
 program exs20;
 
-uses crt;
+
 
 var codP, codO : integer;
     peso,novoPeso : real;

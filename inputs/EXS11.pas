@@ -1,6 +1,6 @@
 program exs11;
 
-uses crt;
+
 
 var horaI,horaF,minI,minF,horaD,minD: integer;
 
