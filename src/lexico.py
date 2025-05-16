@@ -9,7 +9,7 @@ from tokenizer import (
 
 from ferramentas import lendo_float
 
-from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos
+from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos, lista_tuplas
 
 
 def lexico():
@@ -20,7 +20,7 @@ def lexico():
     Leitor = LeitorArquivos()
     Leitor.LerArquivos()
 
-    arquivo = Leitor.get_lines_program('EXS2.pas')
+    arquivo = Leitor.get_lines_program('EXS26.pas')
 
     # Variáveis de estado
     pilha = []  # Para controlar (, [, {
@@ -195,3 +195,4 @@ def lexico():
         exit(1)
 
     print("Resultado da tokenização disponível no arquivo `output.txt`")
+    return lista_tuplas
