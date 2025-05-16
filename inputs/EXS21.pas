@@ -1,6 +1,6 @@
 program exs21;
 
-uses crt;
+
 
 var codE,codC: integer;
 var peso,novoPeso: real;

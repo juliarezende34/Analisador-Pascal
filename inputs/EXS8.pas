@@ -1,6 +1,6 @@
 program exs8;
 
-uses crt;
+
 
 var n1,n2,n3,n4: real;
 

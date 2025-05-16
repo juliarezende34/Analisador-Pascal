@@ -1,6 +1,6 @@
 program exs19 ;
 
-uses crt;
+
 
 var n1,n2: real;
 

@@ -1,6 +1,6 @@
 program exs22;
 
-uses crt;
+
 
 var sal, salLiq, imp: real;
     tempo, grat: integer;

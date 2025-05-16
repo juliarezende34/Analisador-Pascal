@@ -1,7 +1,7 @@
 program valoresMistos;
 { Programa com 8 valores float e 2 valores hexadecimais (formato 0x) }
 
-uses crt;
+
 
 const
   // Valores float

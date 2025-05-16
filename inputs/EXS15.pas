@@ -1,6 +1,6 @@
 program exs15;
 
-uses crt;
+
 
 var sal, horaT, horaE, dep: integer;
     salBru, salLiq, valHt, valHe, imp, grat : real;

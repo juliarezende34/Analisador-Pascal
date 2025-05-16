@@ -1,6 +1,6 @@
 program exs16;
 
-uses crt;
+
 
 var n1: integer;
     n2: real;

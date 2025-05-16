@@ -1,6 +1,6 @@
 program exs25;
 
-uses crt;
+
 
 var angulo, voltas, novoAng, : integer;
 

@@ -1,6 +1,6 @@
 program exs14;
 
-uses crt;
+
 
 var sal,bon,aux,novoSal: real;
 
