@@ -189,6 +189,7 @@ def lexico():
         print("Erro léxico: comentário não finalizado")
         exit(1)
 
+    # Verifica se há delimitadores abertos sem fechamento   
     if pilha:
         ultimo_aberto, linha_aberto, coluna_aberto = pilha[-1]
         print(f"Erro léxico: delimitador '{ultimo_aberto}' aberto na linha {linha_aberto}, coluna {coluna_aberto} não foi fechado.")

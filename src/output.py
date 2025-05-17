@@ -44,11 +44,14 @@ dicionario_tokens = {
     'octal': 28,
     'real': 29,
     'string': 30,
+
     'begin': 31,
     'end': 32,
+
     'for': 33,
     'to': 34,
     'break': 35,
+
     'mod': 36,
     'div': 37,
 
@@ -56,14 +59,18 @@ dicionario_tokens = {
     'else': 39,
     'then': 40,
 
-    'write': 41,
-    'writeln': 42,
-    'read': 43,
-    'readln': 44,
+    'while': 41,
+    'do': 42,
+    'continue': 43,
 
-    '\n': 45,
-    '\0': 46,
-    'variavel':47
+    'write': 44,
+    'writeln': 45,
+    'read': 46,
+    'readln': 47,
+
+    '\n': 48,
+    '\0': 49,
+    'variavel': 50
 }
 
 def write_output(cod, item, linha, coluna):
