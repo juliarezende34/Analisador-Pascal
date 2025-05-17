@@ -105,14 +105,8 @@ def bloco(lista):
     consome('end', lista)
     consome(';', lista)
 
-#------------------------------------
-# instrucoes dos programas
-#------------------------------------
-
-
-
 #---------------------------
-# descricao das instrucoes
+# DESCRIÇÃO DAS INSTRUÇÕES
 #---------------------------
 
 # Comando for
@@ -122,7 +116,7 @@ def forStmt(lista):
     consome('to', lista)
     endFor(lista)
     consome('do', lista)
-    # stmt(lista)
+    stmt(lista)
 
 def endFor(lista):  
     if lista[0][0] == dicionario_tokens['variavel']:
@@ -190,24 +184,24 @@ def whileStmt(lista):
     consome('while', lista)
     # expr(lista)
     consome('do', lista)
-    # stmt(lista)
+    stmt(lista)
     
 # Comando if
 def ifStmt(lista):
     consome('if', lista)
     # expr(lista)
     consome('then', lista)
-    # stmt(lista)
+    stmt(lista)
     elsePart(lista)
 
 def elsePart(lista):
     if lista[0][0] == dicionario_tokens['else']:
         consome('else', lista)
-        # stmt(lista)
+        stmt(lista)
 
 
 #------------------------------
-# expressoes
+# EXPRESSÕES
 #------------------------------
 
 #------------------------------
