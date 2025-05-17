@@ -12,7 +12,7 @@ O projeto se propõe à construir um Interpretador da linguagem Pascal([Especifi
 Utilizando Python 3.12.3 para interpretar o programa, execute:
 
 ```powershell
-py .\main.py .\inputs
+py .\main.py ..\inputs
 ```
 
 

@@ -3,12 +3,13 @@ from LeitorArquivos import LeitorArquivos
 from tokenizer import (
     isDelimitador, palavras_reservadas,
     operadores_logicos, io_tokens,
-    condicionais, operadores_aritmeticos
+    condicionais, operadores_aritmeticos,
+    operadores_comparacao
 )
 
 from ferramentas import lendo_float
 
-from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos
+from output import write_output, escrever_variavel_ou_numero, caracteres_invalidos, lista_tuplas
 
 
 def lexico():
@@ -95,7 +96,7 @@ def lexico():
                     cont_coluna += 2
 
                 # Tratamento de operadores aritméticos simples
-                elif char_atual in operadores_aritmeticos:
+                elif char_atual in operadores_aritmeticos or char_atual in operadores_comparacao:
                     if palavra: # Processa palavra/número antes do operador
                         index_coluna_no_arquivo = cont_coluna - len(palavra)
                         escrever_variavel_ou_numero(palavra, cont_linha, cont_coluna - len(palavra), index_coluna_no_arquivo)
@@ -188,9 +189,11 @@ def lexico():
         print("Erro léxico: comentário não finalizado")
         exit(1)
 
+    # Verifica se há delimitadores abertos sem fechamento   
     if pilha:
         ultimo_aberto, linha_aberto, coluna_aberto = pilha[-1]
         print(f"Erro léxico: delimitador '{ultimo_aberto}' aberto na linha {linha_aberto}, coluna {coluna_aberto} não foi fechado.")
         exit(1)
 
     print("Resultado da tokenização disponível no arquivo `output.txt`")
+    return lista_tuplas

@@ -1,6 +1,6 @@
 program exs10;
 
-uses crt;
+
 
 var dia1,mes1,ano1,dia2,mes2,ano2: integer;
 

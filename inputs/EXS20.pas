@@ -1,9 +1,9 @@
 program exs20;
 
-uses crt;
 
-var cod_p, cod_o : integer;
-    peso,novo_peso : real;
+
+var codP, codO : integer;
+    peso,novoPeso : real;
 
 begin;
 
@@ -20,11 +20,11 @@ begin;
 
  clrscr;
  writeln ('primeiramente digite o codigo do produto comprado numero inteiro entre 1 e 10.');
- readln (cod_p);
+ readln (codP);
 
  clrscr;
  writeln ('agora digite o codigo do pais de origem numero inteiro entre 1 e 3.');
- readln (cod_o);
+ readln (codO);
 
  clrscr;
  writeln ('agora digite o peso do produto em quilos exemplo 1.200 ');
@@ -33,7 +33,7 @@ begin;
 
  clrscr;
 
- novo_peso:= peso*1000;
+ novoPeso:= peso*1000;
 
  {aqui se comea as estruturas de cases um contendo o outro.
  o primeiro case tem como condio o codigo do produto sendo de 1..4, o segundo de 5..7, e o terceiro de 8..10.
@@ -41,76 +41,76 @@ begin;
  e dentro da estrutura de cada pais ja se mostra ao usuario os valores do peso em gramas, o preo total do produto, o valor do imposto, e o preo do produto com imposto.
  e dessa mesma maneira se faz para as outras estruturas de case.}
 
- case cod_p of
+ case codP of
 
- 1..4 :  case cod_o of
+ 1..4 :  case codO of
               1:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*10):4:2 , ' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*10):4:2 , ' .');
                   writeln ('o valor do imposto sobre o produto e 0.');
-                  writeln ('o preco do produto com imposto e ,',  (novo_peso*10):4:2 ,' .');
+                  writeln ('o preco do produto com imposto e ,',  (novoPeso*10):4:2 ,' .');
                   end;
 
               2:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*10):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e ,',  ((novo_peso*10)*0.15):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*10)*1.15):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*10):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e ,',  ((novoPeso*10)*0.15):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*10)*1.15):4:2 ,' .');
                   end;
 
               3:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2, ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*10):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e .',  ((novo_peso*10)*0.25):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*10)*1.25):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2, ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*10):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e .',  ((novoPeso*10)*0.25):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*10)*1.25):4:2 ,' .');
                   end;
           end;
 
 
- 5..7 :  case cod_o of
+ 5..7 :  case codO of
               1:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*25):4:2 , ' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*25):4:2 , ' .');
                   writeln ('o valor do imposto sobre o produto e 0.');
-                  writeln ('o preco do produto com imposto e ,',  (novo_peso*25):4:2 ,' .');
+                  writeln ('o preco do produto com imposto e ,',  (novoPeso*25):4:2 ,' .');
                   end;
 
               2:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*25):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e ,',  ((novo_peso*25)*0.15):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*25)*1.15):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*25):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e ,',  ((novoPeso*25)*0.15):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*25)*1.15):4:2 ,' .');
                   end;
 
               3:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2, ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*25):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e .',  ((novo_peso*25)*0.25):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*25)*1.25):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2, ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*25):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e .',  ((novoPeso*25)*0.25):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*25)*1.25):4:2 ,' .');
                   end;
          end;
 
 
- 8..10:  case cod_o of
+ 8..10:  case codO of
               1:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*35):4:2 , ' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*35):4:2 , ' .');
                   writeln ('o valor do imposto sobre o produto e 0.');
-                  writeln ('o preco do produto com imposto e ,',  (novo_peso*35):4:2 ,' .');
+                  writeln ('o preco do produto com imposto e ,',  (novoPeso*35):4:2 ,' .');
                   end;
 
               2:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2 , ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*35):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e ,',  ((novo_peso*35)*0.15):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*35)*1.15):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2 , ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*35):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e ,',  ((novoPeso*35)*0.15):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*35)*1.15):4:2 ,' .');
                   end;
 
               3:  begin
-                  writeln ('o peso em grama e ', novo_peso:4:2, ' .');
-                  writeln ('o preco total do produto e ', (novo_peso*35):4:2 , ' .');
-                  writeln ('o valor do imposto sobre o produto e .',  ((novo_peso*35)*0.25):4:2 ,  ' .');
-                  writeln ('o preco do produto com imposto e ,',  ((novo_peso*35)*1.25):4:2 ,' .');
+                  writeln ('o peso em grama e ', novoPeso:4:2, ' .');
+                  writeln ('o preco total do produto e ', (novoPeso*35):4:2 , ' .');
+                  writeln ('o valor do imposto sobre o produto e .',  ((novoPeso*35)*0.25):4:2 ,  ' .');
+                  writeln ('o preco do produto com imposto e ,',  ((novoPeso*35)*1.25):4:2 ,' .');
                   end;
 
         end;

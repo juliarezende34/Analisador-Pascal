@@ -1,9 +1,9 @@
 program exs15;
 
-uses crt;
 
-var sal, hora_t, hora_e, dep: integer;
-    sal_bru, sal_liq, val_ht, val_he, imp, grat : real;
+
+var sal, horaT, horaE, dep: integer;
+    salBru, salLiq, valHt, valHe, imp, grat : real;
 
 begin;
 
@@ -23,7 +23,7 @@ begin;
 
  clrscr;
  writeln ('agora digite a quantidade de horas trabalhadas.');
- readln (hora_t);
+ readln (horaT);
 
  clrscr;
  writeln ('agora digite a quantidade de dependentes.');
@@ -31,34 +31,34 @@ begin;
 
  clrscr;
  writeln ('agora digite a quantidade de horas extras.');
- readln (hora_e);
+ reBln (horaE);
 
  //o valor da hora trabalhada sera o valor do salario minimo divido por 5.
  //e da hora extra o valor da hora trabalhada vezes 1.5
 
- val_ht:= sal/5;
- val_he:= val_ht*1.5;
+ valHt:= sal/5;
+ valHe:= valHt*1.5;
 
  // o salario bruto  calculado pela quantidade de horas trabalhadas * o seu valor, pela quantidade de horas extras * o seu valor
  // e pela quantidade de dependentes * 32.
 
- sal_bru:=   (val_ht * hora_t)+(dep * 32)+(val_he * hora_e);
+ salBru:=   (valHt * horaT)+(dep * 32)+(valBe * horaE);
 
 
  //para descobrir o imposto  nescessario uma cadeia de ifs
  //se o salario for maior que 500 entao o imposto sera de 20%, se estiver entre 500 e 200 sera de 10%, caso menor que 200 no ha imposto.
 
- if (sal_bru > 500) then
+ if (salBru > 500) then
     begin
-    imp:= sal_bru * 0.20;
+    imp:= salBru * 0.20;
     end
 
-    else if (sal_bru <= 500) and (sal_bru >= 200) then
+    else if (salBru <= 500) and (salBru >= 200) then
             begin
-            imp:= sal_bru * 0.10;
+            imp:= salBru * 0.10;
             end
 
-            else if (sal_bru < 200) then
+            else if (salBru < 200) then
                     begin
                     imp:= 0;
                     end;
@@ -66,20 +66,20 @@ begin;
 
  //o salario liquido  calculado pela subtrao do imposto sobre o salario bruto.
 
- sal_liq:=  sal_bru - imp;
+ salLiq:=  salBru - imp;
 
  //aqui ja se calcula a bonificao e apresenta ao usuario o salario recebido dele.
  //caso o salario seja maior que 350 a bonificao  de 50 e basta ser somada ao salario liquido.
  //caso seja menor ou igual a 350 a bonificao  de 100 e da mesma maneira so  nescessario somar ao salario liquido.
 
- if (sal_liq > 350) then
+ if (salLiq > 350) then
     begin
-    writeln ('caro usuario seu novo salario sera de ', sal_liq+50:2:2, ' .');
+    writeln ('caro usuario seu novo salario sera de ', salLiq+50:2:2, ' .');
     end
 
-    else if (sal_liq <= 350) then
+    else if (salLiq <= 350) then
             begin
-            writeln ('caro usuario seu novo salario sera de ', sal_liq+100:2:2, ' .');
+            writeln ('caro usuario seu novo salario sera de ', salLiq+100:2:2, ' .');
             end;
 
  writeln (' ');

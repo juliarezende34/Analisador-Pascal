@@ -2,13 +2,13 @@ program ConstantesHexadecimais;
 
 const
   // Constantes em hexadecimal
-  MASCARA_VERMELHA := 0xFF0000;     
-  MASCARA_VERDE    := 0x00FF00;     
-  MASCARA_AZUL     := 0x0000FF;     
-  FLAG_ATIVO       := 0x01;         
-  FLAG_VISIVEL     := 0x02;         
-  FLAG_EDITAVEL    := 0x04;         
-  NUMERO_MAGICO    := 0xDEADBEEF;
+  MASCARAvERMELHA := 0xFF0000;     
+  MASCARAvERDE    := 0x00FF00;     
+  MASCARAaZUL     := 0x0000FF;     
+  FLAGaTIVO       := 0x01;         
+  FLAGvISIVEL     := 0x02;         
+  FLAGeDITAVEL    := 0x04;         
+  NUMEROmAGICO    := 0xDEADBEEF;
 
 var
   cor: integer;
@@ -20,9 +20,9 @@ procedure ExtrairComponentesRGB(cor: integer);
 var
   vermelho, verde, azul: byte;
 begin
-  vermelho := (cor and MASCARA_VERMELHA) shr 16;
-  verde := (cor and MASCARA_VERDE) shr 8;
-  azul := cor and MASCARA_AZUL;
+  vermelho := (cor and MASCARAvERMELHA) shr 16;
+  verde := (cor and MASCARAvERDE) shr 8;
+  azul := cor and MASCARAaZUL;
   
   writeln('Componentes RGB:');
   writeln('Vermelho: ', vermelho);
@@ -34,13 +34,13 @@ end;
 procedure VerificarFlags(flags: byte);
 begin
   writeln('Status:');
-  writeln('Ativo:    ', (flags and FLAG_ATIVO) <> 0);
-  writeln('Visível:  ', (flags and FLAG_VISIVEL) <> 0);
-  writeln('Editável: ', (flags and FLAG_EDITAVEL) <> 0);
+  writeln('Ativo:    ', (flags and FLAGaTIVO) <> 0);
+  writeln('Visível:  ', (flags and FLAGvISIVEL) <> 0);
+  writeln('Editável: ', (flags and FLAGeDITAVEL) <> 0);
 end;
 
 begin
-  writeln('Número mágico: ', NUMERO_MAGICO);
+  writeln('Número mágico: ', NUMEROmAGICO);
   writeln;
   
   // Exemplo com cores
@@ -50,7 +50,7 @@ begin
   writeln;
   
   // Exemplo com flags
-  flags := FLAG_ATIVO or FLAG_EDITAVEL;  // Ativo e editável
+  flags := FLAGaTIVO or FLAGeDITAVEL;  // Ativo e editável
   writeln('Flags: ', flags);
   VerificarFlags(flags);
   writeln;

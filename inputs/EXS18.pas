@@ -1,6 +1,6 @@
 program exs17;
 
-uses crt;
+
 
 var x,y,z: real;
 

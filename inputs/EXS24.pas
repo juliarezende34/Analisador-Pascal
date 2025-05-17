@@ -1,8 +1,8 @@
 program exs24;
 
-uses crt;
 
-var preco, val_add, imp, preco_custo, desconto, novo_preco : real;
+
+var preco, valAdd, imp, precoCusto, desconto, novoPreco : real;
     tipo, refri: char;
     classificacao: string;
 
@@ -39,35 +39,35 @@ begin;
            case tipo of
               'A': begin if (preco < 15) then
                             begin
-                            val_add:= 2;
+                            valAdd:= 2;
                             end
 
                             else if (preco >= 15) then
                                     begin
-                                    val_add:= 5;
+                                    valAdd:= 5;
                                     end;
                    end;
 
 
               'L': begin if (preco < 10) then
                             begin
-                            val_add:= 1.50;
+                            valAdd:= 1.50;
                             end
 
                             else if (preco >= 10) then
                                     begin
-                                    val_add:= 2.50;
+                                    valAdd:= 2.50;
                                     end;
                    end;
 
               'V': begin if (preco < 30) then
                             begin
-                            val_add:= 3;
+                            valAdd:= 3;
                             end
 
                             else if (preco >= 30) then
                                     begin
-                                    val_add:= 2.50;
+                                    valAdd:= 2.50;
                                     end;
                    end;
 
@@ -76,12 +76,12 @@ begin;
 
     'S': begin  if (tipo = 'A') then
                    begin
-                   val_add:=8;
+                   valAdd:=8;
                    end
 
                    else if (tipo = 'L') or (tipo = 'V') then
                            begin
-                           val_add:=0;
+                           valAdd:=0;
                            end;
          end;
  end;
@@ -99,7 +99,7 @@ begin;
 
  //ento se calcula o preco de custo do produto.
 
- preco_custo:= preco + imp;
+ precoCusto:= preco + imp;
 
  {Para definir o valor do desconto se depende de duas variaveis e impondo a condio sobre elas se calcula o valor
    do desconto.}
@@ -111,27 +111,27 @@ begin;
 
     else
         begin
-        desconto:= preco_custo*0.03;
+        desconto:= precoCusto*0.03;
         end;
 
  //ento se calcula o novo preo para que se possa definir a classificao do produto.
 
- novo_preco:= preco_custo - desconto + val_add;
+ novoPreco:= precoCusto - desconto + valAdd;
 
  {a classificao do produto  definida a partir do valor do novo preo.
   A cada condio imposta vai ser uma classificao.}
 
- if (novo_preco <= 50) then
+ if (novoPreco <= 50) then
     begin
     classificacao:= 'barato';
     end
 
-    else if (novo_preco > 50) and (novo_preco < 100) then
+    else if (novoPreco > 50) and (novoPreco < 100) then
             begin
             classificacao:= 'normal';
             end
 
-            else if (novo_preco >= 100) then
+            else if (novoPreco >= 100) then
                     begin
                     classificacao:= 'caro';
                     end;
@@ -141,11 +141,11 @@ begin;
 
  clrscr;
 
- writeln ('o valor adicional e de ', val_add:4:2 , ' .');
+ writeln ('o valor adicional e de ', valAdd:4:2 , ' .');
  writeln ('o valor do imposto e de ', imp:4:2 , ' .');
- writeln ('o preco de custo e de ', preco_custo:4:2 , ' .');
+ writeln ('o preco de custo e de ', precoCusto:4:2 , ' .');
  writeln ('o desconto e de ', desconto:4:2 , ' .');
- writeln ('o novo preco e de ', novo_preco:4:2 , ' .');
+ writeln ('o novo preco e de ', novoPreco:4:2 , ' .');
  writeln ('a classificacao e ', classificacao , ' .');
 
  writeln (' ');
