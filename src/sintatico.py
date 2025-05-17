@@ -1,9 +1,9 @@
 from output import dicionario_tokens
+from tokenizer import io_tokens    
 
-#------------------------------------
-# declaracoes de variaveis
-#------------------------------------
-
+#---------------------------------------------------
+#       DECLARAÇÕES DAS VARIÁVEIS
+#---------------------------------------------------
 def consome(codigo, lista):
     if lista[0][0] == dicionario_tokens[codigo]:
         lista.pop(0)
@@ -50,18 +50,60 @@ def declarations(lista):
     declaration(lista)
     restoDeclaration(lista)
 
-def sintatico(lista):
-    print(len(lista))
-    consome('program', lista)
-    consome('variavel', lista)
-    consome(';', lista)
-    declarations(lista)
-    consome('begin', lista)
-    
-    if len(lista) == 0:
-        print("Análise sintática concluída com sucesso")
+def endFor(lista):
+    if lista[0][0] == 'IDENT':
+        consome('IDENT', lista)
+    elif lista[0][0] == 'NUMint':
+        consome('NUMint', lista)
+    else:
+        print(f"Erro sintático! Esperado: integer ou real ou string | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
+        exit(1)
 
-    print(len(lista))
+
+
+# ---------------------------------------------------
+#       INTRUÇÕES DOS PROGRAMAS
+# ---------------------------------------------------
+
+    
+def stmt(lista):
+    if lista[0][0] in io_tokens:
+        ioStmt(lista)
+    elif lista[0][0] == 'while':
+        whileStmt(lista)
+    elif lista[0][0] == ':=':
+        atrib(lista)
+        consome(';', lista)
+    elif lista[0][0] == 'if':
+        ifStmt(lista)
+    elif lista[0][0] == 'break':
+        break_pascal()
+        consome(';', lista)
+    elif lista[0][0] == 'continue':
+        continue_pascal()
+        consome(';', lista)
+    else:
+        if lista[0][0] == 'begin':
+            bloco()
+        else:
+            consome(';', lista)
+
+
+def stmtList(lista):
+    valor = lista[0][0]
+
+    casos_de_bloco = {'while', 'if', ':=', 'begin', 'break', 'continue'}
+
+    if lista[0][0] in casos_de_bloco:
+        stmt(lista)
+        stmtList(lista)
+
+
+def bloco(lista):
+    consome('begin', lista)
+    stmtList(lista)
+    consome('end', lista)
+    consome(';', lista)
 
 #------------------------------------
 # instrucoes dos programas
@@ -167,3 +209,19 @@ def elsePart(lista):
 #------------------------------
 # expressoes
 #------------------------------
+
+#------------------------------
+# Sintático
+#------------------------------
+
+def sintatico(lista):
+    consome('program', lista)
+    consome('variavel', lista)
+    consome(';', lista)
+    declarations(lista)
+    consome('begin', lista)
+    
+    if len(lista) == 0:
+        print("Análise sintática concluída com sucesso")
+
+    print(len(lista))
