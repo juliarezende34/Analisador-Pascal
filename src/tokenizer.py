@@ -10,7 +10,7 @@ operadores_logicos ={'or', 'and', 'not'}
 
 palavras_reservadas ={
     'program', 'var', 'integer', 'real', 'string',
-    'begin', 'end', 'for', 'to', 'break', 'mod', 'div', 'while'
+    'begin', 'end', 'for', 'to', 'break', 'mod', 'div', 'while','do', 'continue',
 }
 
 condicionais ={'if', 'else', 'then'}

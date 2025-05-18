@@ -88,11 +88,11 @@ def is_int(palavra):
     """
     inteiros = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-    if palavra[0] == '0':
-        return False
-    else:
-        for i in palavra:
-            if i not in inteiros:
-                return False
-              
+    # if palavra[0] == '0':
+    #     return False
+    # else:
+    for i in palavra:
+        if i not in inteiros:
+            return False
+            
         return True

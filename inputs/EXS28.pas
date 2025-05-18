@@ -1,15 +1,11 @@
 program float;
-{ Programa com 8 valores float e 2 valores hexadecimais (formato 0x) }
-
-
-
-const
-  // Valores float
-  PIVAL           := 8.54.6;
- 
-
 var
-  i: integer; 
+  x: integer; 
 
 begin
+  for i := 1 to 10 do
+    begin
+      writeln('Número: ', i);
+      x := x * 1.1;
+  end;
 end.
