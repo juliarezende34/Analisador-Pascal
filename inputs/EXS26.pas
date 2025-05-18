@@ -44,7 +44,7 @@ begin
   writeln;
   
   // Exemplo com cores
-  cor := $3498DB;  // Uma cor azulada
+  cor := 3498DB;  // Uma cor azulada
   writeln('Cor em decimal: ', cor);
   ExtrairComponentesRGB(cor);
   writeln;
