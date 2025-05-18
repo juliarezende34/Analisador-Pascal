@@ -6,11 +6,8 @@ from tokenizer import io_tokens
 #---------------------------------------------------
 def consome(lexema, lista):
     if lista[0][0] == dicionario_tokens[lexema]:
-def consome(lexema, lista):
-    if lista[0][0] == dicionario_tokens[lexema]:
         lista.pop(0)
     else:
-        print(f"Erro sintático! Esperado: {lexema} | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         print(f"Erro sintático! Esperado: {lexema} | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
 
@@ -85,9 +82,6 @@ def stmtList(lista):
     casos_de_stmt = {'for', 'read', 'write','readln','writeln','variavel', 'if', 'begin','break','continue',';'}
     cod_casos_de_stmt = {dicionario_tokens[i] for i in casos_de_stmt}
     if lista[0][0] in cod_casos_de_stmt:
-    casos_de_stmt = {'for', 'read', 'write','readln','writeln','variavel', 'if', 'begin','break','continue',';'}
-    cod_casos_de_stmt = {dicionario_tokens[i] for i in casos_de_stmt}
-    if lista[0][0] in cod_casos_de_stmt:
         stmt(lista)
         stmtList(lista)
 
@@ -105,7 +99,6 @@ def bloco(lista):
 # Comando for
 def forStmt(lista):
     consome('for', lista)
-    atrib(lista)
     atrib(lista)
     consome('to', lista)
     endFor(lista)
@@ -177,14 +170,12 @@ def out(lista):
 def whileStmt(lista):
     consome('while', lista)
     expr(lista)
-    expr(lista)
     consome('do', lista)
     stmt(lista)
     
 # Comando if
 def ifStmt(lista):
     consome('if', lista)
-    expr(lista)
     expr(lista)
     consome('then', lista)
     stmt(lista)
@@ -340,9 +331,6 @@ def sintatico(lista):
     consome(';', lista)
     declarations(lista)
     consome('begin', lista)
-    stmtList(lista)
-    consome('end', lista)
-    consome('.', lista)
     stmtList(lista)
     consome('end', lista)
     consome('.', lista)
