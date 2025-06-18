@@ -1,0 +1,51 @@
+TP03 – Geração de Código Intermediário e Análise Semântica
+
+🔹 Geração de Código Intermediário
+ Garantir que, ao analisar um arquivo .pas, uma lista de tuplas que representa o código intermediário seja retornada corretamente.
+
+ Implementar geração de tuplas para:
+
+ Entrada (read(var) → ("CALL", "SCAN", var, tipo))
+
+ Saída (write(expr) → ("CALL", "PRINT", valor, None))
+
+ Implementar geração de labels:
+
+ Criar um gerador automático de labels (LABEL1, LABEL2, ...).
+
+ Criar gerador de variáveis temporárias (_t1, _t2, ...).
+
+🔹 Controle de Fluxo
+ if, while, for: Gerar as tuplas correspondentes com IF, JUMP e LABEL.
+
+ Adicionar lógica para saltar corretamente entre trechos de código.
+
+ Organizar as listas de tuplas com estrutura:
+
+Labels de entrada e saída
+
+Avaliação da condição
+
+Corpo principal
+
+Saltos (IF, JUMP) entre labels
+
+🔹 Regras Específicas
+ Declarations:
+
+ Implementar análise recursiva.
+
+ Retornar tuplas de inicialização com valor padrão (0, 0.0 ou "").
+
+ Expressões (expr):
+
+ Construir corretamente as listas de tuplas de operações aritméticas e lógicas.
+
+ Garantir precedência usando variáveis temporárias.
+
+ Verificação de símbolo (semântica):
+
+ Checar se variáveis usadas foram declaradas.
+
+ Lançar erro semântico se não foram.
+

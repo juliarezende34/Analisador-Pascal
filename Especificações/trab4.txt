@@ -1,0 +1,47 @@
+TP04 – Interpretador em Python
+
+🔹 Execução de Lista de Tuplas
+ Ler um arquivo .py que retorna a lista de tuplas.
+
+ Executar cada tupla sequencialmente ou pular para labels com base em fluxo.
+
+🔹 Implementar os seguintes tipos de tuplas:
+▫️ Aritméticas:
+ Soma: ("+", guardar, op1, op2)
+
+ Subtração: ("-", guardar, op1, op2)
+
+ Multiplicação, Divisão real, Divisão inteira, Módulo
+
+ Unários: ("+", guardar, op1, None) e ("-", guardar, op1, None)
+
+▫️ Relacionais e Lógicos:
+ ==, <>, <, >, <=, >=
+
+ ||, &&, ! (com uso de valores booleanos em Python)
+
+ Atribuição: ("=", guardar, op1, None)
+
+▫️ Controle de Fluxo:
+ ("IF", condicao, labelTrue, labelFalse)
+
+ ("JUMP", label, None, None)
+
+ ("LABEL", nome, None, None) (registrar todas no início)
+
+▫️ Chamadas de sistema:
+ ("CALL", "PRINT", valor, None) → imprimir
+
+ ("CALL", "SCAN", variavel, None) → ler do teclado
+
+🔹 Outros requisitos:
+ Verificar se operandos usados realmente existem (exceto se for a primeira atribuição).
+
+ Inicializar variáveis na primeira vez que forem usadas.
+
+ Tratar erros de acesso a variáveis ou labels não definidos.
+
+ Modularizar o interpretador (funções bem separadas).
+
+ Comentar os trechos complexos.
+

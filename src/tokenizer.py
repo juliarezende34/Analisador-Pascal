@@ -10,13 +10,36 @@ operadores_logicos ={'or', 'and', 'not'}
 
 palavras_reservadas ={
     'program', 'var', 'integer', 'real', 'string',
-    'begin', 'end', 'for', 'to', 'break', 'mod', 'div'
+    'begin', 'end', 'for', 'to', 'break', 'mod', 'div', 'while','do', 'continue',
 }
 
 condicionais ={'if', 'else', 'then'}
 
 io_tokens = {'write', 'writeln', 'read', 'readln'}
 
+# Mapeamento completo de operadores para código intermediário
+mapeamento_operadores = {
+    # Operadores relacionais
+    '<=': 'LEQ',
+    '<': 'LESS',
+    '>=': 'GEQ',
+    '>': 'GRET',
+    '==': 'EQ',
+    '<>': 'NEQ',
+    
+    # Operadores aritméticos
+    '+': 'ADD',
+    '-': 'SUB',
+    '*': 'MULT',
+    '/': 'FDIV',  
+    'div': 'IDIV', 
+    'mod': 'MOD',
+    
+    # Operadores lógicos
+    'and': 'AND',
+    'or': 'OR',
+    'not': 'NOT'
+}
 
 def isDelimitador(token):
     return token in delimitadores

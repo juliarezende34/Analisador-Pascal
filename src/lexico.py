@@ -20,7 +20,7 @@ def lexico():
     Leitor = LeitorArquivos()
     Leitor.LerArquivos()
 
-    arquivo = Leitor.get_lines_program('EXS2.pas')
+    arquivo = Leitor.get_lines_program('EXS28.pas')
 
     # Variáveis de estado
     pilha = []  # Para controlar (, [, {
@@ -55,10 +55,6 @@ def lexico():
             else:
                 proximo_char = ''
 
-            if char_atual in caracteres_invalidos:
-                print(f'Caracter inválido: {char_atual} | Linha {cont_linha} | Coluna {cont_coluna}')
-                exit(1)
-
             verificador_float = lendo_float(ultimo_char, char_atual, proximo_char)
 
             # Tratamento de comentários
@@ -84,6 +80,10 @@ def lexico():
                     aspas_simples = True
                     i += 1
                     cont_coluna += 1
+
+                elif char_atual in caracteres_invalidos:
+                    print(f'Caracter inválido: {char_atual} | Linha {cont_linha} | Coluna {cont_coluna}')
+                    exit(1)
 
                 # Tratamento de operadores aninhados
                 elif i + 1 < tamanho_linha and char_atual + linha[i+1] in [':=', '<=', '>=', '<>', '==']:
