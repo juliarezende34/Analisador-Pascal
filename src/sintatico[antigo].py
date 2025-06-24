@@ -1,6 +1,5 @@
 from output import dicionario_tokens
-from tokenizer import io_tokens
-from codigoIntermediario import GeradorCodigoIntermediario
+from tokenizer import io_tokens    
 
 #---------------------------------------------------
 #       DECLARAÇÕES DAS VARIÁVEIS
@@ -13,76 +12,61 @@ def consome(lexema, lista):
         exit(1)
 
 def restoIdentList(lista):
-    nomes = []
     if lista[0][0] == dicionario_tokens[',']:
         consome(',', lista)
-        nomes.append(lista[0][1])
         consome('variavel', lista)
-        nomes += restoIdentList(lista)
-    return nomes
+        restoIdentList(lista)
 
 def listaIdent(lista):
-    nomes = [lista[0][1]]
     consome('variavel', lista)
-    nomes += restoIdentList(lista)
-    return nomes
+    restoIdentList(lista)
 
 def type_function(lista):
     cod = lista[0][0]
     if cod == dicionario_tokens['integer']:
         consome('integer', lista)
-        return 'integer'
     elif cod == dicionario_tokens['real']:
         consome('real', lista)
-        return 'real'
     elif cod == dicionario_tokens['string']:
         consome('string', lista)
-        return 'string'
     else:
         print(f"Erro sintático! Esperado: integer ou real ou string | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
 
-def declaration(lista, gerador):
-    nomes = listaIdent(lista)
-    consome(':', lista)
-    tipo = type_function(lista)
-    consome(';', lista)
-    for nome in nomes:
-        if tipo == 'integer':
-            gerador.gera_atribuicao(nome, 0)
-        elif tipo == 'real':
-            gerador.gera_atribuicao(nome, 0.0)
-        elif tipo == 'string':
-            gerador.gera_atribuicao(nome, "")
+def declaration(lista):
+	listaIdent(lista)
+	consome(':', lista)
+	type_function(lista)
+	consome(';', lista)
 
-def restoDeclaration(lista, gerador):
+def restoDeclaration(lista):
     if lista[0][0] == dicionario_tokens['variavel']:
-        declaration(lista, gerador)
-        restoDeclaration(lista, gerador)
+        declaration(lista)
+        restoDeclaration(lista)
 
-def declarations(lista, gerador):
+def declarations(lista):
     consome('var', lista)
-    declaration(lista, gerador)
-    restoDeclaration(lista, gerador)
+    declaration(lista)
+    restoDeclaration(lista)
 
 # ---------------------------------------------------
 #       INTRUÇÕES DOS PROGRAMAS
 # ---------------------------------------------------
     
-def stmt(lista, gerador):
+def stmt(lista):
     if lista[0][1] in io_tokens:
-        ioStmt(lista, gerador)
+        ioStmt(lista)
     elif lista[0][0] == dicionario_tokens['for']:
-        forStmt(lista, gerador)
+        forStmt(lista)
     elif lista[0][0] == dicionario_tokens['while']:
-        whileStmt(lista, gerador)
+        whileStmt(lista)
     elif lista[0][0] == dicionario_tokens['variavel']:
-        atrib(lista, gerador)
+        atrib(lista)
         consome(';', lista)
     elif lista[0][0] == dicionario_tokens['if']:
-        ifStmt(lista, gerador)
+        ifStmt(lista)
     elif lista[0][0] == dicionario_tokens['begin']:
-        bloco(lista, gerador)
+        bloco(lista)
     elif lista[0][0] == dicionario_tokens['break']:
         consome('break', lista)
         consome(';', lista)
@@ -91,17 +75,20 @@ def stmt(lista, gerador):
         consome(';', lista)
     elif lista[0][0] == dicionario_tokens[';']:
         consome(';', lista)
+        
 
-def stmtList(lista, gerador):
+
+def stmtList(lista):
     casos_de_stmt = {'for', 'read', 'write','readln','writeln','variavel', 'if', 'begin','break','continue',';'}
     cod_casos_de_stmt = {dicionario_tokens[i] for i in casos_de_stmt}
     if lista[0][0] in cod_casos_de_stmt:
-        stmt(lista, gerador)
-        stmtList(lista, gerador)
+        stmt(lista)
+        stmtList(lista)
 
-def bloco(lista, gerador):
+
+def bloco(lista):
     consome('begin', lista)
-    stmtList(lista, gerador)
+    stmtList(lista)
     consome('end', lista)
     consome(';', lista)
 
@@ -109,15 +96,16 @@ def bloco(lista, gerador):
 # DESCRIÇÃO DAS INSTRUÇÕES
 #---------------------------
 
-def forStmt(lista, gerador):
+# Comando for
+def forStmt(lista):
     consome('for', lista)
-    atrib(lista, gerador)
+    atrib(lista)
     consome('to', lista)
     endFor(lista)
     consome('do', lista)
-    stmt(lista, gerador)
+    stmt(lista)
 
-def endFor(lista):
+def endFor(lista):  
     if lista[0][0] == dicionario_tokens['variavel']:
         consome('variavel', lista)
     elif lista[0][0] == dicionario_tokens['integer']:
@@ -126,27 +114,35 @@ def endFor(lista):
         print(f"Erro sintático: Esperado variável ou número inteiro | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
 
-def ioStmt(lista, gerador):
-    if lista[0][0] == dicionario_tokens['read'] or lista[0][0] == dicionario_tokens['readln']:
-        consome(lista[0][1], lista)
+# Comandos de IO
+def ioStmt(lista):
+    if lista[0][0] == dicionario_tokens['read']:
+        consome('read', lista)
         consome('(', lista)
-        var = lista[0][1]
         consome('variavel', lista)
         consome(')', lista)
         consome(';', lista)
-        gerador.gera_leitura(var, 'integer')
-    elif lista[0][0] == dicionario_tokens['write'] or lista[0][0] == dicionario_tokens['writeln']:
-        consome(lista[0][1], lista)
+    elif lista[0][0] == dicionario_tokens['write']:
+        consome('write', lista)
         consome('(', lista)
-        var = lista[0][1]
+        outList(lista)
+        consome(')', lista)
+        consome(';', lista)
+    elif lista[0][0] == dicionario_tokens['readln']:
+        consome('readln', lista)
+        consome('(', lista)
         consome('variavel', lista)
         consome(')', lista)
         consome(';', lista)
-        gerador.gera_escrita(var)
+    elif lista[0][0] == dicionario_tokens['writeln']:
+        consome('writeln', lista)
+        consome('(', lista)
+        outList(lista)
+        consome(')', lista)
+        consome(';', lista)
     else:
         print(f"Erro sintático: Esperado comando de IO | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
-
 
 def outList(lista):
     out(lista)
@@ -195,13 +191,10 @@ def elsePart(lista):
 # EXPRESSÕES
 #------------------------------
 
-def atrib(lista, gerador):
-    var = lista[0][1]
+def atrib(lista):
     consome('variavel', lista)
     consome(':=', lista)
-    valor = lista[0][1]
-    consome('integer', lista)
-    gerador.gera_atribuicao(var, int(valor))
+    expr(lista)
 
 def expr(lista):
     or_function(lista)
@@ -333,16 +326,14 @@ def fator(lista):
 #------------------------------
 
 def sintatico(lista):
-    gerador = GeradorCodigoIntermediario()
     consome('program', lista)
     consome('variavel', lista)
     consome(';', lista)
-    declarations(lista, gerador)
+    declarations(lista)
     consome('begin', lista)
-    stmtList(lista, gerador)
+    stmtList(lista)
     consome('end', lista)
     consome('.', lista)
-
+    
     if len(lista) == 0:
         print("Análise sintática concluída com sucesso")
-        return gerador.get_codigo()
