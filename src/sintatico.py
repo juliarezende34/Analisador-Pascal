@@ -522,6 +522,6 @@ def sintatico(lista_tokens):
         exit(1)
 
     if len(lista_tokens) == 0:
-        print("Análise sintática concluída com sucesso!")
+        print("\nAnálise sintática concluída com sucesso! ✔")
     
     return gerador.get_codigo()
