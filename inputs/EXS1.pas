@@ -1,13 +1,12 @@
-program //{asdasdasdasd exs1 =====1.12 0x123 01239;}
+program exemplo1;
 
-real //segue aqui o comentario
+var
+    a, b: integer;
+    c: real;
 
-<>
-var n1,n2,n3,n4: real;
-
-begin;
-
- clrscr;
- writeln ('caro usuario este programa \calculara\ 3 notas com seus respesquitivos pesos e a media da nota sera o conceito recebido.');
- write ('para comecar aperte enter ');
- readkey;
+begin
+    read(a);
+    read(b);
+    c := a + b;
+    writeln('Resultado: ', c);
+end.

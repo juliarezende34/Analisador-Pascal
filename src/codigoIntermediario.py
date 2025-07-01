@@ -1,126 +1,161 @@
+# codigoIntermediario.py
 from tokenizer import mapeamento_operadores
 
+# Classe responsável por gerar o código intermediário
 class GeradorCodigoIntermediario:
     def __init__(self):
-        self.codigo = []  # Lista de tuplas do código intermediário
-        self.contador_temp = 0  # Contador para variáveis temporárias
-        self.contador_label = 0  # Contador para labels
-        self.tabela_simbolos = {}  # Para análise semântica
-        self.pilha_labels = []  # Para controle de fluxo aninhado
+        # Lista que armazena todas as tuplas do código intermediário
+        self.codigo = []
+        # Contadores para criação de temporários e labels únicos
+        self.contador_temp = 0
+        self.contador_label = 0
+        # Tabela de símbolos que armazena tipo de variáveis declaradas
+        self.tabela_simbolos = {}
+        # Pilhas de controle para break e continue (em laços)
+        self.pilha_labels = []
+        self.pilha_break = []
+        self.pilha_continue = []
 
-
-    # ---------------- GERADORES DE NOMES AUXILIARES ----------------
-
-    # Gera nome de variável temporária (ex: _t1, _t2)
+    # Gera uma variável temporária única (ex: _t1, _t2, ...)
     def gera_temp(self):
         self.contador_temp += 1
         return f"_t{self.contador_temp}"
 
-    # Gera nome de label (ex: LABEL1, LOOP2)
+    # Gera um label único (ex: LABEL1, FOR_START2, etc.)
     def gera_label(self, prefixo="LABEL"):
         self.contador_label += 1
         return f"{prefixo}{self.contador_label}"
-    
 
-    # ---------------- DECLARAÇÕES E ATRIBUIÇÕES ----------------
-
-    # Gera código para declaração de variável com valor padrão
+    # Gera instrução de declaração de variável com valor inicial
     def gera_declaracao(self, nome, tipo):
+        if nome in self.tabela_simbolos:
+            return  # Ignora se já foi declarado
+
+        # Define valor padrão baseado no tipo
         valor_inicial = (
-            0 if tipo == "integer" 
-            else 0.0 if tipo == "real" 
+            '0' if tipo == "integer" 
+            else '0.0' if tipo == "real" 
             else "" if tipo == "string" 
             else None
         )
+
+        # Adiciona instrução e salva na tabela de símbolos
         if valor_inicial is not None:
-            self.codigo.append(("=", nome, valor_inicial, None))
+            self.codigo.append(("ATT", nome, valor_inicial, None))
             self.tabela_simbolos[nome] = tipo
 
-    # Gera código para atribuição simples
+    # Gera instrução de atribuição (destino := valor)
     def gera_atribuicao(self, destino, valor):
-        self.codigo.append(("=", destino, valor, None))
+        self.codigo.append(("ATT", destino, valor, None))
+
+        # Inferência de tipo para variáveis ainda não declaradas
         if destino not in self.tabela_simbolos:
             tipo = (
-                "integer" if isinstance(valor, int)
+                "integer" if isinstance(valor, int) or (isinstance(valor, str) and valor.isdigit())
                 else "real" if isinstance(valor, float)
                 else "string"
             )
             self.tabela_simbolos[destino] = tipo
 
-
-    # ---------------- OPERAÇÕES ARITMÉTICAS E LÓGICAS ----------------
-
-    # Gera código para operação convertendo operadores
+    # Gera operação intermediária (ex: ADD, SUB, EQ, etc.)
     def gera_operacao(self, operador, destino, op1, op2=None):
-        
         op_code = mapeamento_operadores[operador]
-        
-        if op2 is None:  # Operação unária
+
+        if op2 is None:
             self.codigo.append((op_code, destino, op1))
-        else:  # Operação binária
+        else:
             self.codigo.append((op_code, destino, op1, op2))
-        return destino
 
-    # Verifica se operando é válido (semântica)
-    def _verificar_operando(self, operando):
-        if isinstance(operando, str) and operando not in self.tabela_simbolos and not operando.startswith("_t"):
-            raise ErroSemantico(f"Operando '{operando}' não declarado")
-        
+        return destino  # Retorna o temporário gerado
 
-    # ---------------- CONTROLE DE FLUXO ----------------
-
-    # Gera label para início de loop (FOR/WHILE)
-    def iniciar_loop(self):
-        label_inicio = self.gera_label("LOOP")
-        self.codigo.append(("LABEL", label_inicio, None, None))
-        self.pilha_labels.append(label_inicio)
-        return label_inicio
-
-    # Gera código para condicional (IF/WHILE)
+    # Gera uma condição com salto condicional (IF)
     def gerar_condicao(self, condicao, label_true, label_false):
-        self.codigo.append(("IF", condicao, label_true, label_false))
+        # Gera labels automaticamente se não forem fornecidos
+        if label_true is None:
+            label_true = self.gera_label("IF_TRUE")
+        if label_false is None:
+            label_false = self.gera_label("ELSE")
 
-    # Gera instrução de salto incondicional
-    def gerar_jump(self, label):  
+        # Instrução IF que redireciona para um dos dois caminhos
+        self.codigo.append(("IF", condicao, label_true, label_false))
+        # Gera label do bloco verdadeiro
+        self.codigo.append(("LABEL", label_true, None, None))
+        return label_true, label_false
+
+    # Gera um salto incondicional
+    def gerar_jump(self, label):
         self.codigo.append(("JUMP", label, None, None))
 
-    # Finaliza estrutura de loop
-    def finalizar_loop(self, label_fim):
-        self.gerar_jump(self.pilha_labels.pop())
-        self.codigo.append(("LABEL", label_fim, None, None))
+    # Gera um label manual
+    def gerar_label(self, label):
+        self.codigo.append(("LABEL", label, None, None))
 
+    # Gera o código completo de um laço for
+    def gerar_for(self, var, inicio, fim, corpo_callback):
+        # Geração de labels únicos para controle do laço
+        label_start = self.gera_label("FOR_START")
+        label_body = self.gera_label("FOR_BODY")
+        label_continue = self.gera_label("FOR_CONTINUE")
+        label_end = self.gera_label("FOR_END")
 
-    # ---------------- ENTRADA/SAÍDA ----------------
-    
-    # Gera código para leitura de entrada
+        # Inicializa variável de controle do for
+        self.gera_atribuicao(var, inicio)
+
+        # Label do início do for
+        self.gerar_label(label_start)
+
+        # Gera condição de parada (var <= fim)
+        temp_cond = self.gera_temp()
+        self.gera_operacao("<=", temp_cond, var, fim)
+
+        # Salta para corpo ou fim do laço
+        self.codigo.append(("IF", temp_cond, label_body, label_end))
+
+        # Label do corpo do laço
+        self.gerar_label(label_body)
+
+        # Controla contexto para uso de break e continue
+        self.pilha_break.append(label_end)
+        self.pilha_continue.append(label_continue)
+
+        # Executa corpo do for via callback
+        corpo_callback(label_continue, label_end)
+
+        # Label de continue (incrementa e volta)
+        self.gerar_label(label_continue)
+        temp_inc = self.gera_temp()
+        self.gera_operacao("+", temp_inc, var, '1')
+        self.gera_atribuicao(var, temp_inc)
+
+        # Volta ao início do for
+        self.gerar_jump(label_start)
+
+        # Label de fim do laço
+        self.gerar_label(label_end)
+
+        # Sai do contexto de break/continue
+        self.pilha_break.pop()
+        self.pilha_continue.pop()
+
+    # Gera leitura de entrada (ex: read(x))
     def gera_leitura(self, variavel, tipo):
-        self.codigo.append(("CALL", "READ", variavel, tipo))
+        self.codigo.append(("CALL", "SCAN", variavel, tipo))
 
-    # Gera código para escrita de saída
+    # Gera escrita de saída (ex: write(x))
     def gera_escrita(self, valor):
-        
-        if isinstance(valor, str) and valor.startswith("'") and valor.endswith("'"):
-            # Se for string literal (incluindo '\n')
-            self.codigo.append(("CALL", "PRINT", valor, None))
-        else:
-            # Se for variável ou valor numérico
-            self.codigo.append(("CALL", "PRINT", valor, None))
+        self.codigo.append(("CALL", "PRINT", valor, None))
 
-
-    # ---------------- UTILIDADES ----------------
-
-    # Retorna o código intermediário gerado
+    # Retorna a lista de tuplas geradas
     def get_codigo(self):
         return self.codigo
 
-    # Reseta o gerador para novo uso
+    # Reseta o gerador (útil para múltiplas execuções)
     def limpar_codigo(self):
         self.codigo = []
         self.contador_temp = 0
         self.contador_label = 0
         self.tabela_simbolos = {}
 
-
+# Exceção customizada para erros semânticos
 class ErroSemantico(Exception):
-    # Exceção para erros semânticos
     pass

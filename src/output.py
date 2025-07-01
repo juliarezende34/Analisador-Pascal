@@ -27,7 +27,7 @@ dicionario_tokens = {
     '>': 13,
     '<': 14,
     ':=': 15,
-    '==': 16,
+    '==': 12,
     '>=': 17,
     '<=': 18,
     '<>': 19,
@@ -72,6 +72,11 @@ dicionario_tokens = {
     '\0': 49,
     'variavel': 50
 }
+
+tokens_numericos = {dicionario_tokens['integer'], 
+                     dicionario_tokens['float'],
+                     dicionario_tokens['octal'],
+                     dicionario_tokens['hexa']}
 
 def write_output(cod, item, linha, coluna):
     with open('../output/output.txt', 'a', encoding='utf-8') as f:

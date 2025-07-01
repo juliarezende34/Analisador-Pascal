@@ -5,6 +5,7 @@ from codigoIntermediario import GeradorCodigoIntermediario, ErroSemantico
 # Mapeamento inverso
 codigo_para_lexema = {v: k for k, v in dicionario_tokens.items()}
 
+
 # --------------------------------------------------
 # FUNÇÕES AUXILIARES
 # --------------------------------------------------
@@ -78,10 +79,10 @@ def declarations(lista, gerador):
     declaration(lista, gerador)
     restoDeclaration(lista, gerador)
 
-# ---------------------------------------------------
-#       INTRUÇÕES DOS PROGRAMAS
-# ---------------------------------------------------
-    
+# --------------------------------------------------
+# INSTRUÇÕES DO PROGRAMA
+# --------------------------------------------------
+
 # Processa uma instrução do programa
 def stmt(lista, gerador): 
     if lista[0][1] in io_tokens:
@@ -100,24 +101,19 @@ def stmt(lista, gerador):
     elif lista[0][0] == dicionario_tokens['break']:
         consome('break', lista)
         consome(';', lista)
-        if not gerador.pilha_break:
-            raise ErroSemantico("Uso de 'break' fora de laço")
-        gerador.gerar_jump(gerador.pilha_break[-1])
     elif lista[0][0] == dicionario_tokens['continue']:
         consome('continue', lista)
         consome(';', lista)
-        if not gerador.pilha_continue:
-            raise ErroSemantico("Uso de 'continue' fora de laço")
-        gerador.gerar_jump(gerador.pilha_continue[-1])
     elif lista[0][0] == dicionario_tokens[';']:
         consome(';', lista)
 
+# Processa lista de instruções
 def stmtList(lista, gerador):
-    casos_de_stmt = {'for', 'read', 'write', 'readln', 'writeln', 'variavel', 'if', 'begin', 'break', 'continue', ';', 'while'}
+    casos_de_stmt = {'for', 'read', 'write','readln','writeln','variavel', 'if', 'begin','break','continue',';', 'while'}
     cod_casos_de_stmt = {dicionario_tokens[i] for i in casos_de_stmt}
-    
-    while lista and lista[0][0] in cod_casos_de_stmt:
+    if lista[0][0] in cod_casos_de_stmt:
         stmt(lista, gerador)
+        stmtList(lista, gerador)
 
 # Processa bloco BEGIN...END
 def bloco(lista, gerador):
@@ -126,114 +122,101 @@ def bloco(lista, gerador):
     consome('end', lista)
     consome(';', lista)
 
-#---------------------------
-# DESCRIÇÃO DAS INSTRUÇÕES
-#---------------------------
+# --------------------------------------------------
+# ESTRUTURAS DE CONTROLE
+# --------------------------------------------------
 
-# Comando for
+# Gera código para loop FOR
 def forStmt(lista, gerador):
+    label_inicio = gerador.gera_label("FOR")
+    label_fim = gerador.gera_label("ENDFOR")
+    
     consome('for', lista)
+    
     var_controle = lista[0][1]
-    consome('variavel', lista)
-    consome(':=', lista)
-    valor_inicio = expr(lista, gerador)
+    atrib(lista, gerador)  # pega o <atrib> da gramática
 
+    gerador.codigo.append(("LABEL", label_inicio, None, None))
+    
     consome('to', lista)
-    valor_fim = expr(lista, gerador)
-
-    consome('do', lista)
-
-    def corpo_for(label_continue, label_end):
-        if lista[0][0] == dicionario_tokens['begin']:
-            bloco(lista, gerador)
-        else:
-            stmt(lista, gerador)
-
-    gerador.gerar_for(var_controle, valor_inicio, valor_fim, corpo_for)
-
-
-def endFor(lista): 
     if lista[0][0] == dicionario_tokens['variavel']:
-        valor = lista[0][1]
+        var_fim = lista[0][1]
         consome('variavel', lista)
-        return valor
-    elif lista[0][0] == dicionario_tokens['integer']:
-        valor = lista[0][1]
-        consome('integer', lista)
-        return valor
     else:
-        print(f"Erro sintático: Esperado variável ou número inteiro | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
-        exit(1)
+        var_fim = lista[0][1]
+        consome('integer', lista)
+    
+    temp_cond = gerador.gera_temp()
+    gerador.gera_operacao('<=', temp_cond, var_controle, var_fim)
+    
+    consome('do', lista)
+    
+    gerador.gerar_condicao(temp_cond, label_inicio, label_fim)
+    
+    # ✅ Chama um único <stmt>
+    stmt(lista, gerador)
 
-# Comando while
+    temp_inc = gerador.gera_temp()
+    gerador.gera_operacao('+', temp_inc, var_controle, 1)
+    gerador.gera_atribuicao(var_controle, temp_inc)
+    
+    gerador.gerar_jump(label_inicio)
+    gerador.codigo.append(("LABEL", label_fim, None, None))
+
+# Gera código para loop WHILE
 def whileStmt(lista, gerador):
     label_inicio = gerador.gera_label("WHILE")
     label_fim = gerador.gera_label("ENDWHILE")
-
-    # Configura pilhas para break/continue
-    gerador.pilha_break.append(label_fim)
-    gerador.pilha_continue.append(label_inicio)
-
-    consome('while', lista)
     
-    # Início do loop
+    consome('while', lista)
     gerador.codigo.append(("LABEL", label_inicio, None, None))
-
-    # Condição
+    
     condicao = expr(lista, gerador)
-    gerador.gerar_condicao(condicao, None, label_fim)  # Se falso, sai do loop
-
+    
     consome('do', lista)
-    stmt(lista, gerador)  # Corpo do while
-
-    # Volta para verificação
+    
+    gerador.gerar_condicao(condicao, label_inicio, label_fim)
+    
+    stmt(lista, gerador)  # ✅ um único stmt
+    
     gerador.gerar_jump(label_inicio)
-
-    # Fim do loop
     gerador.codigo.append(("LABEL", label_fim, None, None))
 
-    # Remove das pilhas
-    gerador.pilha_break.pop()
-    gerador.pilha_continue.pop()
-
-    
-# Comando if
+# Gera código para condicional IF
 def ifStmt(lista, gerador):
     label_else = gerador.gera_label("ELSE")
-
+    label_fim = gerador.gera_label("ENDIF")
+    
     consome('if', lista)
+    
     condicao = expr(lista, gerador)
+    
     consome('then', lista)
-
-    # Se condição falsa, pula para else
-    gerador.gerar_condicao(condicao, None, label_else)
-
-    # Bloco then
-    stmt(lista, gerador)
-
-    # Verifica se há else
-    if lista[0][0] == dicionario_tokens['else']:
-        label_fim = gerador.gera_label("ENDIF")
-        gerador.gerar_jump(label_fim)
-        gerador.codigo.append(("LABEL", label_else, None, None))
-        consome('else', lista)
-        stmt(lista, gerador)
-        gerador.codigo.append(("LABEL", label_fim, None, None))
-    else:
-        gerador.codigo.append(("LABEL", label_else, None, None))
+    
+    gerador.gerar_condicao(condicao, label_else, label_fim)
+    
+    stmt(lista, gerador)  # ✅ THEN é um único stmt
+    
+    gerador.gerar_jump(label_fim)
+    gerador.codigo.append(("LABEL", label_else, None, None))
+    
+    elsePart(lista, gerador)
+    
+    gerador.codigo.append(("LABEL", label_fim, None, None))
 
 
+# Processa parte ELSE do IF
 def elsePart(lista, gerador):
     if lista[0][0] == dicionario_tokens['else']:
         consome('else', lista)
-        stmt(lista, gerador)
+        stmt(lista, gerador) 
 
 
 # --------------------------------------------------
 # ENTRADA/SAÍDA
 # --------------------------------------------------
 
-# Comandos de IO
+# Processa comandos de entrada/saída
 def ioStmt(lista, gerador):
     if lista[0][0] == dicionario_tokens['read'] or lista[0][0] == dicionario_tokens['readln']:
         comando = lista[0][1]
@@ -262,19 +245,19 @@ def ioStmt(lista, gerador):
         # Se for writeln, adiciona uma quebra de linha após a escrita
         if comando == 'writeln':
             gerador.gera_escrita("'\n'")
-    else:
-        print(f"Erro sintático: Esperado comando de IO | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
-        exit(1)
 
+# Processa lista de saída
 def outList(lista, gerador):
     out(lista, gerador)
     restoOutList(lista, gerador)
 
+# Processa itens adicionais na lista de saída#
 def restoOutList(lista, gerador):
     if lista[0][0] == dicionario_tokens[',']:
         consome(',', lista)
         outList(lista, gerador)
 
+# Processa um item de saída
 def out(lista, gerador):
     if lista[0][0] == dicionario_tokens['string']:
         valor = lista[0][1]
@@ -295,17 +278,17 @@ def out(lista, gerador):
     else:
         print(f"Erro sintático: Esperado string, variável ou número | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
-#------------------------------
+
+# --------------------------------------------------
 # EXPRESSÕES
-#------------------------------
+# --------------------------------------------------
 
 # Processa atribuição de variável
 def atrib(lista, gerador):
     var = lista[0][1]
-
     consome('variavel', lista)
     consome(':=', lista)
-
+    
     # Processa expressão completa
     valor = expr(lista, gerador)
     gerador.gera_atribuicao(var, valor)
@@ -324,10 +307,8 @@ def restoOr(lista, gerador, esq):
     if lista[0][0] == dicionario_tokens['or']:
         consome('or', lista)
         dir = and_function(lista, gerador)
-
         temp = gerador.gera_temp()
         gerador.gera_operacao('ou', temp, esq, dir)
-
         return restoOr(lista, gerador, temp)
     return esq
 
@@ -341,10 +322,8 @@ def restoAnd(lista, gerador, esq):
     if lista[0][0] == dicionario_tokens['and']:
         consome('and', lista)
         dir = not_function(lista, gerador)
-
         temp = gerador.gera_temp()
         gerador.gera_operacao('and', temp, esq, dir)
-
         return restoAnd(lista, gerador, temp)
     return esq
 
@@ -353,7 +332,6 @@ def not_function(lista, gerador):
     if lista[0][0] == dicionario_tokens['not']:
         consome('not', lista)
         op = not_function(lista, gerador)
-
         temp = gerador.gera_temp()
         gerador.codigo.append(('NOT', temp, op, None))
         return temp
@@ -364,7 +342,7 @@ def rel(lista, gerador):
     esq = add(lista, gerador)
     return restoRel(lista, gerador, esq)
 
-# Processa operadores relacionais com conversão para seus respectivos códigos
+# Processa operadores relacionais com conversão para códigos de 3 letras
 def restoRel(lista, gerador, esq):
     OP_MAP = {
         '<=': 'LEQ',
@@ -374,13 +352,11 @@ def restoRel(lista, gerador, esq):
         '==': 'EQ',
         '<>': 'NEQ',
         '=': 'EQ',
-        ':=': 'ATT'
     }
     
     if lista[0][0] in [dicionario_tokens['=='], dicionario_tokens['<>'],
                        dicionario_tokens['<'], dicionario_tokens['<='],
-                       dicionario_tokens['>'], dicionario_tokens['>='],
-                       dicionario_tokens['=']]:
+                       dicionario_tokens['>'], dicionario_tokens['>=']]:
         op_simbolo = lista[0][1]  # Pega o símbolo do operador (como '<=')
         op_code = OP_MAP[op_simbolo]  # Converte para 'LEQ'
         consome(op_simbolo, lista)
@@ -453,50 +429,57 @@ def uno(lista, gerador):
         return uno(lista, gerador)
     elif lista[0][0] == dicionario_tokens['-']:
         consome('-', lista)
-        return uno(lista, gerador)
+        op = uno(lista, gerador)
+        temp = gerador.gera_temp()
+        gerador.gera_operacao('not', temp, op, None)
+        return temp
     return fator(lista, gerador)
 
-def fator(lista, gerador):
-    possibilidades = {'integer', 'float', 'variavel', '(', 'string', 'hexa', 'octal'}
-    cod_possibilidades = {dicionario_tokens[i] for i in possibilidades}
+# # Processa fatores primários
+# def fator(lista, gerador):
+#     if lista[0][0] == dicionario_tokens['integer']:
+#         valor = lista[0][1]
+#         consome('integer', lista)
+#         return valor
+#     elif lista[0][0] == dicionario_tokens['float']:
+#         valor = lista[0][1]
+#         consome('float', lista)
+#         return valor
+#     elif lista[0][0] == dicionario_tokens['variavel']:
+#         var = lista[0][1]
+#         consome('variavel', lista)
+#         return var
+#     elif lista[0][0] == dicionario_tokens['(']:
+#         consome('(', lista)
+#         res = expr(lista, gerador)
+#         consome(')', lista)
+#         return res
+#     else:
+#         print(f"Erro sintático: Fator inválido | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
+#         exit(1)
 
-    if lista[0][0] in cod_possibilidades:
-        if lista[0][0] == dicionario_tokens['integer']:
-            valor = lista[0][1]
-            consome('integer', lista)
-            return valor
-        elif lista[0][0] == dicionario_tokens['float']:
-            valor = lista[0][1]
-            consome('float', lista)
-            return valor
-        elif lista[0][0] == dicionario_tokens['hexa']:
-            valor = lista[0][1]
-            consome('hexa', lista)
-            return valor
-        elif lista[0][0] == dicionario_tokens['octal']:
-            valor = lista[0][1]
-            consome('octal', lista)
-            return valor
-        elif lista[0][0] == dicionario_tokens['variavel']:
-            valor = lista[0][1]
-            consome('variavel', lista)
-            return valor
-        elif lista[0][0] == dicionario_tokens['(']:
-            consome('(', lista)
-            res = expr(lista, gerador)
-            consome(')', lista)
-            return res
-        elif lista[0][0] == dicionario_tokens['string']:
-            valor = lista[0][1]
-            consome('string', lista)
-            return valor
+def fator(lista, gerador):
+    if lista[0][0] in tokens_numericos:
+        valor = lista[0][1]
+        consome(codigo_para_lexema[lista[0][0]], lista)
+        return valor
+    elif lista[0][0] == dicionario_tokens['variavel']:
+        var = lista[0][1]
+        consome('variavel', lista)
+        return var
+    elif lista[0][0] == dicionario_tokens['(']:
+        consome('(', lista)
+        res = expr(lista, gerador)
+        consome(')', lista)
+        return res
     else:
-        print(f"Erro sintático: Esperado 'integer','float', 'variavel', '(' ou 'string' | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
+        print(f"Erro sintático: Fator inválido | Recebido: {lista[0][1]} | Linha: {lista[0][2]} | Coluna: {lista[0][3]}")
         exit(1)
 
-#------------------------------
-# Sintático
-#------------------------------
+
+# --------------------------------------------------
+# FUNÇÃO PRINCIPAL
+# --------------------------------------------------
 
 # Função principal do analisador sintático
 def sintatico(lista_tokens):
@@ -520,8 +503,5 @@ def sintatico(lista_tokens):
     if len(lista_tokens) > 0:
         print(f"Erro sintático: Tokens não processados: {lista_tokens[0][1]}")
         exit(1)
-
-    if len(lista_tokens) == 0:
-        print("Análise sintática concluída com sucesso!")
     
     return gerador.get_codigo()
