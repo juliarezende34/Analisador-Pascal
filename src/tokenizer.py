@@ -26,6 +26,7 @@ mapeamento_operadores = {
     '>': 'GRET',
     '==': 'EQ',
     '<>': 'NEQ',
+    '=': 'EQ',
     
     # Operadores aritméticos
     '+': 'ADD',
