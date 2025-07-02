@@ -68,8 +68,23 @@ def chamada_sistema(tupla, dict_variaveis, i):
                 valor_scan = float(valor_scan)
             except ValueError:
                 pass  # Mantém como string
-
-        dict_variaveis[variavel_scan] = valor_scan
+        
+        tipo_valido = False
+        if tupla[3] == 'integer':
+            if type(valor_scan) == type(2):
+                tipo_valido = True
+        elif tupla[3] == 'string':
+            if type(valor_scan) == type('text'):
+                tipo_valido = True
+        elif tupla[3] == 'real':
+            if type(valor_scan) == type(3.5):
+                tipo_valido = True
+        
+        if tipo_valido:
+            dict_variaveis[variavel_scan] = valor_scan
+        else:
+            print(f"Erro durante o SCAN. Tipo esperado: {tupla[3]} | Tipo recebido: {type(valor_scan)} ")
+            exit(1)
 
     else:
         print(f"Aviso: Chamada de sistema '{tupla[1]}' não reconhecida. Linha {i + 1}.")
@@ -146,7 +161,7 @@ def executar_operacoes_relacionais(tupla, dict_variaveis, i):
             valor_op2 = dict_variaveis[op2]
         else:
             valor_op2 = get_valor_literal_ou_variavel(op2, dict_variaveis,i)
-
+        ############################################################################################ Exceto o == e !=, o tipo dos operadores deve ser de número
         if operador == 'LEQ':
             dict_variaveis[destino] = (valor_op1 <= valor_op2)
         elif operador == 'LESS':
@@ -241,7 +256,10 @@ def executar_intermediario(lista):
         # Atribuição
         if tupla_atual[0] == 'ATT':
             variavel = tupla_atual[1]
-            valor = get_valor_literal_ou_variavel(tupla_atual[2], dict_variaveis, program_counter + 1)
+            if tupla_atual[2] != '':
+                valor = get_valor_literal_ou_variavel(tupla_atual[2], dict_variaveis, program_counter + 1)
+            else:
+                valor = ''
             dict_variaveis[variavel] = valor
 
         # Chamada de sistema
