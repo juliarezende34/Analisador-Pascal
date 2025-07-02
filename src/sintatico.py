@@ -5,6 +5,8 @@ from codigoIntermediario import GeradorCodigoIntermediario, ErroSemantico
 # Mapeamento inverso
 codigo_para_lexema = {v: k for k, v in dicionario_tokens.items()}
 
+dict_tipos = {}
+
 # --------------------------------------------------
 # FUNÇÕES AUXILIARES
 # --------------------------------------------------
@@ -61,9 +63,9 @@ def declaration(lista, gerador):
     consome(':', lista)
     tipo = type_function(lista)
     consome(';', lista)
-    
     # Gera código para cada variável declarada
     for nome in nomes:
+        dict_tipos[nome] = tipo  # Armazena o tipo da variável no dicionário
         gerador.gera_declaracao(nome, tipo)
 
 # Processa declarações adicionais
@@ -308,6 +310,7 @@ def atrib(lista, gerador):
 
     # Processa expressão completa
     valor = expr(lista, gerador)
+    #################################################### salvar o valor na tupla com o seu tipo original, ver no dicionário
     gerador.gera_atribuicao(var, valor)
 
 # Processa expressão lógica OR
@@ -403,8 +406,29 @@ def restoAdd(lista, gerador, esq):
         consome('+', lista)
         dir = mult(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('+', temp, esq, dir)
-        return restoAdd(lista, gerador, temp)
+        ############################################################## Antes de todas as operações (inclusive atribuição e and, or...) verificar se o tipo da esquerda
+        ############################################################# e direita são iguais
+        tipos_validos = True
+        if esq in dict_tipos.keys():
+            tipo_esquerda = dict_tipos[esq]
+        else:
+            tipo_esquerda = type(esq)
+
+        if dir in dict_tipos.keys():
+            tipo_direita = dict_tipos[dir]
+        else:
+            tipo_direita = type(dir)
+
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and ((tipo_direita == 'string') or (tipo_direita == type('text'))):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and ((tipo_esquerda == 'string') or (tipo_esquerda == type('text'))):
+            tipos_validos = False
+
+        if tipos_validos:
+            gerador.gera_operacao('+', temp, esq, dir)
+            return restoAdd(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para adição: {tipo_esquerda} + {tipo_direita}")
     elif lista[0][0] == dicionario_tokens['-']:
         consome('-', lista)
         dir = mult(lista, gerador)
@@ -523,5 +547,4 @@ def sintatico(lista_tokens):
 
     if len(lista_tokens) == 0:
         print("\nAnálise sintática concluída com sucesso! ✔")
-    
     return gerador.get_codigo()
