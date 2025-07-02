@@ -41,12 +41,11 @@ class GeradorCodigoIntermediario:
 
         # Adiciona instrução e salva na tabela de símbolos
         if valor_inicial is not None:
-            self.codigo.append(("ATT", nome, valor_inicial, None))
             self.tabela_simbolos[nome] = tipo
+            self.codigo.append(("ATT", nome, valor_inicial, tipo))
 
     # Gera instrução de atribuição (destino := valor)
     def gera_atribuicao(self, destino, valor):
-        self.codigo.append(("ATT", destino, valor, None))
 
         # Inferência de tipo para variáveis ainda não declaradas
         if destino not in self.tabela_simbolos:
@@ -56,6 +55,10 @@ class GeradorCodigoIntermediario:
                 else "string"
             )
             self.tabela_simbolos[destino] = tipo
+        else:
+            tipo = self.tabela_simbolos[destino]
+
+        self.codigo.append(("ATT", destino, valor, tipo))
 
     # Gera operação intermediária (ex: ADD, SUB, EQ, etc.)
     def gera_operacao(self, operador, destino, op1, op2=None):
@@ -143,7 +146,27 @@ class GeradorCodigoIntermediario:
 
     # Gera escrita de saída (ex: write(x))
     def gera_escrita(self, valor):
-        self.codigo.append(("CALL", "PRINT", valor, None))
+        # Se for uma variável conhecida, pega o tipo da tabela
+        if valor in self.tabela_simbolos:
+            tipo = self.tabela_simbolos[valor]
+        else:
+            # Se for literal, tenta inferir o tipo
+            if isinstance(valor, str):
+                if valor.startswith("'") and valor.endswith("'"):
+                    tipo = "string"
+                elif valor.replace('.', '', 1).isdigit():
+                    tipo = "real" if '.' in valor else "integer"
+                else:
+                    tipo = "string"  # assume string genérica para casos como 'Resultado: '
+            elif isinstance(valor, int):
+                tipo = "integer"
+            elif isinstance(valor, float):
+                tipo = "real"
+            else:
+                tipo = None
+
+        self.codigo.append(("CALL", "PRINT", valor, tipo))
+
 
     # Retorna a lista de tuplas geradas
     def get_codigo(self):
