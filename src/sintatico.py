@@ -11,6 +11,28 @@ dict_tipos = {}
 # FUNÇÕES AUXILIARES
 # --------------------------------------------------
 
+def tipo_valor(valor):
+    # Se for variável declarada
+    if valor in dict_tipos:
+        return dict_tipos[valor]
+    # Tenta identificar se é inteiro
+    try:
+        int(valor)
+        return 'integer'
+    except (ValueError, TypeError):
+        pass
+    # Tenta identificar se é real
+    try:
+        float(valor)
+        if '.' in str(valor):
+            return 'real'
+    except (ValueError, TypeError):
+        pass
+    # Se for string entre aspas
+    if isinstance(valor, str) and (valor.startswith("'") or valor.startswith('"')):
+        return 'string'
+    return type(valor)
+
 def consome(lexema, lista):
     # Consome um token esperado da lista de tokens
     # print(f"Consumindo: {lexema} | Dicionario: {dicionario_tokens[lexema]}")
@@ -406,22 +428,15 @@ def restoAdd(lista, gerador, esq):
         consome('+', lista)
         dir = mult(lista, gerador)
         temp = gerador.gera_temp()
-        ############################################################## Antes de todas as operações (inclusive atribuição e and, or...) verificar se o tipo da esquerda
-        ############################################################# e direita são iguais
+        # Antes de todas as operações (inclusive atribuição e and, or...) verificar se o tipo da esquerda
+        # e direita são iguais
         tipos_validos = True
-        if esq in dict_tipos.keys():
-            tipo_esquerda = dict_tipos[esq]
-        else:
-            tipo_esquerda = type(esq)
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
 
-        if dir in dict_tipos.keys():
-            tipo_direita = dict_tipos[dir]
-        else:
-            tipo_direita = type(dir)
-
-        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and ((tipo_direita == 'string') or (tipo_direita == type('text'))):
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
             tipos_validos = False
-        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and ((tipo_esquerda == 'string') or (tipo_esquerda == type('text'))):
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
             tipos_validos = False
 
         if tipos_validos:

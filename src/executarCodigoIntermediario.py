@@ -53,7 +53,10 @@ def chamada_sistema(tupla, dict_variaveis, i):
             imprimir = dict_variaveis[tupla[2]]
         else:
             imprimir = tupla[2]
-        print(imprimir)
+        # Remove aspas se for string Pascal
+        if isinstance(imprimir, str) and ((imprimir.startswith("'") and imprimir.endswith("'")) or (imprimir.startswith('"') and imprimir.endswith('"'))):
+            imprimir = imprimir[1:-1]
+        print(imprimir, end=' ')  # Não pula linha nem adiciona espaço extra
 
     elif tupla[1] == 'SCAN':
         variavel_scan = tupla[2]
