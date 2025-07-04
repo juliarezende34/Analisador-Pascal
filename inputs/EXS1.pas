@@ -6,7 +6,7 @@ var
 
 begin
     read(a);
-    read(b);
+    b := 5;
     c := a + b;
     writeln('Resultado: ', c);
 end.
