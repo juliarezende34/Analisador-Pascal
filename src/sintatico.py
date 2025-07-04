@@ -13,25 +13,15 @@ dict_tipos = {}
 
 def tipo_valor(valor):
     # Se for variável declarada
-    if valor in dict_tipos:
+    if valor in dict_tipos.keys():
         return dict_tipos[valor]
-    # Tenta identificar se é inteiro
-    try:
-        int(valor)
+    elif type(valor) == type(2):
         return 'integer'
-    except (ValueError, TypeError):
-        pass
-    # Tenta identificar se é real
-    try:
-        float(valor)
-        if '.' in str(valor):
-            return 'real'
-    except (ValueError, TypeError):
-        pass
-    # Se for string entre aspas
-    if isinstance(valor, str) and (valor.startswith("'") or valor.startswith('"')):
+    elif type(valor) == type(2.5):
+        return 'real'
+    elif type(valor) == type('text'):
         return 'string'
-    return type(valor)
+
 
 def consome(lexema, lista):
     # Consome um token esperado da lista de tokens
@@ -270,10 +260,10 @@ def ioStmt(lista, gerador):
         
         # Se for readln, adiciona uma quebra de linha após a leitura
         if comando == 'readln':
-            gerador.gera_leitura(var, 'integer')
+            gerador.gera_leitura(var, dict_tipos[var])
             gerador.gera_escrita("'\\n'")  # Adiciona quebra de linha
         else:
-            gerador.gera_leitura(var, 'integer')
+            gerador.gera_leitura(var, dict_tipos[var])
             
     elif lista[0][0] == dicionario_tokens['write'] or lista[0][0] == dicionario_tokens['writeln']:
         comando = lista[0][1]
@@ -329,11 +319,12 @@ def atrib(lista, gerador):
 
     consome('variavel', lista)
     consome(':=', lista)
-
     # Processa expressão completa
     valor = expr(lista, gerador)
-    #################################################### salvar o valor na tupla com o seu tipo original, ver no dicionário
-    gerador.gera_atribuicao(var, valor)
+    if var in dict_tipos.keys():
+        gerador.gera_atribuicao(var, valor)
+    else:
+        raise ErroSemantico(f"Erro: variável {var} utilizada sem inicialização prévia")
 
 # Processa expressão lógica OR
 def expr(lista, gerador):
@@ -501,11 +492,11 @@ def fator(lista, gerador):
 
     if lista[0][0] in cod_possibilidades:
         if lista[0][0] == dicionario_tokens['integer']:
-            valor = lista[0][1]
+            valor = int(lista[0][1])
             consome('integer', lista)
             return valor
         elif lista[0][0] == dicionario_tokens['float']:
-            valor = lista[0][1]
+            valor = float(lista[0][1])
             consome('float', lista)
             return valor
         elif lista[0][0] == dicionario_tokens['hexa']:
