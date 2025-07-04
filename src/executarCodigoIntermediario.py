@@ -25,25 +25,33 @@ def processar_labels(lista):
                 print(f"Aviso: A label '{label_name}' já foi definida anteriormente. Linha {i + 1}.")
     return dict_labels
 
-def get_valor_literal_ou_variavel(valor, dict_variaveis, i):
+def get_valor_literal_ou_variavel(tupla, dict_variaveis, i):
     """
     Tenta retornar o valor de uma variável ou literal passado como string.
     """
-    try:
-        return int(valor)
-    except ValueError:
-        pass
-
-    try:
-        return float(valor)
-    except ValueError:
-        pass
-
-    if valor in dict_variaveis:
-        return dict_variaveis[valor]
+    if type(tupla[2]) == type('text'):
+        if not tupla[2].startswith("_t"):
+            if tupla[3] == 'integer':
+                return int(tupla[2])
+            elif tupla[3] == 'real':
+                return float(tupla[2])
+            elif tupla[3] == 'string':
+                if tupla[1] in dict_variaveis.keys():
+                    return dict_variaveis[tupla[1]]
+                else:
+                    return tupla[2]
+        else:
+            return dict_variaveis[tupla[2]]
     else:
-        print(f"Erro: A variável '{valor}' não foi definida antes de ser usada. Linha {i}.")
-        exit(1)
+        if tupla[3] == 'integer':
+                return int(tupla[2])
+        elif tupla[3] == 'real':
+            return float(tupla[2])
+        elif tupla[3] == 'string':
+            if tupla[1] in dict_variaveis.keys():
+                return dict_variaveis[tupla[1]]
+            else:
+                return tupla[2]
 
 
             
@@ -104,17 +112,24 @@ def executar_operacoes_aritmeticas(tupla, dict_variaveis, i):
 
     if (destino in dict_variaveis.keys()) or destino.startswith('_t'):
         # op1 pode ser: op1 = '1' ou op1 = 'variavel'
-        if op1 in dict_variaveis.keys():
-            valor_op1 = dict_variaveis[op1]
+        if type(tupla[2]) == type('text'):
+            if tupla[2] in dict_variaveis.keys():
+                valor_op1 = dict_variaveis[op1]
+            else:
+                print(f"Erro: Variável '{op1}' não foi declarada antes da operação. Linha {i + 1}.")
+                exit(1)
         else:
-            valor_op1 = get_valor_literal_ou_variavel(op1, dict_variaveis,i)
-        
-        # op2 pode ser: op2 = '1' ou op2 = 'variavel'
-        if op2 in dict_variaveis.keys():
-            valor_op2 = dict_variaveis[op2]
-        else:
-            valor_op2 = get_valor_literal_ou_variavel(op2, dict_variaveis,i)
+            valor_op1 = op1
 
+        if type(tupla[3]) == type('text'):
+            if tupla[3] in dict_variaveis.keys():
+                valor_op2 = dict_variaveis[op2]
+            else:
+                print(f"Erro: Variável '{op2}' não foi declarada antes da operação. Linha {i + 1}.")
+                exit(1)
+        else:
+            valor_op2 = op2
+            
         if operador == 'ADD':
             dict_variaveis[destino] = valor_op1 + (valor_op2)
         elif operador == 'SUB':
@@ -154,16 +169,25 @@ def executar_operacoes_relacionais(tupla, dict_variaveis, i):
 
     if (destino in dict_variaveis) or destino.startswith('_t'):
         # op1 pode ser: op1 = '1' ou op1 = 'variavel'
-        if op1 in dict_variaveis.keys():
-            valor_op1 = dict_variaveis[op1]
+        if type(tupla[2]) == type('text'):
+            if tupla[2] in dict_variaveis.keys():
+                valor_op1 = dict_variaveis[op1]
+            else:
+                print(f"Erro: Variável '{op1}' não foi declarada antes da operação. Linha {i + 1}.")
+                exit(1)
         else:
-            valor_op1 = get_valor_literal_ou_variavel(op1, dict_variaveis,i)
-        
-        # op2 pode ser: op2 = '1' ou op2 = 'variavel'
-        if op2 in dict_variaveis.keys():
-            valor_op2 = dict_variaveis[op2]
+            valor_op1 = op1
+
+        if type(tupla[3]) == type('text'):
+            if tupla[3] in dict_variaveis.keys():
+                valor_op2 = dict_variaveis[op2]
+            else:
+                print(f"Erro: Variável '{op2}' não foi declarada antes da operação. Linha {i + 1}.")
+                exit(1)
         else:
-            valor_op2 = get_valor_literal_ou_variavel(op2, dict_variaveis,i)
+            valor_op2 = op2
+
+        print(f"{type(valor_op1)} | {type(valor_op2)}")
         ############################################################################################ Exceto o == e !=, o tipo dos operadores deve ser de número
         if operador == 'LEQ':
             dict_variaveis[destino] = (valor_op1 <= valor_op2)
@@ -260,7 +284,7 @@ def executar_intermediario(lista):
         if tupla_atual[0] == 'ATT':
             variavel = tupla_atual[1]
             if tupla_atual[2] != '':
-                valor = get_valor_literal_ou_variavel(tupla_atual[2], dict_variaveis, program_counter + 1)
+                valor = get_valor_literal_ou_variavel(tupla_atual, dict_variaveis, program_counter + 1)
             else:
                 valor = ''
             dict_variaveis[variavel] = valor
