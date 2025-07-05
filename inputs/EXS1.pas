@@ -1,12 +1,12 @@
 program exemplo1;
 
 var
-    a, b: integer;
-    c: real;
+    a: integer;
+    b: string;
 
 begin
     read(a);
-    b := 5;
-    c := a + b;
+    b := 'Lucas';
+    c := a mod b;
     writeln('Resultado: ', c);
 end.

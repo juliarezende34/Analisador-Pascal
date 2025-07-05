@@ -1,29 +1,16 @@
-program exs;
-
-
-
-var n1,n2,n3,n4: real;
-
-begin;
-
- clrscr;
- writeln ('caro usuario este programa recebera tres numeros a sua escolha em ordem crescente e um quarto numero aleatorio');
- writeln ('e os colocara em ordem crescente.');
- write  ('para comear por favor tecle enter');
- readkey;
-
- clrscr;
- writeln ('por favor digite o primeiro numero ');
- readln(n1);
-
- clrscr;
- writeln ('agora digite o segundo numero, de forma que ele seja maior que o primeiro');
- readln(n2);
-
- clrscr;
- writeln ('agora digite o terceiro numero, de forma que ele seja maior que o primeiro e o segundo');
- readln (n3);
-
- clrscr;
- writeln ('agora digite um quarto numero a sua escolha');
- readln (n4);
+program ExemploLEG;
+var
+    a: integer;
+    b: real;
+    c: string;
+begin
+    a := 5.5;
+    b := 6;
+    c := 'Lucas';
+    if a == c then
+        writeln('a é menor que b (LESS)');
+    else if a = b then
+        writeln('a é igual a b (LEG)');
+    else
+        writeln('a é maior que b (GEGA)');
+end.
