@@ -20,7 +20,7 @@ def lexico():
     Leitor = LeitorArquivos()
     Leitor.LerArquivos()
 
-    arquivo = Leitor.get_lines_program('EXS_TODOS.pas')
+    arquivo = Leitor.get_lines_program('EXS1.pas')
 
     # Variáveis de estado
     pilha = []  # Para controlar (, [, {

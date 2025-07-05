@@ -432,8 +432,19 @@ def restoAdd(lista, gerador, esq):
         consome('-', lista)
         dir = mult(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('-', temp, esq, dir)
-        return restoAdd(lista, gerador, temp)
+        # Verificação de tipos para subtração
+        tipos_validos = True
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
+            tipos_validos = False
+        if tipos_validos:
+            gerador.gera_operacao('-', temp, esq, dir)
+            return restoAdd(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para subtração: {tipo_esquerda} - {tipo_direita}")
     return esq
 
 # Processa multiplicações e divisões
@@ -447,26 +458,70 @@ def restoMult(lista, gerador, esq):
         consome('*', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('*', temp, esq, dir)
-        return restoMult(lista, gerador, temp)
+        # Verificação de tipos para multiplicação
+        tipos_validos = True
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
+            tipos_validos = False
+        if tipos_validos:
+            gerador.gera_operacao('*', temp, esq, dir)
+            return restoMult(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para multiplicação: {tipo_esquerda} * {tipo_direita}")
     elif lista[0][0] == dicionario_tokens['/']:
         consome('/', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('/', temp, esq, dir)
-        return restoMult(lista, gerador, temp)
+        # Verificação de tipos para divisão
+        tipos_validos = True
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
+            tipos_validos = False
+        if tipos_validos:
+            gerador.gera_operacao('/', temp, esq, dir)
+            return restoMult(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para divisão: {tipo_esquerda} / {tipo_direita}")
     elif lista[0][0] == dicionario_tokens['mod']:
         consome('mod', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('mod', temp, esq, dir)
-        return restoMult(lista, gerador, temp)
+        # Verificação de tipos para mod
+        tipos_validos = True
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
+            tipos_validos = False
+        if tipos_validos:
+            gerador.gera_operacao('mod', temp, esq, dir)
+            return restoMult(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para mod: {tipo_esquerda} mod {tipo_direita}")
     elif lista[0][0] == dicionario_tokens['div']:
         consome('div', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('div', temp, esq, dir)
-        return restoMult(lista, gerador, temp)
+        # Verificação de tipos para div
+        tipos_validos = True
+        tipo_esquerda = tipo_valor(esq)
+        tipo_direita = tipo_valor(dir)
+        if ((tipo_esquerda == 'integer') or (tipo_esquerda == 'real')) and (tipo_direita == 'string'):
+            tipos_validos = False
+        elif ((tipo_direita == 'integer') or (tipo_direita == 'real')) and (tipo_esquerda == 'string'):
+            tipos_validos = False
+        if tipos_validos:
+            gerador.gera_operacao('div', temp, esq, dir)
+            return restoMult(lista, gerador, temp)
+        else:
+            raise ErroSemantico(f"Tipos incompatíves para div: {tipo_esquerda} div {tipo_direita}")
     return esq
 
 # Processa operadores unários
