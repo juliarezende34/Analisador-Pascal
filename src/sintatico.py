@@ -257,14 +257,8 @@ def ioStmt(lista, gerador):
         consome('variavel', lista)
         consome(')', lista)
         consome(';', lista)
-        
-        # Se for readln, adiciona uma quebra de linha após a leitura
-        if comando == 'readln':
-            gerador.gera_leitura(var, dict_tipos[var])
-            gerador.gera_escrita("'\\n'")  # Adiciona quebra de linha
-        else:
-            gerador.gera_leitura(var, dict_tipos[var])
-            
+        # Não gera mais PRINT '\n' após readln
+        gerador.gera_leitura(var, dict_tipos[var])
     elif lista[0][0] == dicionario_tokens['write'] or lista[0][0] == dicionario_tokens['writeln']:
         comando = lista[0][1]
         consome(comando, lista)
@@ -272,7 +266,6 @@ def ioStmt(lista, gerador):
         outList(lista, gerador)
         consome(')', lista)
         consome(';', lista)
-        
         # Se for writeln, adiciona uma quebra de linha após a escrita
         if comando == 'writeln':
             gerador.gera_escrita("'\n'")
@@ -342,7 +335,7 @@ def restoOr(lista, gerador, esq):
         dir = and_function(lista, gerador)
 
         temp = gerador.gera_temp()
-        gerador.gera_operacao('ou', temp, esq, dir)
+        gerador.gera_operacao('or', temp, esq, dir)
 
         return restoOr(lista, gerador, temp)
     return esq
@@ -466,13 +459,13 @@ def restoMult(lista, gerador, esq):
         consome('mod', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('%', temp, esq, dir)
+        gerador.gera_operacao('mod', temp, esq, dir)
         return restoMult(lista, gerador, temp)
     elif lista[0][0] == dicionario_tokens['div']:
         consome('div', lista)
         dir = uno(lista, gerador)
         temp = gerador.gera_temp()
-        gerador.gera_operacao('#', temp, esq, dir)
+        gerador.gera_operacao('div', temp, esq, dir)
         return restoMult(lista, gerador, temp)
     return esq
 

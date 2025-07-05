@@ -28,7 +28,11 @@ def processar_labels(lista):
 def get_valor_literal_ou_variavel(tupla, dict_variaveis, i):
     """
     Tenta retornar o valor de uma variável ou literal passado como string.
+    Adicionada verificação para tupla None.
     """
+    if tupla is None:
+        raise ValueError(f"Erro interno: tupla recebida é None na posição {i}.")
+    
     if type(tupla[2]) == type('text'):
         if not tupla[2].startswith("_t"):
             if tupla[3] == 'integer':
@@ -64,7 +68,13 @@ def chamada_sistema(tupla, dict_variaveis, i):
         # Remove aspas se for string Pascal
         if isinstance(imprimir, str) and ((imprimir.startswith("'") and imprimir.endswith("'")) or (imprimir.startswith('"') and imprimir.endswith('"'))):
             imprimir = imprimir[1:-1]
-        print(imprimir, end=' ')  # Não pula linha nem adiciona espaço extra
+        # Corrige quebra de linha real
+        if imprimir == '\n' or imprimir == "\n":
+            print()  # Pula linha de verdade
+        elif tupla[-1] == 'writeln':  # Se for um PRINT de writeln
+            print(imprimir)  # Pula linha após imprimir
+        else:
+            print(imprimir, end=' ')  # Não pula linha nem adiciona espaço extra
 
     elif tupla[1] == 'SCAN':
         variavel_scan = tupla[2]
@@ -187,7 +197,7 @@ def executar_operacoes_relacionais(tupla, dict_variaveis, i):
         else:
             valor_op2 = op2
 
-        print(f"{type(valor_op1)} | {type(valor_op2)}")
+        # print(f"{type(valor_op1)} | {type(valor_op2)}")
         ############################################################################################ Exceto o == e !=, o tipo dos operadores deve ser de número
         if operador == 'LEQ':
             dict_variaveis[destino] = (valor_op1 <= valor_op2)
