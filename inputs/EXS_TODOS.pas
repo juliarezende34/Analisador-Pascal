@@ -48,10 +48,10 @@ begin
     if not (a = 0) then
         writeln('a não é zero');
 
-    { For }
-    for h := 1 to 3 do
+    { For com bloco (múltiplas instruções) }
+    for i := 1 to 3 do
     begin
-        writeln('For: ', h);
+        writeln('Número: ', i);
     end;
 
     { While }
@@ -73,5 +73,4 @@ begin
     { Strings }
     writeln('String: ', s);
 
- 
 end.

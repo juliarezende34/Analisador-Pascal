@@ -127,7 +127,7 @@ class GeradorCodigoIntermediario:
         # Label de continue (incrementa e volta)
         self.gerar_label(label_continue)
         temp_inc = self.gera_temp()
-        self.gera_operacao("+", temp_inc, var, '1')
+        self.gera_operacao("+", temp_inc, var, 1)  # Corrigido: incremento numérico
         self.gera_atribuicao(var, temp_inc)
 
         # Volta ao início do for

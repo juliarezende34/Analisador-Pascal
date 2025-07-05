@@ -230,17 +230,24 @@ def executar_operacoes_logicas(tupla, dict_variaveis, i):
 
     if (destino in dict_variaveis) or destino.startswith('_t'):
         # op1 pode ser: op1 = '1' ou op1 = 'variavel'
+        if op1 is None:
+            print(f"Erro: Operando 1 (op1) é None na operação lógica '{operador}' para '{destino}' na linha {i}.")
+            exit(1)
+        if op2 is None and operador != 'NOT':
+            print(f"Erro: Operando 2 (op2) é None na operação lógica '{operador}' para '{destino}' na linha {i}.")
+            exit(1)
         if op1 in dict_variaveis.keys():
             valor_op1 = dict_variaveis[op1]
         else:
             valor_op1 = get_valor_literal_ou_variavel(op1, dict_variaveis,i)
-        
         # op2 pode ser: op2 = '1' ou op2 = 'variavel'
-        if op2 in dict_variaveis.keys():
-            valor_op2 = dict_variaveis[op2]
+        if operador != 'NOT':
+            if op2 in dict_variaveis.keys():
+                valor_op2 = dict_variaveis[op2]
+            else:
+                valor_op2 = get_valor_literal_ou_variavel(op2, dict_variaveis,i)
         else:
-            valor_op2 = get_valor_literal_ou_variavel(op2, dict_variaveis,i)
-
+            valor_op2 = None
         if operador == 'AND':
             dict_variaveis[destino] = (valor_op1 and valor_op2)
         elif operador == 'OR':
@@ -250,7 +257,6 @@ def executar_operacoes_logicas(tupla, dict_variaveis, i):
         else:
             print(f"Erro: Operador lógico '{operador}' não reconhecido. Linha {i + 1}.")
             exit(1)
-    
     else:
         print(f"Erro: Variável '{destino}' não foi declarada antes da operação. Linha {i + 1}.")
         exit(1)
