@@ -13,13 +13,20 @@ dict_tipos = {}
 
 def tipo_valor(valor):
     # Se for variável declarada
+    print(f"Tipo do valor: {valor}")
     if valor in dict_tipos.keys():
+        print(dict_tipos[valor])
         return dict_tipos[valor]
     elif type(valor) == type(2):
+        print('integer')
         return 'integer'
     elif type(valor) == type(2.5):
+        print('real')
+        return 'real'
+    elif valor.startswith('_t'):
         return 'real'
     elif type(valor) == type('text'):
+        print('string')
         return 'string'
 
 
