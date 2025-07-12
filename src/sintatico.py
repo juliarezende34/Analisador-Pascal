@@ -23,8 +23,8 @@ def tipo_valor(valor):
     elif type(valor) == type(2.5):
         print('real')
         return 'real'
-    elif valor.startswith('_t'):
-        return 'real'
+    # elif valor.startswith('_t'):
+    #     return 'real'
     elif type(valor) == type('text'):
         print('string')
         return 'string'
@@ -555,11 +555,11 @@ def fator(lista, gerador):
             consome('float', lista)
             return valor
         elif lista[0][0] == dicionario_tokens['hexa']:
-            valor = lista[0][1]
+            valor = float(int(lista[0][1], 16))
             consome('hexa', lista)
             return valor
         elif lista[0][0] == dicionario_tokens['octal']:
-            valor = lista[0][1]
+            valor = float(int(lista[0][1], 8))
             consome('octal', lista)
             return valor
         elif lista[0][0] == dicionario_tokens['variavel']:
